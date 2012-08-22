@@ -11,11 +11,12 @@ var stepper = {};
       self.socket.on('connected', function() {
         self.authenticate();
       });
-      self.socket.on('authenticated', function() {
-        self.isAdmin = true;
-        self.attachListeners();
-      });
     }
+
+    self.socket.on('authenticated', function() {
+      self.isAdmin = true;
+      self.attachListeners();
+    });
 
     self.socket.on('navigateTo', function(command) {
       if (!self.isAdmin) {
@@ -24,30 +25,27 @@ var stepper = {};
     });
   };
 
-  stepper.authenticate = function() {
+  stepper.authenticate = function(auth) {
+    this.auth = auth || this.auth;
     this.socket.emit('authenticate', this.auth);
   };
 
   stepper.attachListeners = function() {
     var self = this;
-    $(document).bind('keypress', function(e) {
+    $(document).keydown(function(e) {
       var command = {
-        type: 'keypress',
-        charCode: e.keyCode ? e.keyCode : e.which
+        type: 'keydown',
+        which: e.which
       };
       self.socket.emit('navigateTo', command);
     });
   };
 
-  stepper.disconnect = function() {
-    this.socket.emit('disconnect');
-    this.socket = null;
-    this.isAdmin = false;
-  };
-
   stepper.navigateTo = function(command) {
-    if (command.type === 'keypress') {
-      $.event.trigger({ type: 'keypress', which: command.charCode });
+    if (command.type === 'keydown') {
+      var e = $.Event('keydown');
+      e.which = command.which;
+      $('body').trigger(e);
     }
   };
 }(jQuery));
