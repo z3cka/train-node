@@ -37,7 +37,7 @@ stepper.emitKeyboardEvent = function(type, e) {
       char: e.char,
       charCode: e.charCode,
       ctrlKey: e.ctrlKey,
-      key: e.key,
+      keyIdentifier: e.keyIdentifier,
       keyCode: e.keyCode,
       locale: e.locale,
       location: e.location,
@@ -70,33 +70,16 @@ stepper.navigateTo = function(command) {
       e = document.createEvent('KeyboardEvent');
       if (e.initKeyboardEvent) {  // WebKit.
         e.initKeyboardEvent(command.type,
-          true, true, window, command.vars.key, 0, command.vars.ctrlKey,
+          true, true, window, command.vars.keyIdentifier, 0, command.vars.ctrlKey,
           command.vars.altKey, command.vars.shiftKey, command.vars.metaKey
         );
-
-        e.charCode = command.vars.charCode;
-        if (command.type == 'keypress') {
-          e.keyCode = command.vars.charCode;
-        }
-        else {
-          e.keyCode = command.vars.keyCode;
-        }
-
-        // Nasty hack to deal with a Webkit bug that doesn't allow us to modify
-        // the keyCode value.
-        // @see https://bugs.webkit.org/show_bug.cgi?id=16735
-        try {
-          Object.defineProperty(e, 'keyCode', { get: function() { return command.vars.keyCode; } });
-        } catch (ex) {
-          // TODO
-        }
       }
       else if (e.initKeyEvent) {  // FF.
         e.initKeyEvent(command.type,
           true, true, window, command.vars.ctrlKey, command.vars.altKey, command.vars.shiftKey,
           command.vars.metaKey, command.vars.keyCode, command.vars.charCode
         );
-        e.keyIdentifier = command.vars.key;
+        e.keyIdentifier = command.vars.keyIdentifier;
       }
     }
     else if (document.createEventObject) {
@@ -106,7 +89,7 @@ stepper.navigateTo = function(command) {
       e.shiftKey = command.vars.shiftKey;
       e.metaKey = command.vars.metaKey;
       e.keyCode = command.vars.charCode;  // Emulate IE charcode-in-the-keycode onkeypress.
-      e.keyIdentifier = command.vars.key;
+      e.keyIdentifier = command.vars.keyIdentifier;
     }
 
     if (e) {
