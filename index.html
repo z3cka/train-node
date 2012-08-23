@@ -270,7 +270,6 @@ linkify( 'a' );
 
 		<script src="js/slidestepper-client.js"></script>
 		<script src="js/reveal.js"></script>
-    <script src="js/reveal.jquery.shim.js"></script>
 
 		<script>
 			// Parse the query string into a key/value object
@@ -316,9 +315,6 @@ linkify( 'a' );
 				// Transition style
 				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
 			});
-
-      // Remove reveal's listeners since we're shimming in our own.
-      Reveal.removeEventListeners();
 
 			hljs.initHighlightingOnLoad();
 		</script>
