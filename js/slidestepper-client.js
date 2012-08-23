@@ -69,10 +69,14 @@ stepper.navigateTo = function(command) {
     if (document.createEvent) {
       e = document.createEvent('KeyboardEvent');
       if (e.initKeyboardEvent) {  // WebKit.
-        e.initKeyboardEvent(command.type,
-          true, true, window, command.vars.keyIdentifier, 0, command.vars.ctrlKey,
-          command.vars.altKey, command.vars.shiftKey, command.vars.metaKey
-        );
+        try {
+          e.initKeyboardEvent(command.type,
+            true, true, window, command.vars.keyIdentifier, 0, command.vars.ctrlKey,
+            command.vars.altKey, command.vars.shiftKey, command.vars.metaKey
+          );
+        }
+        catch (ex) {
+        }
       }
       else if (e.initKeyEvent) {  // FF.
         e.initKeyEvent(command.type,

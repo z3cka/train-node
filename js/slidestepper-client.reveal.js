@@ -50,7 +50,7 @@ var stepperRevealShim = (function() {
       // end
       case 'End': Reveal.navigateTo(Number.MAX_VALUE); triggered = true; break;
       // space
-      case 'Spacebar': overviewIsActive() ? Reveal.toggleOverview() : Reveal.navigateNext(); triggered = true; break;
+      case 'U+0020': case 'Spacebar': overviewIsActive() ? Reveal.toggleOverview() : Reveal.navigateNext(); triggered = true; break;
       // return
       case 'Enter': if (overviewIsActive()) { Reveal.toggleOverview(); triggered = true; } break;
     }
@@ -58,7 +58,7 @@ var stepperRevealShim = (function() {
     if (triggered) {
       event.preventDefault();
     }
-    else if (event.keyIdentifier === 'Esc' && supports3DTransforms) {
+    else if ((event.keyIdentifier === 'Esc' || event.keyIdentifier === 'U+001B') && supports3DTransforms) {
       Reveal.toggleOverview();
       event.preventDefault();
     }
