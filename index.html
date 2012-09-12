@@ -267,12 +267,17 @@ linkify( 'a' );
 
     <script src="js/reveal.js"></script>
 
+    <script src="lib/socket.io.min.js"></script>
+    <script src="lib/slidestepper.min.js"></script>
+
     <script>
       // Parse the query string into a key/value object
       var query = {};
       location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
         query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
       } );
+
+      stepper.init('http://local.d7.com:3000');
 
       // Fires when a slide with data-state=customevent is activated
       Reveal.addEventListener( 'customevent', function() {
@@ -309,6 +314,9 @@ linkify( 'a' );
         // Transition style
         transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
       });
+
+      // Enable the reveal keyboard events shim.
+      stepperRevealShim.attachListeners();
 
       hljs.initHighlightingOnLoad();
     </script>
