@@ -1,0 +1,40 @@
+{
+  "name": "train-node",
+  "version": "0.0.0",
+  "description": "Slides and examples for Four Kitchens' node.js training.",
+  "main": "grunt.js",
+  "dependencies": {
+    "jsdom": "~0.2.15",
+    "markdown": "~0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fourkitchens/train-node.git"
+  },
+  "keywords": [
+    "training",
+    "node.js"
+  ],
+  "author": {
+    "name": "Four Kitchens",
+    "url": "http://fourkitchens.com",
+    "email": "shout@fourkitchens.com"
+  },
+  "contributors": [
+    {
+      "name": "Elliott Foster",
+      "url": "http://fourkitchens.com/about/team/elliott-foster",
+      "email": "elliott@fourkitchens.com"
+    },
+    {
+      "name": "Michal Minecki",
+      "url": "http://fourkitchens.com/about/team/mike-minecki",
+      "email": "mike@fourkitchens.com"
+    },
+  ],
+  "license": "MIT"
+}
