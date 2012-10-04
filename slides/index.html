@@ -1,211 +1,246 @@
 <!doctype html>
 <html lang="en">
-	
-	<head>
-		<meta charset="utf-8">
-		
-		<title>reveal.js - The HTML Presentation Framework</title>
+  
+  <head>
+    <meta charset="utf-8">
+    
+    <title>reveal.js - The HTML Presentation Framework</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		
-		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-		
-		<link rel="stylesheet" href="css/main.css">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="css/main.css">
 
-		<link rel="stylesheet" href="css/theme/fourkitchens.css" >
+    <link rel="stylesheet" href="css/theme/fourkitchens.css" >
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/github.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/github.css">
 
-		<script>
-			// If the query includes 'print-pdf' we'll use the PDF print sheet
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <script>
+      // If the query includes 'print-pdf' we'll use the PDF print sheet
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
-	
-	<body>
-		
-		<div class="reveal">
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+    
+    <div class="reveal">
 
-			<!-- Used to fade in a background when a specific slide state is reached -->
-			<div class="state-background"></div>
-			
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
-				</section>
-				
-				<section data-markdown>
-					## Node.js training.
-				</section>
-				<section data-markdown>
-					## Hello Class
-					```javascript
-					console.log('Welcome!');
-					```
-				</section>
-				<section data-markdown>
-					## Who we are
+      <!-- Used to fade in a background when a specific slide state is reached -->
+      <div class="state-background"></div>
+      
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Reveal.js</h1>
+          <h3>HTML Presentations Made Easy</h3>
+        </section>
+        
+        <section data-markdown>
+          ## Node.js training.
+        </section>
+        <section data-markdown>
+          ## Hello Class
+          ```javascript
+          console.log('Welcome!');
+          ```
+        </section>
+        <section data-markdown>
+          ## Who we are
 
-					### Elliott Foster
+          ### Elliott Foster
 
-					* https://twitter.com/elliotttf
+          * https://twitter.com/elliotttf
 
-					### Mike Minecki
+          ### Mike Minecki
 
-					* https://twitter.com/mirzu
-				</section>
-				<section data-markdown>
-					## Frustrated?
+          * https://twitter.com/mirzu
+        </section>
+        <section data-markdown>
+          ## Frustrated?
 
-					* Who here has been confused, lost, or frustrated?
-					* Raise your hand! It's ok to be confused, lost, or frustrated!
-					* If you are lost tell us, it's normal and you're not slowing us down.
-				</section>
-				<section data-markdown>
-					## Agenda (Topics and schedule)
+          * Who here has been confused, lost, or frustrated?
+          * Raise your hand! It's ok to be confused, lost, or frustrated!
+          * If you are lost tell us, it's normal and you're not slowing us down.
+        </section>
+        <section data-markdown>
+          ## Agenda (Topics and schedule)
 
-					* Intro to node.js
-					* Review JavaScript
-					* Create a toy application
-					* LUNCH!
-					* Work with Drupal and node.js
-				</section>
-			   	<section data-markdown>
-					## What you'll walk away with
-					
-					* Callbacks!
-						* You'll know why that's funny
-				</section>
-			    <section>
-					<h2> What is node.js?</h2>
-					<section data-markdown>
-						### Why
+          * Intro to node.js
+          * Review JavaScript
+          * Create a toy application
+          * LUNCH!
+          * Work with Drupal and node.js
+        </section>
+           <section data-markdown>
+          ## What you'll walk away with
+          
+          * Callbacks!
+            * You'll know why that's funny
+        </section>
+          <section>
+          <h2> What is node.js?</h2>
+          <section data-markdown>
+            ### Why
 
-						* Why not PHP?
-						* What makes Drupal slow
-							* Blocking
-						* Write non-blocking/event-driven PHP
-							* Example
-						* Oh no! Library code is blocking D:
-					</section>
-					<section data-markdown>
-						### What
+            * Why not PHP?
+            * What makes Drupal slow
+              * Blocking
+            * Write non-blocking/event-driven PHP
+              * Example
+            * Oh no! Library code is blocking D:
+          </section>
+          <section data-markdown>
+            ### What
 
-						* V8 Engine
-						* Asynchronous libraries
-						* NPM - package management you'll fall in love with
-						* Fast growing, popular, community
-						* History + stats, committers, installs, library count
-						* Battle tested
-					</section>
-			    	<section data-markdown>
-						### What is it good for
+            * V8 Engine
+            * Asynchronous libraries
+            * NPM - package management you'll fall in love with
+            * Fast growing, popular, community
+            * History + stats, committers, installs, library count
+            * Battle tested
+          </section>
+            <section data-markdown>
+            ### What is it good for
 
-						* Rapid prototyping
-						* Bursty load
-						* API glue
-						* Queue-ish stuff
-						* "Realime" applications
-							* Easy example: chat
-						* **Message passing!**
-					</section>
-					<section data-markdown>
-						### What is it NOT good for
+            * Rapid prototyping
+            * Bursty load
+            * API glue
+            * Queue-ish stuff
+            * "Realime" applications
+              * Easy example: chat
+            * **Message passing!**
+          </section>
+          <section data-markdown>
+            ### What is it NOT good for
 
-						* Web server
-						* Static assets
-						* Complex systems (business logic)
-						* Processing - use C or PHP
-			    	</section>
-					<section data-markdown>
-						### What We've used it for
+            * Web server
+            * Static assets
+            * Complex systems (business logic)
+            * Processing - use C or PHP
+            </section>
+          <section data-markdown>
+            ### What We've used it for
 
-						* RSS Hub
-						* Interactive game
-						* Realtime video commenting
-						* IRC Bot
-						* Parsing HTML
-					</section>
-			    	<section data-markdown>
-						### How
+            * RSS Hub
+            * Interactive game
+            * Realtime video commenting
+            * IRC Bot
+            * Parsing HTML
+          </section>
+            <section data-markdown>
+            ### How
 
-						* Frameworks
-						* Plays well with others
-							* Drupal module
-					</section>
+            * Frameworks
+            * Plays well with others
+              * Drupal module
+          </section>
+        </section>
+        <section data-markdown>
+          ## Class outline.
 
-			    </section>
-				<section data-markdown>
-					## Class outline.
+          * Intro to node.js
+          * Console.log?
+          * JS 101
+          * Step through debugging
+          * Using Require() *NPM? & Modules*
+          * Intro to Events
+          * Database intro
+          * Explain Obsticals
+          * Async programing
+          * Socket.io
+          * **Lunch**
+          * Socket.io 2
+          * Integrating with Drupal 1
+          * Integrating with Drupal 2
+        </section>
+        <section data-markdown>
+          ## ```console.log()```
+        </section>
+        <section data-markdown>
+          ## JavaScript 101
+        </section>
+        <section data-markdown>
+          ## Step-through debugging
+        </section>
+        <section data-markdown>
+          ## Using ```require()```, NPM, and modules
+        </section>
+        <section data-markdown>
+          ## Intro to events
+        </section>
+        <section data-markdown>
+          ## Working with databases
+        </section>
+        <section data-markdown>
+          ## Asynchronous programming
+        </section>
+        <section data-markdown>
+          ## Socket.io I
+        </section>
+        <section data-markdown>
+          ## Munch on Lunch
+        </section>
+        <section data-markdown>
+          ## Socket.io II
+        </section>
+        <section data-markdown>
+          ## Integrating with Drupal I
+        </section>
+        <section data-markdown>
+          ## Integrating with Drupal II
+        </section>
+      </div>
 
-					* Intro to node.js
-					* Console.log?
-					* JS 101
-					* Step through debugging
-					* Using Require() *NPM? & Modules*
-					* Intro to Events
-					* Database intro
-					* Explain Obsticals
-					* Async programing
-					* Socket.io
-					* **Lunch**
-					* Socket.io 2
-					* Integrating with Drupal 1
-					* Integrating with Drupal 2
-				</section>
-			</div>
+      <!-- The navigational controls UI -->
+      <aside class="controls">
+        <a class="left" href="#">&#x25C4;</a>
+        <a class="right" href="#">&#x25BA;</a>
+        <a class="up" href="#">&#x25B2;</a>
+        <a class="down" href="#">&#x25BC;</a>
+      </aside>
 
-			<!-- The navigational controls UI -->
-			<aside class="controls">
-				<a class="left" href="#">&#x25C4;</a>
-				<a class="right" href="#">&#x25BA;</a>
-				<a class="up" href="#">&#x25B2;</a>
-				<a class="down" href="#">&#x25BC;</a>
-			</aside>
+      <!-- Presentation progress bar -->
+      <div class="progress"><span></span></div>
+      
+    </div>
 
-			<!-- Presentation progress bar -->
-			<div class="progress"><span></span></div>
-			
-		</div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    <script>
+      
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        
+        theme: Reveal.getQueryHash().theme || 'default', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
 
-		<script>
-			
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				
-				theme: Reveal.getQueryHash().theme || 'default', // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/linear(2d)
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+          { src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+        ]
+      });
+      
+    </script>
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
-					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
-				]
-			});
-			
-		</script>
-
-	</body>
+  </body>
 </html>
