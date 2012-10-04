@@ -2,6 +2,7 @@
   "port": "3000",
   "pollTimeout": "1000",
   "feeds": [
-    "http://news.ycombinator.com/rss"
+    "http://news.ycombinator.com/rss",
+    "http://reddit.com/.rss"
   ]
 }
