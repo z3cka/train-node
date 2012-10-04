@@ -182,7 +182,55 @@
           ## Working with databases
         </section>
         <section data-markdown>
-          ## Asynchronous programming
+          ## Obstacles
+        </section>
+        <section>
+          <small>Asynchronous programming</small>
+          <section data-markdown>
+            ## How to stop Code-blocking
+
+            ![placeholder](http://ll-media.tmz.com/2012/08/11/0811-gymnist-getty-3.jpg)
+          </section>
+          <section data-markdown>
+            
+          </section>
+          <section data-markdown>
+            ### Don't do complicated stuff in the event looop.
+
+            <pre><code>
+var start = Date.now();
+
+setTimeout(function timeout1() {
+  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+
+  for (var x = 0; x < 3999999999; x++) {}
+
+  console.log('Done with timeout1().');
+}, 1000);
+
+setTimeout(function timeout2() {
+  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+  console.log('Done with timeout2().');
+}, 2000);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Keep it simple.
+
+            Don't put complicated logic in the main event thread.
+
+            * Long sorts/searches.
+            * Long Math (fibbonacci sequence).
+            * Processing lots of raw data.
+          </section>
+          <section data-markdown>
+            ### How To fix
+
+            * Fork process
+            * Hand off to other program and listen for event.
+            * Write C
+            * Use a queue
+          </section>
         </section>
         <section data-markdown>
           ## Socket.io I
