@@ -4,12 +4,13 @@ define([
   "lodash",
   "backbone",
   "handlebars",
+  "socket.io",
 
   // Plugins.
   "plugins/backbone.layoutmanager"
 ],
 
-function($, _, Backbone, Handlebars) {
+function($, _, Backbone, Handlebars, iop) {
 
   // Provide a global location to place configuration settings and module
   // creation.
@@ -17,6 +18,13 @@ function($, _, Backbone, Handlebars) {
     // The root path to run the application.
     root: "/"
   };
+
+  // TODO - this will need to be variable in training wheels scripts.
+  var socket = io.connect('http://localhost:3000');
+
+  socket.on('connect', function() {
+    console.log('woah');
+  });
 
   // Localize or create a new JavaScript Template object.
   var JST = window.JST = window.JST || {};

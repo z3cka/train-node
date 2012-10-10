@@ -14,7 +14,8 @@ require.config({
     jquery: "../assets/js/libs/jquery",
     lodash: "../assets/js/libs/lodash",
     backbone: "../assets/js/libs/backbone",
-    handlebars: "../assets/js/libs/handlebars-1.0.0.beta.6"
+    handlebars: "../assets/js/libs/handlebars-1.0.0.beta.6",
+    "socket.io": "../assets/js/libs/socket.io"
   },
 
   shim: {

@@ -29,8 +29,25 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', express.static(__dirname + '/client'));
+app.get('/app', express.static(__dirname + '/client/app'));
+app.get('/assets/css', express.static(__dirname + '/client/assets/css'));
+app.get('/assets/js', express.static(__dirname + '/client/assets/js'));
 
-http.createServer(app).listen(app.get('port'), function() {
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
+
+server.listen(app.get('port'), function() {
   console.log("Server listening on port " + app.get('port'));
+});
+
+var poller = new poll.Poll(config.feed);
+
+poller.on('fed', function(err, data) {
+  if (err) {
+    console.error('Error fetching data (' + err + ')');
+    return;
+  }
+
+  io.sockets.emit('newStories', data);
 });
