@@ -1,0 +1,22 @@
+{
+  "description": "A RSS to JSON feed endpoint for use in training.",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "union": "0.3.0",
+    "flatiron": "0.2.8",
+    "rsj": "0.0.1",
+    "resourceful": "~0.3.2"
+  },
+  "devDependencies": {
+    "api-easy": "0.3.2",
+    "vows": "0.6.1"
+  },
+  "scripts": {
+    "test": "vows --spec",
+    "start": "node app.js"
+  },
+  "name": "feed",
+  "author": "Four Kitchens",
+  "homepage": "http://fourkitchens.com"
+}
