@@ -169,6 +169,210 @@
         <section data-markdown>
           ## Using ```require()```, NPM, and modules
         </section>
+        <section>
+          <small> Using ```require()```, NPM, and modules </small>
+
+          <section data-markdown>
+            ## ```require()```
+
+            Used to include built in libraries, libraries from package manager and local files.
+          </section>
+          <section data-markdown>
+            ## ```require()``` for built in libraries.
+
+            [List of libraries](http://nodejs.org/docs/latest/api/)
+
+            <pre><code>
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
+            </code></pre>
+
+          </section>
+          <section data-markdown>
+            ### ```require()``` for built in libraries.
+
+            * Set the variable ```http``` to the object returened by require.
+
+            <pre><code>var http = require('http');</code></pre>
+
+            * Use the ```createServer``` function from the library we just loaded.
+
+            <pre><code>http.createServer(function (req, res) {</code></pre>
+
+          </section>
+          <section data-markdown>
+            module_a.js
+
+            <pre><code>console.log('this is a');</pre></code>
+
+            module_b.js
+
+            <pre><code>console.log(' this is b');</pre></code>
+
+            main.js
+
+            <pre><code>
+              require('module_a');
+              require('module_b')
+            </pre></code>
+
+            ```$ node main.js```
+
+          </section>
+          <section data-markdown>
+            ## Try it.
+          
+          </section>
+          <section data-markdown>
+            ### Use relative paths.
+
+            <pre><code>
+              require('./module_a');
+              require('./module_b')
+            </pre></code>
+
+            ```$ node main.js```
+          </section>
+          <section data-markdown>
+            ### Exposing APIs
+
+            * Three different possibilities
+              1. module.exports
+              2. exports
+              3. Altering Prototypes.
+
+          </section>
+          <section data-markdown>
+            #### ```module.exports``` exposes a root level class or object.
+
+            <pre><code>
+              // world.js
+              module.exports = world;
+
+              var world = {};
+              world.word = 'world';
+            </code></pre>
+          </section>
+          <section data-markdown>
+            #### ```exports``` exposes a namespaced class or object.
+
+
+            <pre><code>
+              // hello.js
+              exports.hello = word;
+
+              function word() {
+                return 'hello';
+              }
+            </code></pre>
+
+          </section>
+          <section data-markdown>
+            #### Using the above.
+
+            <pre><code>
+              var Hello = require('hello');
+              var world = require('world');
+
+              var begining = new Hello();
+              var phase = begining.word() + ' ' + world.word;
+            </code></pre>
+
+          </section>
+          <section>
+            <h3> Try it</h3>
+
+            <ul>
+              <li class='fragment'>Didn't work?</li>
+              <li class='fragment'>Don't forget the ./ when requiring local files</li>
+            </ul>
+            <pre class='fragment'><code>
+              var Hello = require('./hello');
+              var world = require('./world');
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Where does ```require()``` look for files?
+
+            * Core libraries
+            * modules in the node_modules directory
+            * locally defined modules _if the module is prefixed with a path_
+              * Paths can be absolute, but this is highly discouraged, use the relative paths or package your own module.
+
+            [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
+          </section>
+          <section>
+            <h3>NPM</h3>
+
+            <ul>
+              <li class='fragment'>Node's Personal Manservant</li>
+              <li class='fragment'>Collection of over 16k community built libraries</li>
+              <li class='fragment'>Handles installation and dependency</li>
+              <li class='fragment'>Everything from GPIO libraries to a few CMSs</li>
+            </ul>
+          </section>
+          <section data-markdown>
+            ## NPM Commands
+
+            * npm install <module> - install module
+              * add -g to install at the system level.
+            * npm install --save <module> - installs module and adds it to your local package.json file.
+            * npm install - installs everything from the local package.json file.
+            * npm init - creates an empty package.json file
+            * npm search - search for modules
+
+            [NPM help (if --help is too old school for you.)](https://npmjs.org/doc/)
+          </section>
+          <section data-markdown>
+            ## Try it
+
+            npm init
+
+            npm install colors
+
+            npm install --save colors
+            </section>
+            <section data-markdown>
+              ### Package.json
+              
+              <pre><code>
+{
+  "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+  "name": "npmExample",
+  "description": "An example from the world famous Four Kitchens Node.js training.",
+  "version": "0.0.1",
+  "homepage": "http://fourkitchens.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fourkitchens/train-node.git"
+  },
+  "engines": {
+    "node": "~0.6.8"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
+              </code></pre>
+
+              [package.json reference](http://package.json.jit.su/)
+            </section>
+        </section>
+        <section data-markdown>
+          <pre><code>
+// colorsExample.js
+var colors = require('colors');
+
+console.log('hello'.green); // outputs green text
+console.log('i like cake and pies'.underline.red) // outputs red underlined text
+console.log('inverse the color'.inverse); // inverses the color
+console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
+          </code></pre>
+        </section>
         <section data-markdown>
           ## Intro to events
         </section>
@@ -183,10 +387,48 @@
           <section data-markdown>
             ## How to stop Code-blocking
 
+            ```js101/async/```
+
             ![placeholder](http://ll-media.tmz.com/2012/08/11/0811-gymnist-getty-3.jpg)
           </section>
           <section data-markdown>
-            
+            ## Syncrounous example
+
+            Checkout the order of the log messages.
+
+            <pre><code>
+console.log("I'm going to read a file synchronously.");
+
+syncContents = fs.readFileSync(__filename);
+
+console.log("I'm done reading the file synchronously.");
+console.log('I read ' + syncContents.length + ' characters.');
+console.log("Now I'm ready to do the next thing.");
+            </code></pre>
+          </section>
+
+          <section data-markdown>
+            ## Asyncrounous Example
+
+            Now see how the log messages have changed.
+
+            <pre><code>
+console.log("I'm going to read a file asynchronously.");
+fs.readFile(__filename, function(err, data) {
+  asyncContents = data;
+  console.log("I'm done reading the file asynchronously.");
+  console.log('I read ' + asyncContents.length + ' characters.');
+});
+console.log("Now I'm ready to do the next thing.");
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Why is this even included?
+
+            You might need it, we haven't.
+
+            Only reason we've used other sync functions is to simplify code flow when doing something simple and fast.
+
           </section>
           <section data-markdown>
             ### Don't do complicated stuff in the event looop.
