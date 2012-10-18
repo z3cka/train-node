@@ -36,10 +36,9 @@
   <body>
     
     <div class="reveal">
-
       <!-- Used to fade in a background when a specific slide state is reached -->
       <div class="state-background"></div>
- 
+
       <div class="slides">
         <section data-markdown>
           ## Node.js training.
@@ -83,8 +82,11 @@
           * Callbacks!
             * You'll know why that's funny
         </section>
+        <section data-markdown>
+          ## What is node.js?
+        </section>
         <section>
-          <h2> What is node.js?</h2>
+          <small>What is node.js?</small>
           <section data-markdown>
             ### Why
 
@@ -94,6 +96,75 @@
             * Write non-blocking/event-driven PHP
               * Example
             * Oh no! Library code is blocking D:
+          </section>
+          <section data-markdown>
+            ## What makes PHP "slow"
+          </section>
+          <section data-markdown>
+            ## What do you mean by slow?
+          </section>
+          <section data-markdown>
+            ### We actually mean bad at handling concurency.
+
+            What makes PHP/Drupal bad at handling concurency?
+
+            * Big memory foot print.
+              * If you need to load 100Meg of Code to deliver 4 lines of JSON. . .
+            * Everything happens in order.
+              * You 100ms database call will hold up the execution of the enire process.
+              * Your next 100ms call will do the same, etc.
+              * Only after all the database calls have completed can we return the 4 lines of JSON.
+          </section>
+          <section data-markdown>
+            ## In node:
+
+            "Everything happens in Parellel execpt for your code."
+          </section>
+          <section data-markdown>
+            #huh?
+          </section>
+          <section data-markdown>
+            ## Imagine a King with servants
+
+            * Every morning the servants line up.
+            * One at a time they come into his throne room.
+            * They report on what they've done.
+            * Sometimes the king gives them more to do.
+            * Always one at a time, so the king can focus.
+          </section>
+          <section data-markdown>
+            ## Code Please.
+
+            <pre><code>
+var fs = require('fs')
+  , sys = require('sys');
+
+fs.readFile('treasure-chamber-report.txt', function(report) {
+  sys.puts("oh, look at all my money: "+report);
+});
+
+fs.writeFile('letter-to-princess.txt', '...', function() {
+  sys.puts("can't wait to hear back from her!");
+});
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Explain the Code Please.
+
+            * Code gives node 2 things to do.
+            * Each callback gets fired one at a time
+            * Until one callback is fired all others wait in line
+
+            ### However
+
+            * We don't need to wait for the file being read, to write the file.
+            * Both System IO calls are started independently.
+          </section>
+          <section data-markdown>
+            ### Don't need to wait for one to finish before the next starts!
+
+            * 
+
           </section>
           <section data-markdown>
             ### What
