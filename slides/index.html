@@ -185,12 +185,12 @@
             [List of libraries](http://nodejs.org/docs/latest/api/)
 
             <pre><code>
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
+              var http = require('http');
+              http.createServer(function (req, res) {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.end('Hello World\n');
+              }).listen(1337, '127.0.0.1');
+              console.log('Server running at http://127.0.0.1:1337/');
             </code></pre>
 
           </section>
@@ -340,25 +340,25 @@ console.log('Server running at http://127.0.0.1:1337/');
             </section>
             <section data-markdown>
               ### Package.json
-              
+
               <pre><code>
-{
-  "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
-  "name": "npmExample",
-  "description": "An example from the world famous Four Kitchens Node.js training.",
-  "version": "0.0.1",
-  "homepage": "http://fourkitchens.com",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/fourkitchens/train-node.git"
-  },
-  "engines": {
-    "node": "~0.6.8"
-  },
-  "dependencies": {},
-  "devDependencies": {},
-  "optionalDependencies": {}
-}
+                {
+                  "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+                  "name": "npmExample",
+                  "description": "An example from the world famous Four Kitchens Node.js training.",
+                  "version": "0.0.1",
+                  "homepage": "http://fourkitchens.com",
+                  "repository": {
+                    "type": "git",
+                    "url": "git://github.com/fourkitchens/train-node.git"
+                  },
+                  "engines": {
+                    "node": "~0.6.8"
+                  },
+                  "dependencies": {},
+                  "devDependencies": {},
+                  "optionalDependencies": {}
+                }
               </code></pre>
 
               [package.json reference](http://package.json.jit.su/)
@@ -366,13 +366,13 @@ console.log('Server running at http://127.0.0.1:1337/');
         </section>
         <section data-markdown>
           <pre><code>
-// colorsExample.js
-var colors = require('colors');
+            // colorsExample.js
+            var colors = require('colors');
 
-console.log('hello'.green); // outputs green text
-console.log('i like cake and pies'.underline.red) // outputs red underlined text
-console.log('inverse the color'.inverse); // inverses the color
-console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
+            console.log('hello'.green); // outputs green text
+            console.log('i like cake and pies'.underline.red) // outputs red underlined text
+            console.log('inverse the color'.inverse); // inverses the color
+            console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
           </code></pre>
         </section>
         <section data-markdown>
@@ -393,13 +393,13 @@ console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
             Checkout the order of the log messages.
 
             <pre><code>
-console.log("I'm going to read a file synchronously.");
+              console.log("I'm going to read a file synchronously.");
 
-syncContents = fs.readFileSync(__filename);
+              syncContents = fs.readFileSync(__filename);
 
-console.log("I'm done reading the file synchronously.");
-console.log('I read ' + syncContents.length + ' characters.');
-console.log("Now I'm ready to do the next thing.");
+              console.log("I'm done reading the file synchronously.");
+              console.log('I read ' + syncContents.length + ' characters.');
+              console.log("Now I'm ready to do the next thing.");
             </code></pre>
           </section>
 
@@ -409,13 +409,13 @@ console.log("Now I'm ready to do the next thing.");
             Now see how the log messages have changed.
 
             <pre><code>
-console.log("I'm going to read a file asynchronously.");
-fs.readFile(__filename, function(err, data) {
-  asyncContents = data;
-  console.log("I'm done reading the file asynchronously.");
-  console.log('I read ' + asyncContents.length + ' characters.');
-});
-console.log("Now I'm ready to do the next thing.");
+              console.log("I'm going to read a file asynchronously.");
+              fs.readFile(__filename, function(err, data) {
+                asyncContents = data;
+                console.log("I'm done reading the file asynchronously.");
+                console.log('I read ' + asyncContents.length + ' characters.');
+              });
+              console.log("Now I'm ready to do the next thing.");
             </code></pre>
           </section>
           <section data-markdown>
@@ -430,20 +430,20 @@ console.log("Now I'm ready to do the next thing.");
             ### Don't do complicated stuff in the event looop.
 
             <pre><code>
-var start = Date.now();
+              var start = Date.now();
 
-setTimeout(function timeout1() {
-  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+              setTimeout(function timeout1() {
+                console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
 
-  for (var x = 0; x < 3999999999; x++) {}
+                for (var x = 0; x < 3999999999; x++) {}
 
-  console.log('Done with timeout1().');
-}, 1000);
+                console.log('Done with timeout1().');
+              }, 1000);
 
-setTimeout(function timeout2() {
-  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
-  console.log('Done with timeout2().');
-}, 2000);
+              setTimeout(function timeout2() {
+                console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+                console.log('Done with timeout2().');
+              }, 2000);
             </code></pre>
           </section>
           <section data-markdown>
@@ -582,6 +582,39 @@ setTimeout(function timeout2() {
                 });
               });
             </code></pre>
+          </section>
+        </section>
+        <section>
+          <small>A quick intro to Express</small>
+          <section data-markdown>
+            ### Express
+
+            * A web application framework for node.js
+            * Provides:
+              * Static asset handling
+              * Dynamic router
+              * [Connect](http://www.senchalabs.org/connect/) middleware
+          </section>
+          <section data-markdown>
+            ### Getting started
+
+            * Use the ```express``` command to set up some scaffolding for a new application:
+            <pre><code>
+              $ express server
+              $ cd server
+              $ npm install
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Getting started (cont)
+
+            * We're going to make a few changes to support the application we're going to build:
+              1. Copy the config.js file and client directory from your home directory to the example dirctory:
+                <pre><code>
+                  $ cp ~/config.js ~/train-node/exercises/server/config.js
+                  $ cp -r ~/train-node/client ~/train-node/exercises/server/client
+                </code></pre>
+              1. Edit app.js to remove some pieces we won't be using, include the config file, change the port we listen on, and change the static assets path: [see the diff](https://gist.github.com/3914051).
           </section>
         </section>
         <section data-markdown>
