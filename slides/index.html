@@ -584,6 +584,39 @@
             </code></pre>
           </section>
         </section>
+        <section>
+          <small>A quick intro to Express</small>
+          <section data-markdown>
+            ### Express
+
+            * A web application framework for node.js
+            * Provides:
+              * Static asset handling
+              * Dynamic router
+              * [Connect](http://www.senchalabs.org/connect/) middleware
+          </section>
+          <section data-markdown>
+            ### Getting started
+
+            * Use the ```express``` command to set up some scaffolding for a new application:
+            <pre><code>
+              $ express example
+              $ cd example
+              $ npm install
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Getting started (cont)
+
+            * We're going to make a few changes to support the application we're going to build:
+              1. Copy the config.js file and client directory from your home directory to the example dirctory:
+                <pre><code>
+                  $ cp ~/config.js example/config.js
+                  $ cp -r ~/client example/client
+                </code></pre>
+              1. Edit app.js to remove some pieces we won't be using, include the config file, change the port we listen on, and change the static assets path: [see the diff](https://gist.github.com/3914051).
+          </section>
+        </section>
         <section data-markdown>
           ## Obstacles
         </section>
