@@ -5,12 +5,13 @@ define([
   "backbone",
   "handlebars",
   "socket.io",
+  "./training-config"
 
   // Plugins.
   "plugins/backbone.layoutmanager"
 ],
 
-function($, _, Backbone, Handlebars, iop) {
+function($, _, Backbone, Handlebars, io, conf) {
 
   // Provide a global location to place configuration settings and module
   // creation.
@@ -19,8 +20,7 @@ function($, _, Backbone, Handlebars, iop) {
     root: "/"
   };
 
-  // TODO - this will need to be variable in training wheels scripts.
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect(conf.url);
 
   socket.on('connect', function() {
     console.log('woah');
