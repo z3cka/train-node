@@ -4,15 +4,17 @@
   <head>
     <meta charset="utf-8">
     
-    <title>reveal.js - The HTML Presentation Framework</title>
+    <title>node.js training | Four Kitchens</title>
 
-    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-    <meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="node.js training slides built with love by the Web Chefs at Four Kitchens.">
+    <meta name="author" content="Four Kitchens">
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='$itext/css'>
+
+    <link rel="favicon" href="favicon.ico">
     
     <link rel="stylesheet" href="css/main.css">
 
@@ -376,12 +378,6 @@ console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
         <section data-markdown>
           ## Intro to events
         </section>
-        <section data-markdown>
-          ## Working with databases
-        </section>
-        <section data-markdown>
-          ## Obstacles
-        </section>
         <section>
           <small>Asynchronous programming</small>
           <section data-markdown>
@@ -467,6 +463,129 @@ setTimeout(function timeout2() {
             * Write C
             * Use a queue
           </section>
+        </section>
+        <section>
+          <small>Working with databases</small>
+          <section data-markdown>
+            ### Overview
+
+            * One of the easiest places to see asynchronous programming:
+              1. Application makes call to database and immediately returns to the event loop.
+              1. Later, database calls back with results.
+            * For the more advanced examples in this class you'll be given the opportunity to work with a database, either MySQL or MongoDB.
+          </section>
+          <section data-markdown>
+            ### MySQL
+
+            * [http://www.mysql.com/](http://www.mysql.com/)
+            * Relational database system
+            * If you're a Drupal developer you're probably pretty familiar with it, but the libraries we'll be using to interact with it aren't as abstracted as DBTNG.
+             * i.e. you'll have to write actual SQL queries ಠ_ಠ
+          </section>
+          <section data-markdown>
+            ### Node.js and MySQL
+
+            * We'll be using the [node-mysql](https://github.com/felixge/node-mysql) library.
+            * ```$ npm install mysql@2.0.0-alpha3```
+            <pre><code>
+              var mysql = require('mysql');
+              var conn = mysql.createConnection({
+                host: 'localhost',
+                user: 'you',
+                password: 'unsafe'
+              });
+              conn.connect();
+
+              conn.query('SELECT "Hello world" AS message', function(err, rows, fields) {
+                if (err) {
+                  throw err;
+                }
+
+                console.log(rows[0].message);
+              });
+              conn.end();
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### MongoDB
+
+            * [http://www.mongodb.org/](http://www.mongodb.org/)
+            * Schemaless document store
+            * Documents are stored as BSON which is very similar to JSON and therefore extremely convenient to work with in node.js!
+          </section>
+          <section data-markdown>
+            ### MongoDB Examples
+
+            * There's not a real query language in the same sense as MySQL and since the database is schemaless you can throw whatever you like at it:
+
+              ```$ mongo```
+            <pre><code>
+              db.test.insert({
+                title: 'test',
+                message: 'Hello world'
+              });
+              db.test.find({ title: 'test' }).pretty();
+              db.test.update(
+                { title: 'test' },
+                { $set: { message: 'Yo dawg' } }
+              );
+              db.test.find({ title: 'test' }).pretty();
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Sub documents
+
+            * One of the most useful parts of MongoDB is the ability to store "sub documents" or objects within a primary document:
+
+            <pre><code>
+            db.test.update(
+              { title: 'test'},
+              { $set: {
+                speaker: {
+                  name: 'Elliott Foster',
+                  occupation: 'Hipster Technologist',
+                  interests: [
+                    'JavaScript',
+                    'beer',
+                    'bicycles'
+                  ]
+                }
+              } }
+            );
+            db.test.find({ 'speaker.name': 'Elliott Foster' }).pretty();
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ![mind blown](http://i.minus.com/iDaEYSlzALNnN.gif)
+          </section>
+          <section data-markdown>
+            ### Node.js and MongoDB
+
+            * We'll be using the [mongode](https://github.com/milewise/mongode) library to interact with MongoDB
+            <pre><code>
+              var mongode = require('mongode');
+              var test = mongode.connect('mongo://127.0.0.1/test');
+              var collection = test.collection('test');
+              var doc = { title: 'test2', message: 'node and mongo, yay!' };
+              collection.insert(doc, {safe:true}, function(err, objects) {
+                if (err) {
+                  console.error(err.message);
+                  process.exit(1);
+                }
+                collection.findOne({ title: 'test2' }, function(err, document) {
+                  if (err) {
+                    console.error(err.message);
+                    process.exit(1);
+                  }
+                  console.log(document.message);
+                  process.exit(0);
+                });
+              });
+            </code></pre>
+          </section>
+        </section>
+        <section data-markdown>
+          ## Obstacles
         </section>
         <section data-markdown>
           ## Socket.io I
