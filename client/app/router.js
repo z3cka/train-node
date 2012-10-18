@@ -12,7 +12,8 @@ function(app) {
     },
 
     index: function() {
-
+      app.useLayout('main');
+      app.layout.render();
     }
   });
 

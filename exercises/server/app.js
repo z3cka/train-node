@@ -35,6 +35,15 @@ server.listen(app.get('port'), function() {
 
 var poller = new poll.Poll(config.feed);
 
+poller.on('refresh', function(err, data) {
+  if (err) {
+    console.error('Error fetching data (' + err + ')');
+    return;
+  }
+
+  io.sockets.emit('refresh', data);
+});
+
 poller.on('fed', function(err, data) {
   if (err) {
     console.error('Error fetching data (' + err + ')');
