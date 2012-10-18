@@ -1,3 +1,3 @@
 define({
-  url: 'http://localhost:3000'
+  url: 'http://local.d7.com:3000'
 });

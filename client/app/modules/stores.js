@@ -21,6 +21,8 @@ define(['app', 'lodash', 'backbone'], function(app, _, Backbone) {
   });
 
   Stories.Views.List = Backbone.View.extend({
+    tagName: 'div',
+    className: 'stories-list',
     beforeRender: function() {
       this.$el.children().remove();
       this.collection.each(function(story) {
