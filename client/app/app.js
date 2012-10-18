@@ -4,13 +4,14 @@ define([
   "lodash",
   "backbone",
   "handlebars",
+  "./training-config",
   "socket.io",
 
   // Plugins.
   "plugins/backbone.layoutmanager"
 ],
 
-function($, _, Backbone, Handlebars, iop) {
+function($, _, Backbone, Handlebars, conf) {
 
   // Provide a global location to place configuration settings and module
   // creation.
@@ -19,11 +20,14 @@ function($, _, Backbone, Handlebars, iop) {
     root: "/"
   };
 
-  // TODO - this will need to be variable in training wheels scripts.
-  var socket = io.connect('http://localhost:3000');
+  var socket = io.connect(conf.url);
 
-  socket.on('connect', function() {
-    console.log('woah');
+  socket.on('newStories', function(stories) {
+    app.trigger('newStories', stories);
+  });
+
+  socket.on('refresh', function(stories) {
+    app.trigger('refresh', stories);
   });
 
   // Localize or create a new JavaScript Template object.

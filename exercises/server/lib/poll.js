@@ -1,6 +1,6 @@
 var events = require('events');
 var http = require('http');
-var _ = require('underscore');
+var _ = require('lodash');
 var url = require('url');
 var util = require('util');
 
