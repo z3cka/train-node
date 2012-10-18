@@ -4,15 +4,17 @@
   <head>
     <meta charset="utf-8">
     
-    <title>reveal.js - The HTML Presentation Framework</title>
+    <title>node.js training | Four Kitchens</title>
 
-    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-    <meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="node.js training slides built with love by the Web Chefs at Four Kitchens.">
+    <meta name="author" content="Four Kitchens">
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
-    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='$itext/css'>
+
+    <link rel="favicon" href="favicon.ico">
     
     <link rel="stylesheet" href="css/main.css">
 
@@ -169,43 +171,279 @@
         <section data-markdown>
           ## Using ```require()```, NPM, and modules
         </section>
+        <section>
+          <small> Using ```require()```, NPM, and modules </small>
+
+          <section data-markdown>
+            ## ```require()```
+
+            Used to include built in libraries, libraries from package manager and local files.
+          </section>
+          <section data-markdown>
+            ## ```require()``` for built in libraries.
+
+            [List of libraries](http://nodejs.org/docs/latest/api/)
+
+            <pre><code>
+              var http = require('http');
+              http.createServer(function (req, res) {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.end('Hello World\n');
+              }).listen(1337, '127.0.0.1');
+              console.log('Server running at http://127.0.0.1:1337/');
+            </code></pre>
+
+          </section>
+          <section data-markdown>
+            ### ```require()``` for built in libraries.
+
+            * Set the variable ```http``` to the object returened by require.
+
+            <pre><code>var http = require('http');</code></pre>
+
+            * Use the ```createServer``` function from the library we just loaded.
+
+            <pre><code>http.createServer(function (req, res) {</code></pre>
+
+          </section>
+          <section data-markdown>
+            module_a.js
+
+            <pre><code>console.log('this is a');</pre></code>
+
+            module_b.js
+
+            <pre><code>console.log(' this is b');</pre></code>
+
+            main.js
+
+            <pre><code>
+              require('module_a');
+              require('module_b')
+            </pre></code>
+
+            ```$ node main.js```
+
+          </section>
+          <section data-markdown>
+            ## Try it.
+          
+          </section>
+          <section data-markdown>
+            ### Use relative paths.
+
+            <pre><code>
+              require('./module_a');
+              require('./module_b')
+            </pre></code>
+
+            ```$ node main.js```
+          </section>
+          <section data-markdown>
+            ### Exposing APIs
+
+            * Three different possibilities
+              1. module.exports
+              2. exports
+              3. Altering Prototypes.
+
+          </section>
+          <section data-markdown>
+            #### ```module.exports``` exposes a root level class or object.
+
+            <pre><code>
+              // world.js
+              module.exports = world;
+
+              var world = {};
+              world.word = 'world';
+            </code></pre>
+          </section>
+          <section data-markdown>
+            #### ```exports``` exposes a namespaced class or object.
+
+
+            <pre><code>
+              // hello.js
+              exports.hello = word;
+
+              function word() {
+                return 'hello';
+              }
+            </code></pre>
+
+          </section>
+          <section data-markdown>
+            #### Using the above.
+
+            <pre><code>
+              var Hello = require('hello');
+              var world = require('world');
+
+              var begining = new Hello();
+              var phase = begining.word() + ' ' + world.word;
+            </code></pre>
+
+          </section>
+          <section>
+            <h3> Try it</h3>
+
+            <ul>
+              <li class='fragment'>Didn't work?</li>
+              <li class='fragment'>Don't forget the ./ when requiring local files</li>
+            </ul>
+            <pre class='fragment'><code>
+              var Hello = require('./hello');
+              var world = require('./world');
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Where does ```require()``` look for files?
+
+            * Core libraries
+            * modules in the node_modules directory
+            * locally defined modules _if the module is prefixed with a path_
+              * Paths can be absolute, but this is highly discouraged, use the relative paths or package your own module.
+
+            [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
+          </section>
+          <section>
+            <h3>NPM</h3>
+
+            <ul>
+              <li class='fragment'>Node's Personal Manservant</li>
+              <li class='fragment'>Collection of over 16k community built libraries</li>
+              <li class='fragment'>Handles installation and dependency</li>
+              <li class='fragment'>Everything from GPIO libraries to a few CMSs</li>
+            </ul>
+          </section>
+          <section data-markdown>
+            ## NPM Commands
+
+            * npm install <module> - install module
+              * add -g to install at the system level.
+            * npm install --save <module> - installs module and adds it to your local package.json file.
+            * npm install - installs everything from the local package.json file.
+            * npm init - creates an empty package.json file
+            * npm search - search for modules
+
+            [NPM help (if --help is too old school for you.)](https://npmjs.org/doc/)
+          </section>
+          <section data-markdown>
+            ## Try it
+
+            npm init
+
+            npm install colors
+
+            npm install --save colors
+            </section>
+            <section data-markdown>
+              ### Package.json
+
+              <pre><code>
+                {
+                  "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+                  "name": "npmExample",
+                  "description": "An example from the world famous Four Kitchens Node.js training.",
+                  "version": "0.0.1",
+                  "homepage": "http://fourkitchens.com",
+                  "repository": {
+                    "type": "git",
+                    "url": "git://github.com/fourkitchens/train-node.git"
+                  },
+                  "engines": {
+                    "node": "~0.6.8"
+                  },
+                  "dependencies": {},
+                  "devDependencies": {},
+                  "optionalDependencies": {}
+                }
+              </code></pre>
+
+              [package.json reference](http://package.json.jit.su/)
+            </section>
+        </section>
+        <section data-markdown>
+          <pre><code>
+            // colorsExample.js
+            var colors = require('colors');
+
+            console.log('hello'.green); // outputs green text
+            console.log('i like cake and pies'.underline.red) // outputs red underlined text
+            console.log('inverse the color'.inverse); // inverses the color
+            console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
+          </code></pre>
+        </section>
         <section data-markdown>
           ## Intro to events
-        </section>
-        <section data-markdown>
-          ## Working with databases
-        </section>
-        <section data-markdown>
-          ## Obstacles
         </section>
         <section>
           <small>Asynchronous programming</small>
           <section data-markdown>
             ## How to stop Code-blocking
 
+            ```js101/async/```
+
             ![placeholder](http://ll-media.tmz.com/2012/08/11/0811-gymnist-getty-3.jpg)
           </section>
           <section data-markdown>
-            
+            ## Syncrounous example
+
+            Checkout the order of the log messages.
+
+            <pre><code>
+              console.log("I'm going to read a file synchronously.");
+
+              syncContents = fs.readFileSync(__filename);
+
+              console.log("I'm done reading the file synchronously.");
+              console.log('I read ' + syncContents.length + ' characters.');
+              console.log("Now I'm ready to do the next thing.");
+            </code></pre>
+          </section>
+
+          <section data-markdown>
+            ## Asynchronous Example
+
+            Now see how the log messages have changed.
+
+            <pre><code>
+              console.log("I'm going to read a file asynchronously.");
+              fs.readFile(__filename, function(err, data) {
+                asyncContents = data;
+                console.log("I'm done reading the file asynchronously.");
+                console.log('I read ' + asyncContents.length + ' characters.');
+              });
+              console.log("Now I'm ready to do the next thing.");
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Why is this even included?
+
+            You might need it, we haven't.
+
+            Only reason we've used other sync functions is to simplify code flow when doing something simple and fast.
+
           </section>
           <section data-markdown>
             ### Don't do complicated stuff in the event looop.
 
             <pre><code>
-var start = Date.now();
+              var start = Date.now();
 
-setTimeout(function timeout1() {
-  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+              setTimeout(function timeout1() {
+                console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
 
-  for (var x = 0; x < 3999999999; x++) {}
+                for (var x = 0; x < 3999999999; x++) {}
 
-  console.log('Done with timeout1().');
-}, 1000);
+                console.log('Done with timeout1().');
+              }, 1000);
 
-setTimeout(function timeout2() {
-  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
-  console.log('Done with timeout2().');
-}, 2000);
+              setTimeout(function timeout2() {
+                console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+                console.log('Done with timeout2().');
+              }, 2000);
             </code></pre>
           </section>
           <section data-markdown>
@@ -225,6 +463,162 @@ setTimeout(function timeout2() {
             * Write C
             * Use a queue
           </section>
+        </section>
+        <section>
+          <small>Working with databases</small>
+          <section data-markdown>
+            ### Overview
+
+            * One of the easiest places to see asynchronous programming:
+              1. Application makes call to database and immediately returns to the event loop.
+              1. Later, database calls back with results.
+            * For the more advanced examples in this class you'll be given the opportunity to work with a database, either MySQL or MongoDB.
+          </section>
+          <section data-markdown>
+            ### MySQL
+
+            * [http://www.mysql.com/](http://www.mysql.com/)
+            * Relational database system
+            * If you're a Drupal developer you're probably pretty familiar with it, but the libraries we'll be using to interact with it aren't as abstracted as DBTNG.
+             * i.e. you'll have to write actual SQL queries ಠ_ಠ
+          </section>
+          <section data-markdown>
+            ### Node.js and MySQL
+
+            * We'll be using the [node-mysql](https://github.com/felixge/node-mysql) library.
+            * ```$ npm install mysql@2.0.0-alpha3```
+            <pre><code>
+              var mysql = require('mysql');
+              var conn = mysql.createConnection({
+                host: 'localhost',
+                user: 'you',
+                password: 'unsafe'
+              });
+              conn.connect();
+
+              conn.query('SELECT "Hello world" AS message', function(err, rows, fields) {
+                if (err) {
+                  throw err;
+                }
+
+                console.log(rows[0].message);
+              });
+              conn.end();
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### MongoDB
+
+            * [http://www.mongodb.org/](http://www.mongodb.org/)
+            * Schemaless document store
+            * Documents are stored as BSON which is very similar to JSON and therefore extremely convenient to work with in node.js!
+          </section>
+          <section data-markdown>
+            ### MongoDB Examples
+
+            * There's not a real query language in the same sense as MySQL and since the database is schemaless you can throw whatever you like at it:
+
+              ```$ mongo```
+            <pre><code>
+              db.test.insert({
+                title: 'test',
+                message: 'Hello world'
+              });
+              db.test.find({ title: 'test' }).pretty();
+              db.test.update(
+                { title: 'test' },
+                { $set: { message: 'Yo dawg' } }
+              );
+              db.test.find({ title: 'test' }).pretty();
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Sub documents
+
+            * One of the most useful parts of MongoDB is the ability to store "sub documents" or objects within a primary document:
+
+            <pre><code>
+            db.test.update(
+              { title: 'test'},
+              { $set: {
+                speaker: {
+                  name: 'Elliott Foster',
+                  occupation: 'Hipster Technologist',
+                  interests: [
+                    'JavaScript',
+                    'beer',
+                    'bicycles'
+                  ]
+                }
+              } }
+            );
+            db.test.find({ 'speaker.name': 'Elliott Foster' }).pretty();
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ![mind blown](http://i.minus.com/iDaEYSlzALNnN.gif)
+          </section>
+          <section data-markdown>
+            ### Node.js and MongoDB
+
+            * We'll be using the [mongode](https://github.com/milewise/mongode) library to interact with MongoDB
+            <pre><code>
+              var mongode = require('mongode');
+              var test = mongode.connect('mongo://127.0.0.1/test');
+              var collection = test.collection('test');
+              var doc = { title: 'test2', message: 'node and mongo, yay!' };
+              collection.insert(doc, {safe:true}, function(err, objects) {
+                if (err) {
+                  console.error(err.message);
+                  process.exit(1);
+                }
+                collection.findOne({ title: 'test2' }, function(err, document) {
+                  if (err) {
+                    console.error(err.message);
+                    process.exit(1);
+                  }
+                  console.log(document.message);
+                  process.exit(0);
+                });
+              });
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <small>A quick intro to Express</small>
+          <section data-markdown>
+            ### Express
+
+            * A web application framework for node.js
+            * Provides:
+              * Static asset handling
+              * Dynamic router
+              * [Connect](http://www.senchalabs.org/connect/) middleware
+          </section>
+          <section data-markdown>
+            ### Getting started
+
+            * Use the ```express``` command to set up some scaffolding for a new application:
+            <pre><code>
+              $ express server
+              $ cd server
+              $ npm install
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Getting started (cont)
+
+            * We're going to make a few changes to support the application we're going to build:
+              1. Copy the config.js file and client directory from your home directory to the example dirctory:
+                <pre><code>
+                  $ cp ~/config.js ~/train-node/exercises/server/config.js
+                  $ cp -r ~/train-node/client ~/train-node/exercises/server/client
+                </code></pre>
+              1. Edit app.js to remove some pieces we won't be using, include the config file, change the port we listen on, and change the static assets path: [see the diff](https://gist.github.com/3914051).
+          </section>
+        </section>
+        <section data-markdown>
+          ## Obstacles
         </section>
         <section data-markdown>
           ## Socket.io I
