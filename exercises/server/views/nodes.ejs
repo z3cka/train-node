@@ -1,0 +1,10 @@
+<h1>Nodes</h1>
+<% if (results.length) { %>
+  <ul>
+   <% for (var i = 0; i < results.length; i++) { %>
+     <li><%= results[i].title %></li>
+   <% } %>
+  </ul>
+  <% } else { %>
+  <p>No results </p>
+  <% } %>

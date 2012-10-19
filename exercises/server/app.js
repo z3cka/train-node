@@ -6,7 +6,9 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+
 var poll = require('./lib/poll');
+var nodes = require('./lib/nodes');
 
 var config = require('./config');
 
@@ -14,6 +16,9 @@ var app = express();
 
 app.configure(function() {
   app.set('port', config.port);
+  app.set('view engine', 'ejs');
+  app.set('views', __dirname + '/views');
+  app.set('view options', { layout: false});
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -66,3 +71,12 @@ app.post('/ping', function(request, response){
   console.log(request.body);      // your JSON
   response.send(request.body);    // echo the result back
 });
+
+app.get('/nodes', function (req, res, next) {
+  nodes('http://train-node.local/exercises/drupal/rest/node.json', function (err, nodes) {
+    console.log(nodes);
+    if (err) return next( err);
+    res.render('nodes', { results: nodes });
+  });
+});
+
