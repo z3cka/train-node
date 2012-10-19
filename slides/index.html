@@ -649,12 +649,81 @@
         </section>
         <section data-markdown>
           ## Munch on Lunch
+
+          ![lunch](http://weknowmemes.com/wp-content/uploads/2012/07/alpaca-lunch.jpg)
         </section>
         <section data-markdown>
           ## Socket.io II
         </section>
         <section data-markdown>
           ## Integrating with Drupal I
+        </section>
+        <section>
+          <small>Integrating with Drupal I</small>
+          <section data-markdown>
+            ## What we'll build.
+
+            * We'll ping the node server with with node title
+            * We'll create a list of Drupal nodes in our app.
+
+          </section>
+          <section data-markdown>
+            ### Create the Node.js Endpoint.
+<pre><code>
+app.post('/ping', function(request, response){
+  console.log(request.body);      // your JSON
+  response.send(request.body);    // echo the result back
+});
+</code></pre>
+
+          ### Bonus
+
+          save the drupal title in the database.
+
+          </section>
+          <section data-markdown>
+            ### Create a Drupal module to send the title to node.
+
+            1. Stub drupal module is created already.
+            2. We'll put the code that talks to node in a node_view hook.
+            3. Hint: we'll use drupal_json_encode() and drupal_http_request()
+            4. Be sure to handle errors.
+          </section>
+          <section data-markdown>
+            ### Example Drupal Module code.
+            <pre><code>
+  $data = array('title' => $node->title);
+  $data = drupal_json_encode($data);
+  $uri = variable_get('ping_nodejs_uri','http://localhost:3000/ping');
+
+  $options = array();
+  $options['headers'] = array('Content-Type' => 'application/json');
+  $options['method'] = 'POST';
+  $options['data'] = $data;
+  $response = drupal_http_request($uri, $options);
+
+  if($response->code != 200) {
+    drupal_set_message("Got an error: " . $response->error, 'error');
+  } else {
+    drupal_set_message('Successfully contacted node server. Response was: ' . $response->data);
+  }
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## What's wrong with this approach?
+          </section>
+          <section data-markdown>
+            ## What's wrong with this approach?
+
+            We are slowing down the response on the drupal side by waiting for a response from node.js.
+
+            #### How to Fix?
+
+            1. Add the database call to a que and use cron to clear it.
+            2. Poll Drupal for new content.
+          </section>
+          <section data-markdown>
+            ## </section>
         </section>
         <section data-markdown>
           ## Integrating with Drupal II
