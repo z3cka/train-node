@@ -63,3 +63,7 @@ app.get('/stories', function(req, res) {
   });
 });
 
+app.post('/ping', function(request, response){
+  console.log(request.body);      // your JSON
+  response.send(request.body);    // echo the result back
+});

@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Pings a node server when a node is saved.
+ */
+
+/**
+ * Implements hook_node_insert().
+ */
+function ping_nodejs_node_view($node) {
+  $data = array('title' => $node->title);
+  $data = drupal_json_encode($data);
+  $uri = 'http://localhost:3000/';
+  $options = array();
+  $options['headers'] = array('Content-Type' => 'application/json');
+  $options['method'] = 'POST';
+  $options['data'] = $data;
+  $response = drupal_http_request($uri, $options);
+
+  if($response->code != 200) {
+  	drupal_set_message("Got an error: " . $response->error, 'error');
+  } else {
+  	drupal_set_message('Successfully contacted node server. Response was:' . $response->data);
+  }
+}
