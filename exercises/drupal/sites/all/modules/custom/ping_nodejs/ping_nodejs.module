@@ -12,7 +12,7 @@ function ping_nodejs_node_view($node) {
   $data = array('title' => $node->title);
   $data = drupal_json_encode($data);
 
-  $uri = variable_get('ping_nodejs_uri','http://localhost:3000/');
+  $uri = variable_get('ping_nodejs_uri','http://localhost:3000/ping');
 
   $options = array();
   $options['headers'] = array('Content-Type' => 'application/json');
