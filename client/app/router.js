@@ -4,7 +4,7 @@ define([
   './modules/stories'
 ],
 
-function(app) {
+function(app, Stories) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -15,6 +15,7 @@ function(app) {
     index: function() {
       app.useLayout('main');
       app.layout.render();
+      this.stories.fetch();
     },
 
     initialize: function() {
