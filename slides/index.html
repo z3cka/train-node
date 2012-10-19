@@ -722,11 +722,106 @@ app.post('/ping', function(request, response){
             1. Add the database call to a que and use cron to clear it.
             2. Poll Drupal for new content.
           </section>
-          <section data-markdown>
-            ## </section>
         </section>
         <section data-markdown>
           ## Integrating with Drupal II
+        </section>
+        <section>
+          <small>Integrating with Drupal II</small>
+          <section data-markdown>
+            ## Getting a list of Drupal Nodes.
+
+            1. Install and configure Services modules.
+            2. Create and theme a route in our app for drupal to ping.
+          </section>
+          <section data-markdown>
+            ## Install and Configure Services module.
+
+            1. It's already there, just enable it.
+            2. go to admin/structure/services
+            3. configure a rest server with endpoint "rest".
+            4. configure the rest server with the node resource.
+          </section>
+          <section data-markdown>
+            ## Create & theme a route to show a list of nodes.
+
+            1. Create a new  Express middleware
+            2. Create an endpoint that uses that middleware
+            3. Add a template engine to Express.
+            4. Create a template for the page of nodes.
+          </section>
+          <section data-markdown>
+            ## Add a new library
+
+            *npm install --save superagent*
+          </section>
+          <section data-markdown>
+            ## Create the Express middleware.
+
+            Create file: */lib/nodes.js
+
+            <pre><code>
+var request = require('superagent');
+
+/**
+ * Get Nodes function
+ *
+ */
+module.exports  = function nodes (url, fn) {
+  request.get(url)
+    .end(function (res) {
+      if (res.body) {
+        return fn(null, res.body);
+      }
+    });
+};
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Add a theming engine
+
+            *npm install --save ejs*
+
+            #### add the themeing engine to our app.
+            <pre><code>
+  //  app.set('port', config.port);
+  app.set('view engine', 'ejs');
+  app.set('views', __dirname + '/views');
+  app.set('view options', { layout: false});
+  //  app.use(express.logger('dev'));
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Create the template
+
+            Create the file */views/nodes.ejs*
+
+            <pre><code>
+< h1 > Nodes < / h1 >
+<% if (results.length) { %>
+  <ul>
+   <% for (var i = 0; i < results.length; i++) { %>
+     <li><%= results[i].title %></li>
+   <% } %>
+  </ul>
+  <% } else { %>
+  <p>No results </p>
+<% } %>
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Add code to the app.
+
+            <pre><code>
+app.get('/nodes', function (req, res, next) {
+  nodes('http://train-node.local/exercises/drupal/rest/node.json', function (err, nodes) {
+    console.log(nodes);
+    if (err) return next( err);
+    res.render('nodes', { results: nodes });
+  });
+});
+            </code></pre>
+          </section>
         </section>
       </div>
 
