@@ -9,18 +9,23 @@ var Feed = exports.attach = (function() {
   var items = {};
 
   function pollFeed(feed) {
-    rsj.r2j(feed, function(data) {
-      if (!data) {
-        this.log.error('There was a problem fetching data for ' + feed);
-        return;
-      }
-      data = JSON.parse(data);
-      data.forEach(function(item) {
-        if (typeof items[item.guid] === 'undefined') {
-          items[item.guid] = item;
+    try {
+      rsj.r2j(feed, function(data) {
+        if (!data) {
+          this.log.error('There was a problem fetching data for ' + feed);
+          return;
         }
+        data = JSON.parse(data);
+        data.forEach(function(item) {
+          if (typeof items[item.guid] === 'undefined') {
+            items[item.guid] = item;
+          }
+        });
       });
-    });
+    }
+    catch (exception) {
+      console.error(exception);
+    }
   };
 
   return function(options) {
