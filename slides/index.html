@@ -620,8 +620,23 @@
         <section data-markdown>
           ## Obstacles
         </section>
-        <section data-markdown>
-          ## Socket.io I
+        <section>
+          <small>Socket.io I</small>
+          <section data-markdown>
+            ### What you'll build
+
+            * A polling loop to grab a list of stories from [http://TODO](http://TODO).
+              * The result will be an array of JSON objects. Store this
+                in memory so it can be made available to the client.
+            * An endpoint for the client to fetch the latest stories (/stories)
+            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x)
+              * The client is currently aware of two events:
+                1. refresh - a full list of stories that will replace those displayed
+                   on the client page.
+                1. newStories - a partial list of new stories, if you choose to use
+                   this event you'll need to parse out any new stories from those
+                   fetched from the feed.
+          </section>
         </section>
         <section data-markdown>
           ## Munch on Lunch
