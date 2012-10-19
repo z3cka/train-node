@@ -30,6 +30,12 @@ function($, _, Backbone, Handlebars, conf) {
     app.trigger('refresh', stories);
   });
 
+  // NOTE: This assumes we're good with whatever we get from the feed
+  // and will not protect against XSS, etc.
+  Handlebars.registerHelper('description', function() {
+    return new Handlebars.SafeString(this.description);
+  });
+
   // Localize or create a new JavaScript Template object.
   var JST = window.JST = window.JST || {};
 

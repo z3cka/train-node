@@ -11,34 +11,46 @@ function Poll(feed) {
 };
 util.inherits(Poll, events.EventEmitter);
 
-Poll.prototype.poll = function() {
-  var self = this;
-  var options = url.parse(self.feed);
-  http.get(options, function polledFeed(res) {
+Poll.prototype.getStories = function(callback) {
+  var options = url.parse(this.feed);
+  var req = http.get(options, function polledFeed(res) {
     var data = '';
     res.on('data', function(chunk) {
       data += chunk;
     });
     res.on('end', function() {
       if (res.statusCode !== 200) {
-        this.emit('fed', res.statusCode, null);
+        callback(res.statusCode, null);
         return;
       }
+      callback(null, JSON.parse(data));
+    });
+  });
+  req.on('error', function() {
+    callback(500, null);
+  });
+};
 
-      var newStories = [];
+Poll.prototype.poll = function() {
+  var self = this;
+  this.getStories(function(err, data) {
+    if (err) {
+      self.emit('fed', err, null);
+      return;
+    }
 
-      data = JSON.parse(data);
-      data.forEach(function(story) {
-        if (self.guids.indexOf(story.guid) === -1) {
-          self.guids.push(story.guid);
-          newStories.push(story);
-        }
-      });
+    var newStories = [];
 
-      if (newStories.length) {
-        this.emit('fed', null, data);
+    data.forEach(function(story) {
+      if (self.guids.indexOf(story.guid) === -1) {
+        self.guids.push(story.guid);
+        newStories.push(story);
       }
     });
+
+    if (newStories.length) {
+      self.emit('fed', null, data);
+    }
   });
 };
 

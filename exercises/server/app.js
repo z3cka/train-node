@@ -52,3 +52,14 @@ poller.on('fed', function(err, data) {
 
   io.sockets.emit('newStories', data);
 });
+
+app.get('/stories', function(req, res) {
+  poller.getStories(function(err, stories) {
+    if (err) {
+      res.send(500, 'Error fetching stories.');
+      return;
+    }
+    res.json(stories);
+  });
+});
+

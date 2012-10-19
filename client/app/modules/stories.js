@@ -10,13 +10,17 @@ define(['app', 'lodash', 'backbone'], function(app, _, Backbone) {
   });
 
   Stories.Collection = Backbone.Collection.extend({
-    model: Stories.Model,
+    url: '/stories',
+    model: Stories.Model
   });
 
   Stories.Views.Item = Backbone.View.extend({
     template: 'story',
     serialize: function() {
       return this.model.toJSON();
+    },
+    append: function(root, child) {
+      $(root).prepend(child);
     }
   });
 
@@ -38,11 +42,14 @@ define(['app', 'lodash', 'backbone'], function(app, _, Backbone) {
       app.on('refresh', _.bind(this.refresh, this));
     },
     add: function(story) {
-      var Story = new Stories.Model(story);
-      this.insertView(new Stories.Views.Item({ model: Story }));
+      var storyView = new Stories.Views.Item({ model: story });
+      storyView.render();
+      this.$el.prepend(storyView.$el);
     },
     newStories: function(stories) {
-      this.collections.add(stories);
+      _.each(stories, function(story) {
+        this.collection.add(story);
+      }, this);
     },
     refresh: function(stories) {
       this.collections.reset(stories);
