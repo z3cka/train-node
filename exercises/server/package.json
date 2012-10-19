@@ -9,6 +9,8 @@
     "express": "3.0.0rc5",
     "jade": "*",
     "socket.io": "~0.9.10",
-    "lodash": "~0.8.2"
+    "lodash": "~0.8.2",
+    "ejs": "~0.8.3",
+    "superagent": "~0.9.7"
   }
 }
