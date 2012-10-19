@@ -23,6 +23,6 @@ function ping_nodejs_node_view($node) {
   if($response->code != 200) {
   	drupal_set_message("Got an error: " . $response->error, 'error');
   } else {
-  	drupal_set_message('Successfully contacted node server. Response was:' . $response->data);
+  	drupal_set_message('Successfully contacted node server. Response was: ' . $response->data);
   }
 }
