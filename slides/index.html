@@ -629,14 +629,22 @@
               * The result will be an array of JSON objects. Store this
                 in memory so it can be made available to the client.
             * An endpoint for the client to fetch the latest stories (/stories)
-            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x)
-              * The client is currently aware of two events:
+          </section>
+          <section data-markdown>
+            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x).
+              The client is currently aware of two events:
                 1. refresh - a full list of stories that will replace those displayed
                    on the client page.
                 1. newStories - a partial list of new stories, if you choose to use
                    this event you'll need to parse out any new stories from those
                    fetched from the feed.
           </section>
+          <section data-markdown>
+            ### Bonus challenge!
+
+            1. Store the stories in either MySQL or MongoDB. Use this list to avoid
+               creating duplicate content in case the feed re-sends an item or you
+               need to restart your node server.
         </section>
         <section data-markdown>
           ## Munch on Lunch
