@@ -14,7 +14,6 @@ var app = express();
 
 app.configure(function() {
   app.set('port', config.port);
-  app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
