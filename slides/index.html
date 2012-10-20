@@ -60,27 +60,33 @@
 
           * https://twitter.com/mirzu
         </section>
-        <section data-markdown>
-          ## Frustrated?
 
-          * Who here has been confused, lost, or frustrated?
-          * Raise your hand! It's ok to be confused, lost, or frustrated!
-          * If you are lost tell us, it's normal and you're not slowing us down.
-        </section>
-        <section data-markdown>
-          ## Agenda (Topics and schedule)
-
-          * Intro to node.js
-          * Review JavaScript
-          * Create a toy application
-          * LUNCH!
-          * Work with Drupal and node.js
-        </section>
         <section data-markdown>
           ## What you'll walk away with
 
           * Callbacks!
             * You'll know why that's funny
+          * Some more JS Chops
+          * Some Async programming skillz
+          * A small Socket.io app
+          * A chance to use the Express Node.js framework.
+          * A few strategies on how to work node into your Drupal projects.
+        </section>
+        <section data-markdown>
+          ## Class outline.
+
+          * Intro to node.js
+          * Console.log
+          * JS 101
+          * Step through debugging
+          * Using Require() *NPM? & Modules*
+          * Intro to Events
+          * Database intro
+          * Async programing
+          * Socket.io
+          * **Lunch**
+          * Integrating with Drupal 1
+          * Integrating with Drupal 2
         </section>
         <section data-markdown>
           ## What is node.js?
@@ -88,25 +94,35 @@
         <section>
           <small>What is node.js?</small>
           <section data-markdown>
-            ### Why
+            ## From Nodejs.org
 
-            * Why not PHP?
-            * What makes Drupal slow
-              * Blocking
-            * Write non-blocking/event-driven PHP
-              * Example
-            * Oh no! Library code is blocking D:
+            <blockquote>Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+            </blockquote>
           </section>
           <section data-markdown>
-            ## What makes PHP "slow"
+            ### What Makes it
+            ### *Fast and Scaleable?*
+
+            * V8 Engine
+
+            * Asynchronous libraries
+
+            * Event Driven.
+          </section>
+          <section data-markdown>
+            ## Why do we need another server side language/framework?
+          </section>
+          <section data-markdown>
+            # PHP is slow.
           </section>
           <section data-markdown>
             ## What do you mean by slow?
           </section>
           <section data-markdown>
-            ### We actually mean bad at handling concurency.
-
-            What makes PHP/Drupal bad at handling concurency?
+            ## We actually mean bad at handling concurency.
+          </section>
+          <section data-markdown>
+            ### Why is PHP/Drupal bad at handling concurency?
 
             * Big memory foot print.
               * If you need to load 100Meg of Code to deliver 4 lines of JSON. . .
@@ -118,7 +134,7 @@
           <section data-markdown>
             ## In node:
 
-            "Everything happens in Parellel execpt for your code."
+            <blockquote>Everything happens in Parellel execpt for your code.</blockquote>
           </section>
           <section data-markdown>
             #huh?
@@ -154,7 +170,8 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
             * Code gives node 2 things to do.
             * Each callback gets fired one at a time
             * Until one callback is fired all others wait in line
-
+          </section>
+          <section data-markdown>
             ### However
 
             * We don't need to wait for the file being read, to write the file.
@@ -162,22 +179,24 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
           </section>
           <section data-markdown>
             ### Don't need to wait for one to finish before the next starts!
-
-            * 
+          </section>
+          <section data-markdown>
+            ## Why not write non-blocking/event-driven PHP
 
           </section>
           <section data-markdown>
-            ### What
+            ## There are event driven Async PHP frameworks.
 
-            * V8 Engine
-            * Asynchronous libraries
-            * NPM - package management you'll fall in love with
-            * Fast growing, popular, community
-            * History + stats, committers, installs, library count
-            * Battle tested
+            For example: [PRADOTM](http://www.photon-project.com/)
           </section>
-            <section data-markdown>
-            ### What is it good for
+          <section data-markdown>
+            ## Libraries.
+
+            * PHP libraries are primarily blocking and not event driven.
+            * Node.js libraries are almost all non-blocking and event driven.
+          </section>
+          <section data-markdown>
+            ### What is it node.js good for
 
             * Rapid prototyping
             * Bursty load
@@ -188,13 +207,13 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
             * **Message passing!**
           </section>
           <section data-markdown>
-            ### What is it NOT good for
+            ### What is it node.js NOT good for
 
             * Web server
-            * Static assets
+            * (Large) static assets
             * Complex systems (business logic)
-            * Processing - use C or PHP
-            </section>
+            * Lots of processing - use C or PHP
+          </section>
           <section data-markdown>
             ### What We've used it for
 
@@ -204,31 +223,39 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
             * IRC Bot
             * Parsing HTML
           </section>
-            <section data-markdown>
-            ### How
+          <section data-markdown>
+            ### What about the community?
 
-            * Frameworks
+            * Lots of Frameworks
+            * Package manager that kicks butt
+              * Over 16k packages
+            * Very fast moving project
+              * 63 Releases in the last year and half
+            * Welcoming community
+            * Used by big companies
             * Plays well with others
-              * Drupal module
+            * Drupal module
+          </section>
+          <section data-markdown>
+            ## One more thing . . .
+          </section>
+          <section data-markdown>
+            ## Share client and server side code.
+
+            ![yeah](/slides/assets/img/glasses-off.gif)
           </section>
         </section>
         <section data-markdown>
-          ## Class outline.
+          ## Lets get into it!
+          
+          ![Adventure Time](/slides/assets/img/adventuretime.jpeg)
+        </section>
+        <section data-markdown>
+          ## Frustrated?
 
-          * Intro to node.js
-          * Console.log?
-          * JS 101
-          * Step through debugging
-          * Using Require() *NPM? & Modules*
-          * Intro to Events
-          * Database intro
-          * Explain Obsticals
-          * Async programing
-          * Socket.io
-          * **Lunch**
-          * Socket.io 2
-          * Integrating with Drupal 1
-          * Integrating with Drupal 2
+          * Who here has been confused, lost, or frustrated?
+          * Raise your hand! It's ok to be confused, lost, or frustrated!
+          * If you are lost tell us, it's normal and you're not slowing us down.
         </section>
         <section data-markdown>
           ## ```console.log()```
