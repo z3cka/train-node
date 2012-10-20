@@ -668,8 +668,42 @@ bar(10);
         </section>
         <section data-markdown>
           ## Intro to events
+
+          * Lots of node functions that emit events.
+          * Eventually you'll write your own.
+
+          [Events Explained.](http://howtonode.org/demystifying-events-in-node)
         </section>
         <section>
+          <small>Intro to Events</small>
+          <section data-markdown>
+            ## Events Example
+            <pre><code>
+  // basic imports
+  var events = require('events');
+
+  // for us to do a require later
+  module.exports = Dummy;
+
+  function Dummy() {
+      events.EventEmitter.call(this);
+  }
+
+  // inherit events.EventEmitter
+  Dummy.super_ = events.EventEmitter;
+  Dummy.prototype = Object.create(events.EventEmitter.prototype, {
+      constructor: {
+          value: Dummy,
+          enumerable: false
+      }
+  });
+            </code></pre>
+          </section>
+       </section>
+       <section data-markdown>
+         ## Asynchronous programming
+       </section>
+       <section>
           <small>Asynchronous programming</small>
           <section data-markdown>
             ## How to stop Code-blocking
@@ -710,12 +744,19 @@ bar(10);
             </code></pre>
           </section>
           <section data-markdown>
-            ## Why is this even included?
+            ## Why have both?
+          </section>
+          <section data-markdown>
+            ## Why have both?
 
             You might need it, we haven't.
 
-            Only reason we've used other sync functions is to simplify code flow when doing something simple and fast.
+            * Sometimes simplifies code flow.
+            * Useful if you _need_ to stop code from executing until the operation is completed.
 
+          </section>
+          <section data-markdown>
+            ## One last note.
           </section>
           <section data-markdown>
             ### Don't do complicated stuff in the event looop.
@@ -747,7 +788,7 @@ bar(10);
             * Processing lots of raw data.
           </section>
           <section data-markdown>
-            ### How To fix
+            ### How to get around this problem:
 
             * Fork process
             * Hand off to other program and listen for event.
@@ -875,6 +916,20 @@ bar(10);
             </code></pre>
           </section>
         </section>
+        <section data-markdown>
+          ## Your first Server.
+
+          ```/hello```
+
+          <pre><code>
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
+          </code></pre>
+        </section>
         <section>
           <small>A quick intro to Express</small>
           <section data-markdown>
@@ -916,7 +971,7 @@ bar(10);
           <section data-markdown>
             ### What you'll build
 
-            * A polling loop to grab a list of stories from [http://TODO](http://TODO).
+            * A polling loop to grab a list of stories from [http://localhost:3000](http://localhost:3000).
               * The result will be an array of JSON objects. Store this
                 in memory so it can be made available to the client.
             * An endpoint for the client to fetch the latest stories (/stories)
