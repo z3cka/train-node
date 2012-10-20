@@ -796,6 +796,20 @@ bar(10);
             * Use a queue
           </section>
         </section>
+        <section data-markdown>
+          ## Your first Server.
+
+          ```/hello```
+
+          <pre><code>
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
+          </code></pre>
+        </section>
         <section>
           <small>Working with databases</small>
           <section data-markdown>
@@ -916,20 +930,6 @@ bar(10);
             </code></pre>
           </section>
         </section>
-        <section data-markdown>
-          ## Your first Server.
-
-          ```/hello```
-
-          <pre><code>
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
-          </code></pre>
-        </section>
         <section>
           <small>A quick intro to Express</small>
           <section data-markdown>
@@ -967,7 +967,37 @@ console.log('Server running at http://127.0.0.1:1337/');
           ## Socket.io
         </section>
         <section>
-          <small>Socket.io I</small>
+          <small>Socket.io </small>
+          <section data-markdown>
+            ### What is Socket.io
+
+            <blockquote>
+              Socket.IO aims to make realtime apps possible in every browser and mobile device, blurring the differences between the different transport mechanisms. It's care-free realtime 100% in JavaScript.
+            </blockquote>
+          </section>
+          <section data-markdown>
+            #### Server
+            <pre><code>
+var io = require('socket.io').listen(80);
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+            </code></pre>
+
+            #### Client
+
+            <pre><code>
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+            </code></pre>
+          </section>
           <section data-markdown>
             ### What you'll build
 
@@ -999,9 +1029,6 @@ console.log('Server running at http://127.0.0.1:1337/');
           ![lunch](http://weknowmemes.com/wp-content/uploads/2012/07/alpaca-lunch.jpg)
         </section>
         <section data-markdown>
-          ## Socket.io II
-        </section>
-        <section data-markdown>
           ## Integrating with Drupal I
         </section>
         <section>
@@ -1015,16 +1042,19 @@ console.log('Server running at http://127.0.0.1:1337/');
           </section>
           <section data-markdown>
             ### Create the Node.js Endpoint.
-<pre><code>
+
+            <pre><code>
 app.post('/ping', function(request, response){
   console.log(request.body);      // your JSON
   response.send(request.body);    // echo the result back
 });
-</code></pre>
+            </code></pre>
 
-          ### Bonus
+            &nbsp
 
-          save the drupal title in the database.
+            ### Bonus
+
+            Save the drupal title in the database.
 
           </section>
           <section data-markdown>
