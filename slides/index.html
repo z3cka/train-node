@@ -247,7 +247,7 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
         </section>
         <section data-markdown>
           ## Lets get into it!
-          
+
           ![Adventure Time](/slides/assets/img/adventuretime.jpeg)
         </section>
         <section data-markdown>
@@ -259,12 +259,205 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
         </section>
         <section data-markdown>
           ## ```console.log()```
+
+          Same debugging tool you use in the browser.
+
+          * Create your first app!
+          * Make an app.js file in the _/console.log_ folder.
+          * Add one line. . .
+
+          <pre><code>
+            console.log('Mathamatical!');
+          </code></pre>
+
+          Now run it
+
+          <pre><code>
+            $ node app
+          </code></pre>
+        </section>
+        <section data-markdown>
+          ![result](/slides/assets/img/consolelog.png)
         </section>
         <section data-markdown>
           ## JavaScript 101
         </section>
-        <section data-markdown>
-          ## Step-through debugging
+        <section>
+          <small>JavaScript 101</small>
+          <section data-markdown>
+            ### Scope Example 1
+<pre><code>
+var foo = 'kitteh';
+
+/**
+ * This function alters the 'foo' variable that was
+ * previously defined in the global scope.
+ */
+var example = function() {
+  foo = 'doggie';
+};
+
+console.log('Example 1: foo = ' + foo);
+example();
+console.log('Now foo = ' + foo);
+
+console.log("\n");
+</code></pre>
+
+          </section>
+          <section data-markdown>
+            ### Scope: Global Variable Scope
+
+            ![result](/slides/assets/img/scope1.png)
+          </section>
+          <section data-markdown>
+            ### Scope: Local Variable Scope
+
+            <pre><code>
+/**
+ * This function defines its own 'foo' variable that
+ * will not alter the one defined in the global scope.
+ */
+var example2 = function() {
+  var foo = 'chupacabra';
+  console.log("My foo = " + foo);
+};
+
+console.log('Example 2: foo = ' + foo);
+example2();
+console.log('Now foo = ' + foo);
+
+
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Scope: Local Variable Scope
+
+            ![result](/slides/assets/img/scope2.png)
+          </section>
+          <section data-markdown>
+            ## Closures
+
+
+          </section>
+          <section data-markdown>
+            ### Hoisting
+
+            <pre><code>
+/**
+ * This function attempts to access a variable before
+ * it is defined and illustrates hoisting.
+ *
+ * NOTE: if 'a' had not been defined within this scope,
+ * attempting to access it would have thrown a fatal error.
+ */
+var example3 = function() {
+  console.log(a);
+  var a = 1;
+  console.log(a);
+};
+
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Scope: Hoisting
+
+            ![result](/slides/assets/img/scope3.png)
+          </section>
+          <section data-markdown>
+            ## This
+
+            <pre><code>
+  addHorn: function() {
+    this.hasHorn = true;
+
+    var countHorns = function() {
+      if (this.hasHorn) {
+        return 1;
+      }
+      return 0;
+    };
+
+//    console.log('I have ' + countHorns() + ' horns.');
+  }
+
+
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## This
+
+            <pre><code>
+  addHorn: function() {
+    var self = this;
+    self.hasHorn = true;
+
+    var countHorns = function() {
+      if (self.hasHorn) {
+        return 1;
+      }
+      return 0;
+    };
+//    console.log('I have ' + countHorns() + ' horns.');
+  }
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## This
+
+            ![this](/slides/assets/img/this.png)
+          </section>
+          <section data-markdown>
+            ## Closures
+
+            <blockquote>
+              Returning functions for fun and profit.
+            </blockquote>
+          </section>
+          <section data-markdown>
+            ## Not a Closure
+
+            <pre><code>
+/**
+ * EXAMPLE 1: Not a Closure.
+ */
+var foo = function foo(x) {
+  var tmp = 3;
+  function bar(y) {
+    console.log(x + y + (++tmp));
+  }
+  bar(10);
+};
+foo(2);
+foo(2);
+foo(2);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## A Closure
+
+            <pre><code>
+/**
+ * EXAMPLE 2: A Closure
+ */
+
+var foo = function foo(x) {
+  var tmp = 3;
+  return function (y) {
+    console.log(x + y + (++tmp));
+  };
+};
+var bar = foo(2); // bar is now a closure.
+bar(10);
+bar(10);
+bar(10);
+           </code></pre>
+          </section>
+          <section data-markdown>
+            ## Closures
+
+            ![this](/slides/assets/img/closures.png)
+          </section>
         </section>
         <section data-markdown>
           ## Using ```require()```, NPM, and modules

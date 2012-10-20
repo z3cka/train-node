@@ -2,42 +2,40 @@
  * @fileoverview closure examples.
  */
 
+console.log('Example 1:');
 /**
- * EXAMPLE 1: basic and anonymous closures.
+ * EXAMPLE 1: Not a Closure.
  */
-
-/**
- * Basic closure that alters a variable and executes a callback.
- *
- * @param {string} thing
- *   The string to alter.
- * @param {function} callback
- *   The function to execute after the string is altered.
- */
-var foo = function(thing, callback) {
-  thing = 'unicorn';
-  callback(bar);
+var foo = function foo(x) {
+  var tmp = 3;
+  function bar(y) {
+    console.log(x + y + (++tmp));
+  }
+  bar(10);
 };
+foo(2);
+foo(2);
+foo(2);
 
+console.log('\n');
+
+console.log('Example 2:');
 /**
- * Basic closure that returns a string.
- *
- * @param {string} thing
+ * EXAMPLE 2: A Closure
  */
-var foo2 = function(thing) {
-  return "I'm a " + thing;
+
+var foo = function foo(x) {
+  var tmp = 3;
+  return function (y) {
+    console.log(x + y + (++tmp));
+  };
 };
+var bar = foo(2); // bar is now a closure.
+bar(10);
+bar(10);
+bar(10);
 
-console.log(foo2('pony'));
-
-/**
- * The callback for foo is an anonymous closure that's only
- * accessible when foo executes it.
- */
-foo(bar, function closure(baz) {
-  console.log(foo2(baz));
-});
-
+console.log('\n');
 console.log('=============================');
 
 /**
