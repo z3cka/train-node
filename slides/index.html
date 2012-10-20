@@ -623,6 +623,17 @@ bar(10);
             npm install --save colors
             </section>
             <section data-markdown>
+              <pre><code>
+                // colorsExample.js
+                var colors = require('colors');
+
+                console.log('hello'.green); // outputs green text
+                console.log('i like cake and pies'.underline.red) // outputs red underlined text
+                console.log('inverse the color'.inverse); // inverses the color
+                console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
+              </code></pre>
+            </section>
+            <section data-markdown>
               ### Package.json
 
               <pre><code>
@@ -649,17 +660,6 @@ bar(10);
             </section>
         </section>
         <section data-markdown>
-          <pre><code>
-            // colorsExample.js
-            var colors = require('colors');
-
-            console.log('hello'.green); // outputs green text
-            console.log('i like cake and pies'.underline.red) // outputs red underlined text
-            console.log('inverse the color'.inverse); // inverses the color
-            console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
-          </code></pre>
-        </section>
-        <section data-markdown>
           ## Intro to events
 
           * Lots of node functions that emit events.
@@ -674,22 +674,25 @@ bar(10);
             <pre><code>
   // basic imports
   var events = require('events');
+  var util = require('util');
 
-  // for us to do a require later
-  module.exports = Dummy;
+  function Poll(feed) {
+    this.guids = [];
+    this.feed = feed;
+    this.poller = setInterval(_.bind(this.poll, this), 1000);
+  };
 
-  function Dummy() {
-      events.EventEmitter.call(this);
+  util.inherits(Poll, events.EventEmitter);
+
+  Poll.prototype.getStories = function(callback) {
+
+  // . . .
+
+    if (newStories.length) {
+      self.emit('fed', null, data);
+    }
   }
-
-  // inherit events.EventEmitter
-  Dummy.super_ = events.EventEmitter;
-  Dummy.prototype = Object.create(events.EventEmitter.prototype, {
-      constructor: {
-          value: Dummy,
-          enumerable: false
-      }
-  });
+  exports.Poll = Poll;
             </code></pre>
           </section>
        </section>
@@ -802,6 +805,12 @@ http.createServer(function (req, res) {
 }).listen(1337, '127.0.0.1');
 console.log('Server running at http://127.0.0.1:1337/');
           </code></pre>
+
+          change *1337* to your port number.
+
+        </section>
+        <section data-markdown>
+          ## Working with Databases
         </section>
         <section>
           <small>Working with databases</small>
@@ -955,71 +964,6 @@ console.log('Server running at http://127.0.0.1:1337/');
                 </code></pre>
               1. Edit app.js to remove some pieces we won't be using, include the config file, change the port we listen on, and change the static assets path: [see the diff](https://gist.github.com/3914051).
           </section>
-        </section>
-        <section data-markdown>
-          ## Socket.io
-        </section>
-        <section>
-          <small>Socket.io </small>
-          <section data-markdown>
-            ### What is Socket.io
-
-            <blockquote>
-              Socket.IO aims to make realtime apps possible in every browser and mobile device, blurring the differences between the different transport mechanisms. It's care-free realtime 100% in JavaScript.
-            </blockquote>
-          </section>
-          <section data-markdown>
-            #### Server
-            <pre><code>
-var io = require('socket.io').listen(80);
-
-io.sockets.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
-            </code></pre>
-
-            #### Client
-
-            <pre><code>
-  var socket = io.connect('http://localhost');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### What you'll build
-
-            * A polling loop to grab a list of stories from [http://localhost:3000](http://localhost:3000).
-              * The result will be an array of JSON objects. Store this
-                in memory so it can be made available to the client.
-            * An endpoint for the client to fetch the latest stories (/stories)
-          </section>
-          <section data-markdown>
-            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x).
-              The client is currently aware of two events:
-                1. refresh - a full list of stories that will replace those displayed
-                   on the client page.
-                1. newStories - a partial list of new stories, if you choose to use
-                   this event you'll need to parse out any new stories from those
-                   fetched from the feed.
-          </section>
-          <section data-markdown>
-            ### Bonus challenge!
-
-            1. Store the stories in either MySQL or MongoDB. Use this list to avoid
-               creating duplicate content in case the feed re-sends an item or you
-               need to restart your node server.
-            </section>
-        </section>
-        <section data-markdown>
-          ## Munch on Lunch
-
-          ![lunch](http://weknowmemes.com/wp-content/uploads/2012/07/alpaca-lunch.jpg)
         </section>
         <section data-markdown>
           ## Integrating with Drupal I
@@ -1191,7 +1135,72 @@ app.get('/nodes', function (req, res, next) {
 });
             </code></pre>
           </section>
+        </section>       <section data-markdown>
+          ## Socket.io
         </section>
+        <section>
+          <small>Socket.io </small>
+          <section data-markdown>
+            ### What is Socket.io
+
+            <blockquote>
+              Socket.IO aims to make realtime apps possible in every browser and mobile device, blurring the differences between the different transport mechanisms. It's care-free realtime 100% in JavaScript.
+            </blockquote>
+          </section>
+          <section data-markdown>
+            #### Server
+            <pre><code>
+var io = require('socket.io').listen(80);
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+            </code></pre>
+
+            #### Client
+
+            <pre><code>
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### What you'll build
+
+            * A polling loop to grab a list of stories from [http://localhost:3000](http://localhost:3000).
+              * The result will be an array of JSON objects. Store this
+                in memory so it can be made available to the client.
+            * An endpoint for the client to fetch the latest stories (/stories)
+          </section>
+          <section data-markdown>
+            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x).
+              The client is currently aware of two events:
+                1. refresh - a full list of stories that will replace those displayed
+                   on the client page.
+                1. newStories - a partial list of new stories, if you choose to use
+                   this event you'll need to parse out any new stories from those
+                   fetched from the feed.
+          </section>
+          <section data-markdown>
+            ### Bonus challenge!
+
+            1. Store the stories in either MySQL or MongoDB. Use this list to avoid
+               creating duplicate content in case the feed re-sends an item or you
+               need to restart your node server.
+            </section>
+        </section>
+        <section data-markdown>
+          ## Munch on Lunch
+
+          ![lunch](http://weknowmemes.com/wp-content/uploads/2012/07/alpaca-lunch.jpg)
+        </section>
+
       </div>
 
       <!-- The navigational controls UI -->
