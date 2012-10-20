@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Pings a node server when a node is saved.
+ */
+
+/**
+ * Implements hook_node_insert().
+ */
+function ping_nodejs_node_view($node) {
+
+}

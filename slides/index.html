@@ -256,12 +256,12 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
             [List of libraries](http://nodejs.org/docs/latest/api/)
 
             <pre><code>
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
+              var http = require('http');
+              http.createServer(function (req, res) {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.end('Hello World\n');
+              }).listen(1337, '127.0.0.1');
+              console.log('Server running at http://127.0.0.1:1337/');
             </code></pre>
 
           </section>
@@ -411,25 +411,25 @@ console.log('Server running at http://127.0.0.1:1337/');
             </section>
             <section data-markdown>
               ### Package.json
-              
+
               <pre><code>
-{
-  "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
-  "name": "npmExample",
-  "description": "An example from the world famous Four Kitchens Node.js training.",
-  "version": "0.0.1",
-  "homepage": "http://fourkitchens.com",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/fourkitchens/train-node.git"
-  },
-  "engines": {
-    "node": "~0.6.8"
-  },
-  "dependencies": {},
-  "devDependencies": {},
-  "optionalDependencies": {}
-}
+                {
+                  "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+                  "name": "npmExample",
+                  "description": "An example from the world famous Four Kitchens Node.js training.",
+                  "version": "0.0.1",
+                  "homepage": "http://fourkitchens.com",
+                  "repository": {
+                    "type": "git",
+                    "url": "git://github.com/fourkitchens/train-node.git"
+                  },
+                  "engines": {
+                    "node": "~0.6.8"
+                  },
+                  "dependencies": {},
+                  "devDependencies": {},
+                  "optionalDependencies": {}
+                }
               </code></pre>
 
               [package.json reference](http://package.json.jit.su/)
@@ -437,13 +437,13 @@ console.log('Server running at http://127.0.0.1:1337/');
         </section>
         <section data-markdown>
           <pre><code>
-// colorsExample.js
-var colors = require('colors');
+            // colorsExample.js
+            var colors = require('colors');
 
-console.log('hello'.green); // outputs green text
-console.log('i like cake and pies'.underline.red) // outputs red underlined text
-console.log('inverse the color'.inverse); // inverses the color
-console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
+            console.log('hello'.green); // outputs green text
+            console.log('i like cake and pies'.underline.red) // outputs red underlined text
+            console.log('inverse the color'.inverse); // inverses the color
+            console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
           </code></pre>
         </section>
         <section data-markdown>
@@ -464,13 +464,13 @@ console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
             Checkout the order of the log messages.
 
             <pre><code>
-console.log("I'm going to read a file synchronously.");
+              console.log("I'm going to read a file synchronously.");
 
-syncContents = fs.readFileSync(__filename);
+              syncContents = fs.readFileSync(__filename);
 
-console.log("I'm done reading the file synchronously.");
-console.log('I read ' + syncContents.length + ' characters.');
-console.log("Now I'm ready to do the next thing.");
+              console.log("I'm done reading the file synchronously.");
+              console.log('I read ' + syncContents.length + ' characters.');
+              console.log("Now I'm ready to do the next thing.");
             </code></pre>
           </section>
 
@@ -480,13 +480,13 @@ console.log("Now I'm ready to do the next thing.");
             Now see how the log messages have changed.
 
             <pre><code>
-console.log("I'm going to read a file asynchronously.");
-fs.readFile(__filename, function(err, data) {
-  asyncContents = data;
-  console.log("I'm done reading the file asynchronously.");
-  console.log('I read ' + asyncContents.length + ' characters.');
-});
-console.log("Now I'm ready to do the next thing.");
+              console.log("I'm going to read a file asynchronously.");
+              fs.readFile(__filename, function(err, data) {
+                asyncContents = data;
+                console.log("I'm done reading the file asynchronously.");
+                console.log('I read ' + asyncContents.length + ' characters.');
+              });
+              console.log("Now I'm ready to do the next thing.");
             </code></pre>
           </section>
           <section data-markdown>
@@ -501,20 +501,20 @@ console.log("Now I'm ready to do the next thing.");
             ### Don't do complicated stuff in the event looop.
 
             <pre><code>
-var start = Date.now();
+              var start = Date.now();
 
-setTimeout(function timeout1() {
-  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+              setTimeout(function timeout1() {
+                console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
 
-  for (var x = 0; x < 3999999999; x++) {}
+                for (var x = 0; x < 3999999999; x++) {}
 
-  console.log('Done with timeout1().');
-}, 1000);
+                console.log('Done with timeout1().');
+              }, 1000);
 
-setTimeout(function timeout2() {
-  console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
-  console.log('Done with timeout2().');
-}, 2000);
+              setTimeout(function timeout2() {
+                console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
+                console.log('Done with timeout2().');
+              }, 2000);
             </code></pre>
           </section>
           <section data-markdown>
@@ -655,14 +655,73 @@ setTimeout(function timeout2() {
             </code></pre>
           </section>
         </section>
-        <section data-markdown>
-          ## Obstacles
+        <section>
+          <small>A quick intro to Express</small>
+          <section data-markdown>
+            ### Express
+
+            * A web application framework for node.js
+            * Provides:
+              * Static asset handling
+              * Dynamic router
+              * [Connect](http://www.senchalabs.org/connect/) middleware
+          </section>
+          <section data-markdown>
+            ### Getting started
+
+            * Use the ```express``` command to set up some scaffolding for a new application:
+            <pre><code>
+              $ express server
+              $ cd server
+              $ npm install
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Getting started (cont)
+
+            * We're going to make a few changes to support the application we're going to build:
+              1. Copy the config.js file and client directory from your home directory to the example dirctory:
+                <pre><code>
+                  $ cp ~/config.js ~/train-node/exercises/server/config.js
+                  $ cp -r ~/train-node/client ~/train-node/exercises/server/client
+                </code></pre>
+              1. Edit app.js to remove some pieces we won't be using, include the config file, change the port we listen on, and change the static assets path: [see the diff](https://gist.github.com/3914051).
+          </section>
         </section>
         <section data-markdown>
-          ## Socket.io I
+          ## Socket.io
+        </section>
+        <section>
+          <small>Socket.io I</small>
+          <section data-markdown>
+            ### What you'll build
+
+            * A polling loop to grab a list of stories from [http://TODO](http://TODO).
+              * The result will be an array of JSON objects. Store this
+                in memory so it can be made available to the client.
+            * An endpoint for the client to fetch the latest stories (/stories)
+          </section>
+          <section data-markdown>
+            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x).
+              The client is currently aware of two events:
+                1. refresh - a full list of stories that will replace those displayed
+                   on the client page.
+                1. newStories - a partial list of new stories, if you choose to use
+                   this event you'll need to parse out any new stories from those
+                   fetched from the feed.
+          </section>
+          <section data-markdown>
+            ### Bonus challenge!
+
+            1. Store the stories in either MySQL or MongoDB. Use this list to avoid
+               creating duplicate content in case the feed re-sends an item or you
+               need to restart your node server.
+            </section>
         </section>
         <section data-markdown>
           ## Munch on Lunch
+
+          ![lunch](http://weknowmemes.com/wp-content/uploads/2012/07/alpaca-lunch.jpg)
         </section>
         <section data-markdown>
           ## Socket.io II
@@ -670,8 +729,170 @@ setTimeout(function timeout2() {
         <section data-markdown>
           ## Integrating with Drupal I
         </section>
+        <section>
+          <small>Integrating with Drupal I</small>
+          <section data-markdown>
+            ## What we'll build.
+
+            * We'll ping the node server with with node title
+            * We'll create a list of Drupal nodes in our app.
+
+          </section>
+          <section data-markdown>
+            ### Create the Node.js Endpoint.
+<pre><code>
+app.post('/ping', function(request, response){
+  console.log(request.body);      // your JSON
+  response.send(request.body);    // echo the result back
+});
+</code></pre>
+
+          ### Bonus
+
+          save the drupal title in the database.
+
+          </section>
+          <section data-markdown>
+            ### Create a Drupal module to send the title to node.
+
+            1. Stub drupal module is created already.
+            2. We'll put the code that talks to node in a node_view hook.
+            3. Hint: we'll use drupal_json_encode() and drupal_http_request()
+            4. Be sure to handle errors.
+          </section>
+          <section data-markdown>
+            ### Example Drupal Module code.
+            <pre><code>
+  $data = array('title' => $node->title);
+  $data = drupal_json_encode($data);
+  $uri = variable_get('ping_nodejs_uri','http://localhost:3000/ping');
+
+  $options = array();
+  $options['headers'] = array('Content-Type' => 'application/json');
+  $options['method'] = 'POST';
+  $options['data'] = $data;
+  $response = drupal_http_request($uri, $options);
+
+  if($response->code != 200) {
+    drupal_set_message("Got an error: " . $response->error, 'error');
+  } else {
+    drupal_set_message('Successfully contacted node server. Response was: ' . $response->data);
+  }
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## What's wrong with this approach?
+          </section>
+          <section data-markdown>
+            ## What's wrong with this approach?
+
+            We are slowing down the response on the drupal side by waiting for a response from node.js.
+
+            #### How to Fix?
+
+            1. Add the database call to a que and use cron to clear it.
+            2. Poll Drupal for new content.
+          </section>
+        </section>
         <section data-markdown>
           ## Integrating with Drupal II
+        </section>
+        <section>
+          <small>Integrating with Drupal II</small>
+          <section data-markdown>
+            ## Getting a list of Drupal Nodes.
+
+            1. Install and configure Services modules.
+            2. Create and theme a route in our app for drupal to ping.
+          </section>
+          <section data-markdown>
+            ## Install and Configure Services module.
+
+            1. It's already there, just enable it.
+            2. go to admin/structure/services
+            3. configure a rest server with endpoint "rest".
+            4. configure the rest server with the node resource.
+          </section>
+          <section data-markdown>
+            ## Create & theme a route to show a list of nodes.
+
+            1. Create a new  Express middleware
+            2. Create an endpoint that uses that middleware
+            3. Add a template engine to Express.
+            4. Create a template for the page of nodes.
+          </section>
+          <section data-markdown>
+            ## Add a new library
+
+            *npm install --save superagent*
+          </section>
+          <section data-markdown>
+            ## Create the Express middleware.
+
+            Create file: */lib/nodes.js
+
+            <pre><code>
+var request = require('superagent');
+
+/**
+ * Get Nodes function
+ *
+ */
+module.exports  = function nodes (url, fn) {
+  request.get(url)
+    .end(function (res) {
+      if (res.body) {
+        return fn(null, res.body);
+      }
+    });
+};
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Add a theming engine
+
+            *npm install --save ejs*
+
+            #### add the themeing engine to our app.
+            <pre><code>
+  //  app.set('port', config.port);
+  app.set('view engine', 'ejs');
+  app.set('views', __dirname + '/views');
+  app.set('view options', { layout: false});
+  //  app.use(express.logger('dev'));
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Create the template
+
+            Create the file */views/nodes.ejs*
+
+            <pre><code>
+< h1 > Nodes < / h1 >
+<% if (results.length) { %>
+  <ul>
+   <% for (var i = 0; i < results.length; i++) { %>
+     <li><%= results[i].title %></li>
+   <% } %>
+  </ul>
+  <% } else { %>
+  <p>No results </p>
+<% } %>
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Add code to the app.
+
+            <pre><code>
+app.get('/nodes', function (req, res, next) {
+  nodes('http://train-node.local/exercises/drupal/rest/node.json', function (err, nodes) {
+    console.log(nodes);
+    if (err) return next( err);
+    res.render('nodes', { results: nodes });
+  });
+});
+            </code></pre>
+          </section>
         </section>
       </div>
 
