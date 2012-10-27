@@ -1,3 +1,74 @@
-@import "main.styl"
+@import url(../vendor/h5bp/css/style.css);
+@import url(../js/plugins/flexslider/flexslider.css);
+/* -------------------------------------------------------------------------*/
+/* Layout */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\000039}}
+.container {
+  *zoom: 1;
+  max-width: 59em;
+  _width: 59em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/var\/lib\/gems\/1\.8\/gems\/compass-0\.13\.alpha\.0\/frameworks\/compass\/stylesheets\/compass\/utilities\/general\/_clearfix\.scss}line{font-family:\0000338}}
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
-/* Put development-only CSS below this line. */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000314}}
+.region {
+  margin-bottom: 2em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000318}}
+.images {
+  position: relative;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000321}}
+.images .images-list img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000321}}
+  .images .images-list img {
+    width: auto;
+  }
+}
+
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000334}}
+  .stories {
+    width: 32.20339%;
+    float: left;
+    margin-right: 1.69492%;
+    display: inline;
+  }
+}
+
+@media (min-width: 768px) {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000339}}
+  .messages {
+    width: 66.10169%;
+    float: right;
+    margin-right: 0;
+    #margin-left: -1em;
+    display: inline;
+  }
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000345}}
+.messages #new-message input:not([type="submit"]), .messages #new-message textarea {
+  width: 100%;
+  margin-bottom: .25em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/home\/elliotttf\/train-node\/client\/assets\/sass\/index\.scss}line{font-family:\0000351}}
+.messages .message {
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}

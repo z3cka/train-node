@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 
     // The clean task ensures all files are removed from the dist/ directory so
     // that no files linger from previous builds.
-    clean: ["dist/"],
+    clean: ['dist/'],
 
     // The lint task will run the build configuration and the application
     // JavaScript through JSHint and report any errors.  You can change the
@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     // https://github.com/cowboy/grunt/blob/master/docs/task_lint.md
     lint: {
       files: [
-        "build/config.js", "app/**/*.js"
+        'build/config.js', 'app/**/*.js'
       ]
     },
 
@@ -36,8 +36,8 @@ module.exports = function(grunt) {
     // The concat task depends on this file to exist, so if you decide to
     // remove this, ensure concat is updated accordingly.
     jst: {
-      "dist/debug/templates.js": [
-        "app/templates/**/*.html"
+      'dist/debug/templates.js': [
+        'app/templates/**/*.html'
       ]
     },
 
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
     // The concat task depends on this file to exist, so if you decide to
     // remove this, ensure concat is updated accordingly.
     handlebars: {
-      "dist/debug/templates.js": ["app/templates/**/*.html"]
+      'dist/debug/templates.js': ['app/templates/**/*.html']
     },
 
     // The concatenate task is used here to merge the almond require/define
@@ -60,66 +60,15 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: [
-          "assets/js/libs/almond.js",
-          "dist/debug/templates.js",
-          "dist/debug/require.js"
+          'assets/js/libs/almond.js',
+          'dist/debug/templates.js',
+          'dist/debug/require.js'
         ],
 
-        dest: "dist/debug/require.js",
+        dest: 'dist/debug/require.js',
 
-        separator: ";"
+        separator: ';'
       }
-    },
-
-    // This task uses the MinCSS Node.js project to take all your CSS files in
-    // order and concatenate them into a single CSS file named index.css.  It
-    // also minifies all the CSS as well.  This is named index.css, because we
-    // only want to load one stylesheet in index.html.
-    mincss: {
-      "dist/release/index.css": [
-        "dist/debug/index.css"
-      ]
-    },
-
-    // The stylus task is used to compile Stylus stylesheets into a single
-    // CSS file for debug and release deployments.  
-    stylus: {
-      // Put all your CSS files here, order matters!
-      files: [
-        "assets/vendor/h5bp/css/style.css",
-        "assets/css/index.css"
-      ],
-
-      // Default task which runs in debug mode, this will build out to the
-      // `dist/debug` directory.
-      compile: {
-        // Used for @imports.
-        options: { paths: ["assets/css"] },
-        
-        files: {
-          "dist/debug/index.css": "<config:stylus.files>"
-        }
-      },
-
-      // This dev task only runs with `watch:stylus` this will *completely*
-      // overwrite the `assets/css/index.css` file referenced in `index.html`.
-      // Use this only when you cannot use the `bbb server` runtime
-      // compilation.
-      dev: {
-        // Used for @imports.
-        options: { paths: ["assets/css"] },
-        
-        files: {
-          "assets/css/index.css": "<config:stylus.files>"
-        }
-      }
-    },
-
-    // Takes the built require.js file and minifies it for filesize benefits.
-    min: {
-      "dist/release/require.js": [
-        "dist/debug/require.js"
-      ]
     },
 
     // Running the server without specifying an action will run the defaults,
@@ -131,7 +80,7 @@ module.exports = function(grunt) {
     // Changing the defaults might look something like this:
     //
     // server: {
-    //   host: "127.0.0.1", port: 9001
+    //   host: '127.0.0.1', port: 9001
     //   debug: { ... can set host and port here too ...
     //  }
     //
@@ -139,33 +88,62 @@ module.exports = function(grunt) {
     //  until documentation has been written.
     server: {
       // Ensure the favicon is mapped correctly.
-      files: { "favicon.ico": "favicon.ico" },
+      files: { 'favicon.ico': 'favicon.ico' },
 
       debug: {
         // Ensure the favicon is mapped correctly.
-        files: { "favicon.ico": "favicon.ico" },
+        files: { 'favicon.ico': 'favicon.ico' },
 
         // Map `server:debug` to `debug` folders.
         folders: {
-          "app": "dist/debug",
-          "assets/js/libs": "dist/debug",
-          "assets/css": "dist/debug"
+          'app': 'dist/debug',
+          'assets/js/libs': 'dist/debug',
+          'assets/css': 'dist/debug'
         }
       },
 
       release: {
         // This makes it easier for deploying, by defaulting to any IP.
-        host: "0.0.0.0",
+        host: '0.0.0.0',
 
         // Ensure the favicon is mapped correctly.
-        files: { "favicon.ico": "favicon.ico" },
+        files: { 'favicon.ico': 'favicon.ico' },
 
         // Map `server:release` to `release` folders.
         folders: {
-          "app": "dist/release",
-          "assets/js/libs": "dist/release",
-          "assets/css": "dist/release"
+          'app': 'dist/release',
+          'assets/js/libs': 'dist/release',
+          'assets/css': 'dist/release'
         }
+      }
+    },
+
+    compass: {
+      dev: {
+        src: 'assets/sass',
+        dest: 'assets/css',
+        linecomments: true,
+        forcecompile: true,
+        require: [
+          'susy',
+          'respond-to'
+        ],
+        debugsass: true,
+        relativeassets: true
+      },
+      prod: {
+        src: 'assets/sass',
+        dest: 'dist/release',
+        outputstyle: 'compressed',
+        linecomments: false,
+        forcecompile: true,
+        require: [
+          'susy',
+          'respond-to'
+        ],
+        debugsass: false,
+        images: '/assets/images',
+        relativeassets: true
       }
     },
 
@@ -173,44 +151,50 @@ module.exports = function(grunt) {
     // future other builders may be contributed as drop-in alternatives.
     requirejs: {
       // Include the main configuration file.
-      mainConfigFile: "app/config.js",
+      mainConfigFile: 'app/config.js',
 
       // Output file.
-      out: "dist/debug/require.js",
+      out: 'dist/debug/require.js',
 
       // Root application module.
-      name: "config",
+      name: 'config',
 
       // Do not wrap everything in an IIFE.
       wrap: false,
 
       // Build Handlebars runtime, instead of full version.
       paths: {
-        handlebars: "../assets/js/libs/handlebars.runtime-1.0.0.beta"
+        handlebars: '../assets/js/libs/handlebars.runtime-1.0.0.beta'
       }
     },
 
-    // The headless QUnit testing environment is provided for "free" by Grunt.
+    // The headless QUnit testing environment is provided for 'free' by Grunt.
     // Simply point the configuration to your test directory.
     qunit: {
-      all: ["test/qunit/*.html"]
+      all: ['test/qunit/*.html']
     },
 
     // The headless Jasmine testing is provided by grunt-jasmine-task. Simply
     // point the configuration to your test directory.
     jasmine: {
-      all: ["test/jasmine/*.html"]
+      all: ['test/jasmine/*.html']
     },
 
     // The watch task can be used to monitor the filesystem and execute
     // specific tasks when files are modified.  By default, the watch task is
-    // available to compile stylus templates if you are unable to use the
+    // available to compile sass templates if you are unable to use the
     // runtime builder (use if you have a custom server, PhoneGap, Adobe Air,
     // etc.)
     watch: {
-      stylus: {
-        files: ["grunt.js", "assets/css/**/*.styl"],
-        tasks: "stylus:dev"
+      lint: {
+        files: [
+          'build/config.js', 'app/**/*.js'
+        ],
+        tasks: ['lint']
+      },
+      compass: {
+        files: ['grunt.js', 'assets/sass/**/*.scss'],
+        tasks: ['compass:dev', 'compass:prod']
       }
     }
 
@@ -221,10 +205,11 @@ module.exports = function(grunt) {
   // dist/debug/templates.js, compile all the application code into
   // dist/debug/require.js, and then concatenate the require/define shim
   // almond.js and dist/debug/templates.js into the require.js file.
-  grunt.registerTask("debug", "clean lint jst requirejs concat stylus:compile");
+  grunt.registerTask('debug', 'clean lint jst requirejs concat compass:dev');
 
   // The release task will run the debug tasks and then minify the
   // dist/debug/require.js file and CSS files.
-  grunt.registerTask("release", "debug min mincss");
+  grunt.registerTask('release', 'debug min compass-clean compass:prod');
 
+  grunt.loadNpmTasks('grunt-compass');
 };
