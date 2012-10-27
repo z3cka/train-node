@@ -200,7 +200,7 @@ setInterval(function newStories() {
 
   // TODO (bonus) - save the stories so new clients can load history when the
   // connect.
-}, conf.pollInterval || 10000);
+}, config.pollInterval || 10000);
 
 /**
  * Notifies the client of new images.
@@ -209,5 +209,5 @@ setInterval(function newStories() {
   // TODO - fetch images from flickr or other feeds and refresh the client
   // with the fetched content.
   // Hint: check out the rsj node module for parsing RSS to JSON automagically.
-}, conf.pollInterval || 10000);
+}, config.pollInterval || 10000);
 
