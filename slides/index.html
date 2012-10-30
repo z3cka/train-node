@@ -534,28 +534,6 @@
             ## ```require()``` for built in libraries.
 
             [List of libraries](http://nodejs.org/docs/latest/api/)
-
-            <pre><code class="javascript">
-              var http = require('http');
-              http.createServer(function hello(req, res) {
-                res.writeHead(200, {'Content-Type': 'text/plain'});
-                res.end('Hello World\n');
-              }).listen(1337, '127.0.0.1');
-              console.log('Server running at http://127.0.0.1:1337/');
-            </code></pre>
-
-          </section>
-          <section data-markdown>
-            ### ```require()``` for built in libraries.
-
-            * Set the variable ```http``` to the object returened by require.
-
-            <pre><code class="javascript">var http = require('http');</code></pre>
-
-            * Use the ```createServer``` function from the library we just loaded.
-
-            <pre><code class="javascript">http.createServer(function hello(req, res) {</code></pre>
-
           </section>
           <section>
             <h3>NPM</h3>
