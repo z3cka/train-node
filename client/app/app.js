@@ -1,34 +1,24 @@
 define([
   // Libraries.
-  "jquery",
-  "lodash",
-  "backbone",
-  "handlebars",
-  "./training-config",
-  "socket.io",
+  'jquery',
+  'lodash',
+  'backbone',
+  'handlebars',
+  'socket.io',
 
   // Plugins.
-  "plugins/backbone.layoutmanager"
+  'plugins/backbone.layoutmanager',
+  'plugins/flexslider/jquery.flexslider'
 ],
 
-function($, _, Backbone, Handlebars, conf) {
+function($, _, Backbone, Handlebars) {
 
   // Provide a global location to place configuration settings and module
   // creation.
   var app = {
     // The root path to run the application.
-    root: "/"
+    root: '/'
   };
-
-  var socket = io.connect(conf.url);
-
-  socket.on('newStories', function(stories) {
-    app.trigger('newStories', stories);
-  });
-
-  socket.on('refresh', function(stories) {
-    app.trigger('refresh', stories);
-  });
 
   // NOTE: This assumes we're good with whatever we get from the feed
   // and will not protect against XSS, etc.
@@ -45,15 +35,15 @@ function($, _, Backbone, Handlebars, conf) {
     manage: true,
 
     paths: {
-      layout: "app/templates/layouts/",
-      template: "app/templates/"
+      layout: 'app/templates/layouts/',
+      template: 'app/templates/'
     },
 
     fetch: function(path) {
       var done;
 
       // Add the html extension.
-      path = path + ".html";
+      path = path + '.html';
 
       // If the template has not been loaded yet, then load.
       if (!JST[path]) {
@@ -98,12 +88,12 @@ function($, _, Backbone, Handlebars, conf) {
       // Create a new Layout with options.
       var layout = new Backbone.Layout(_.extend({
         template: name,
-        className: "layout " + name,
-        id: "layout"
+        className: 'layout ' + name,
+        id: 'layout'
       }, options));
 
       // Insert into the DOM.
-      $("#main").empty().append(layout.el);
+      $('#main').empty().append(layout.el);
 
       // Render the layout.
       layout.render();

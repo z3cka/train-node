@@ -1,0 +1,55 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "base";
+
+/* -------------------------------------------------------------------------*/
+/* Layout */
+
+.container {
+  @include container;
+  //@include susy-grid-background;
+}
+
+.region {
+  margin-bottom: 2em;
+}
+
+.images {
+  position: relative;
+  .images-list {
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+
+      @include respond-to('tablet') {
+        width: auto;
+      }
+    }
+  }
+}
+
+.stories {
+  @include respond-to('tablet') {
+    @include span-columns(4);
+  }
+}
+.messages {
+  @include respond-to('tablet') {
+    @include span-columns(8 omega);
+  }
+
+  #new-message {
+    input:not([type="submit"]), textarea {
+      width: 100%;
+      margin-bottom: .25em;
+    }
+  }
+
+  .message {
+    padding: 5px;
+    border-bottom: 1px solid gray;
+  }
+}

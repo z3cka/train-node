@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'backbone'], function(app, _, Backbone) {
+define(['app', 'lodash', 'backbone', 'jquery'], function(app, _, Backbone, $) {
   var Stories = app.module();
 
   Stories.Model = Backbone.Model.extend({
@@ -25,36 +25,35 @@ define(['app', 'lodash', 'backbone'], function(app, _, Backbone) {
   });
 
   Stories.Views.List = Backbone.View.extend({
-    tagName: 'div',
-    className: 'stories-list',
+    template: 'stories',
     beforeRender: function() {
-      this.$el.children().remove();
+      $('.stories-list', this.$el).children().remove();
       this.collection.each(function(story) {
-        this.insertView(new Stories.Views.Item({ model: story }));
+        this.insertView('.stories-list', new Stories.Views.Item({ model: story }));
       }, this);
     },
     initialize: function() {
       this.collection.on('reset', this.render, this);
-
       this.collection.on('add', this.add, this);
 
       app.on('newStories', _.bind(this.newStories, this));
-      app.on('refresh', _.bind(this.refresh, this));
+      app.on('refreshStories', _.bind(this.refreshStories, this));
     },
     add: function(story) {
       var storyView = new Stories.Views.Item({ model: story });
       storyView.render();
-      this.$el.prepend(storyView.$el);
+      $('.stories-list', this.$el).prepend(storyView.$el);
     },
     newStories: function(stories) {
       _.each(stories, function(story) {
         this.collection.add(story);
       }, this);
     },
-    refresh: function(stories) {
-      this.collections.reset(stories);
+    refreshStories: function(stories) {
+      this.collection.reset(stories);
     }
   });
 
   return Stories;
 });
+
