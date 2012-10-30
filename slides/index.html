@@ -49,16 +49,24 @@
           console.log('Welcome!');
           ```
         </section>
-        <section data-markdown>
-          ## Who we are
+        <section>
+          <h2>Who we are</h2>
 
-          ### Elliott Foster
+          <div class="instructor group">
+            <img src="http://img.fourkitchens.com/sites/default/files/profiles/avatars/elliott-foster-100.png" />
+            <h3>Elliott Foster</h3>
+            <ul>
+              <li><a href="https://twitter.com/elliotttf">https://twitter.com/elliotttf</a></li>
+            </ul>
+          </div>
 
-          * https://twitter.com/elliotttf
-
-          ### Mike Minecki
-
-          * https://twitter.com/mirzu
+          <div class="instructor group">
+            <img src="http://img.fourkitchens.com/sites/default/files/profiles/avatars/mike-100_0.jpg" />
+            <h3>Mike Minecki</h3>
+            <ul>
+              <li><a href="https://twitter.com/mirzu">https://twitter.com/mirzu</a></li>
+            </ul>
+          </div>
         </section>
 
         <section data-markdown>
@@ -154,11 +162,11 @@
               var fs = require('fs')
                 , sys = require('sys');
 
-              fs.readFile('treasure-chamber-report.txt', function(report) {
+              fs.readFile('treasure-chamber-report.txt', function readFile(report) {
                 sys.puts("oh, look at all my money: "+report);
               });
 
-              fs.writeFile('letter-to-princess.txt', '...', function() {
+              fs.writeFile('letter-to-princess.txt', '...', function writeFile() {
                 sys.puts("can't wait to hear back from her!");
               });
             </code></pre>
@@ -445,55 +453,41 @@
             ![this](/slides/assets/img/this.png)
           </section>
           <section data-markdown>
-            ## Closures
+            ## Anonymous and named functions
 
-            <blockquote>
-              Returning functions for fun and profit.
-            </blockquote>
+            ![spy vs spy](http://upload.wikimedia.org/wikipedia/en/thumb/a/a9/Spy-vs-spy.png/200px-Spy-vs-spy.png)
           </section>
           <section data-markdown>
-            ## Not a Closure
+            ## Anonymous functions
 
             <pre><code class="javascript">
-              /**
-               * EXAMPLE 1: Not a Closure.
-               */
-              var foo = function foo(x) {
-                var tmp = 3;
-                function bar(y) {
-                  console.log(x + y + (++tmp));
-                }
-                bar(10);
-              };
-              foo(2);
-              foo(2);
-              foo(2);
+              setTimeout(function() {
+                console.trace("I'm anonymous, see?");
+                console.log('==========================');
+              }, 1);
             </code></pre>
           </section>
           <section data-markdown>
-            ## A Closure
+            ## Named functions
 
             <pre><code class="javascript">
-              /**
-               * EXAMPLE 2: A Closure
-               */
-
-              var foo = function foo(x) {
-                var tmp = 3;
-                return function (y) {
-                  console.log(x + y + (++tmp));
-                };
-              };
-              var bar = foo(2); // bar is now a closure.
-              bar(10);
-              bar(10);
-              bar(10);
-           </code></pre>
+              setTimeout(function named() {
+                console.trace("I'm named, somebody loves me.");
+                console.log('==========================');
+              }, 1000);
+            </code></pre>
           </section>
           <section data-markdown>
-            ## Closures
+            ## More named functions
 
-            ![this](/slides/assets/img/closures.png)
+            <pre><code class="javascript">
+              var namedFunc2 = function() {
+                console.trace("I'm a different kind of named function.");
+                console.log('==========================');
+              };
+
+              setTimeout(namedFunc2, 2000);
+            </code></pre>
           </section>
         </section>
         <section data-markdown>
@@ -514,7 +508,7 @@
 
             <pre><code class="javascript">
               var http = require('http');
-              http.createServer(function (req, res) {
+              http.createServer(function hello(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
                 res.end('Hello World\n');
               }).listen(1337, '127.0.0.1');
@@ -531,7 +525,7 @@
 
             * Use the ```createServer``` function from the library we just loaded.
 
-            <pre><code class="javascript">http.createServer(function (req, res) {</code></pre>
+            <pre><code class="javascript">http.createServer(function hello(req, res) {</code></pre>
 
           </section>
           <section data-markdown>
@@ -775,7 +769,7 @@
 
             <pre><code class="javascript">
               console.log("I'm going to read a file asynchronously.");
-              fs.readFile(__filename, function(err, data) {
+              fs.readFile(__filename, function readFile(err, data) {
                 asyncContents = data;
                 console.log("I'm done reading the file asynchronously.");
                 console.log('I read ' + asyncContents.length + ' characters.');
@@ -843,7 +837,7 @@
 
           <pre><code class="javascript">
             var http = require('http');
-            http.createServer(function (req, res) {
+            http.createServer(function hello(req, res) {
               res.writeHead(200, {'Content-Type': 'text/plain'});
               res.end('Hello World\n');
             }).listen(1337, '127.0.0.1');
@@ -928,7 +922,7 @@
             ### Create the Node.js Endpoint.
 
             <pre><code class="javascript">
-              app.post('/ping', function(request, response){
+              app.post('/ping', function postPing(request, response){
                 console.log(request.body);      // your JSON
                 response.send(request.body);    // echo the result back
               });
@@ -1017,7 +1011,7 @@
                */
               module.exports  = function nodes (url, fn) {
                 request.get(url)
-                  .end(function (res) {
+                  .end(function gotNodes(res) {
                     if (res.body) {
                       return fn(null, res.body);
                     }
@@ -1066,8 +1060,8 @@
             ## Add code to the app.
 
             <pre><code class="javascript">
-              app.get('/nodes', function (req, res, next) {
-                nodes('http://train-node.local/exercises/drupal/rest/node.json', function (err, nodes) {
+              app.get('/nodes', function getNodes(req, res, next) {
+                nodes('http://train-node.local/exercises/drupal/rest/node.json', function renderNodes(err, nodes) {
                   console.log(nodes);
                   if (err) return next( err);
                   res.render('nodes', { results: nodes });
@@ -1092,9 +1086,9 @@
             <pre><code class="javascript">
               var io = require('socket.io').listen(80);
 
-              io.sockets.on('connection', function (socket) {
+              io.sockets.on('connection', function onConnection(socket) {
                 socket.emit('news', { hello: 'world' });
-                socket.on('my other event', function (data) {
+                socket.on('my other event', function onMyOtherEvent(data) {
                   console.log(data);
                 });
               });
@@ -1104,7 +1098,7 @@
 
             <pre><code class="javascript">
               var socket = io.connect('http://localhost');
-              socket.on('news', function (data) {
+              socket.on('news', function onNews(data) {
                 console.log(data);
                 socket.emit('my other event', { my: 'data' });
               });
@@ -1171,7 +1165,7 @@
               });
               conn.connect();
 
-              conn.query('SELECT "Hello world" AS message', function(err, rows, fields) {
+              conn.query('SELECT "Hello world" AS message', function selectResult(err, rows, fields) {
                 if (err) {
                   throw err;
                 }
@@ -1242,12 +1236,12 @@
               var test = mongode.connect('mongo://127.0.0.1/test');
               var collection = test.collection('test');
               var doc = { title: 'test2', message: 'node and mongo, yay!' };
-              collection.insert(doc, {safe:true}, function(err, objects) {
+              collection.insert(doc, {safe:true}, function insertResult(err, objects) {
                 if (err) {
                   console.error(err.message);
                   process.exit(1);
                 }
-                collection.findOne({ title: 'test2' }, function(err, document) {
+                collection.findOne({ title: 'test2' }, function findOneResult(err, document) {
                   if (err) {
                     console.error(err.message);
                     process.exit(1);
