@@ -10,6 +10,7 @@ var http = require('http');
  */
 http.createServer(function hello(req, res) {
   // TODO - respond with a message using the res object.
+  // Hint: http://nodejs.org/docs/latest/api/http.html#http_class_http_serverresponse
 
   // TODO (bonus) - inspect the request object with console.log to find
   // client headers that got sent.
