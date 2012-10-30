@@ -52,6 +52,11 @@ body {
 	color:#fff; 
 	text-shadow: none; 
 }
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 /*********************************************
  * HEADERS
  *********************************************/
@@ -163,4 +168,21 @@ body {
 		        transition: width 800ms cubic-bezier(0.260, 0.860, 0.440, 0.985);
 	}
 
+/*********************************************
+ * INSTRUCTOR SLIDE
+ *********************************************/
+.reveal section .instructor {
+  margin: 1em auto;
+  position: relative;
+  width: 68%;
+}
+.reveal section .instructor h3,
+.reveal section .instructor ul {
+  float: left;
+}
+.reveal section .instructor img {
+  float: left;
+  margin-top: 0;
+  margin-right: 1em;
+}
 
