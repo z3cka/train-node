@@ -150,17 +150,17 @@
           <section data-markdown>
             ## Code Please.
 
-            <pre><code>
-var fs = require('fs')
-  , sys = require('sys');
+            <pre><code class="javascript">
+              var fs = require('fs')
+                , sys = require('sys');
 
-fs.readFile('treasure-chamber-report.txt', function(report) {
-  sys.puts("oh, look at all my money: "+report);
-});
+              fs.readFile('treasure-chamber-report.txt', function(report) {
+                sys.puts("oh, look at all my money: "+report);
+              });
 
-fs.writeFile('letter-to-princess.txt', '...', function() {
-  sys.puts("can't wait to hear back from her!");
-});
+              fs.writeFile('letter-to-princess.txt', '...', function() {
+                sys.puts("can't wait to hear back from her!");
+              });
             </code></pre>
           </section>
           <section data-markdown>
@@ -256,6 +256,54 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
           * Raise your hand! It's ok to be confused, lost, or frustrated!
           * If you are lost tell us, it's normal and you're not slowing us down.
         </section>
+        <section>
+          <small>Your environment</small>
+          <section data-markdown>
+            ## Connecting to the server
+
+            * SSH into the server from your local machine
+              <pre><code class="no-highlight">
+                $ ssh YOU@nodejs.4kclass.com
+              </code></pre>
+            * Pro-tip: You may want to keep two terminal sessions open to the server so
+              you can edit files while running a node process or edit two files
+              at once in different windows.
+          </section>
+          <section data-markdown>
+            ## Editing files
+
+            * Use your preferred editor on server
+              (we like vim but won't judge if you use emacs -- but we can't help you either).
+            * If you want to edit files locally, SFTP with the credentials you were provided
+              <pre><code class="no-highlight">
+                $ sftp YOU@nodejs.4kclass.com
+              </code></pre>
+          </section>
+          <section data-markdown>
+            ## File structure
+
+            * All course code is located in
+              <pre><code class="no-highlight">~/train-node</code></pre>
+            * Familiarize yourself with the files and directories here,
+              you'll be spending most of your time in the following directories:
+              <pre><code class="no-highlight">
+                ~/train-node/js101
+                ~/train-node/exercises/drupal
+                ~/train-node/exercises/server
+              </code></pre>
+          </section>
+          <section data-markdown>
+            ## Commands you'll be using
+
+            * ```cp [src] [dst]``` - to copy a file
+            * ```mv [src] [dst]``` - to move or rename a file
+            * ```rm [file]``` - to delete a file
+            * ```node [file]``` - to start a node process (or just ```node``` to
+              use the node REPL shell).
+            * ```CTRL+C``` - to stop a node process that does not automatically exit.
+
+          </section>
+        </section>
         <section data-markdown>
           ## ```console.log()```
 
@@ -265,13 +313,13 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
           * Make an app.js file in the _/console.log_ folder.
           * Add one line. . .
 
-          <pre><code>
+          <pre><code class="javascript">
             console.log('Mathamatical!');
           </code></pre>
 
           Now run it
 
-          <pre><code>
+          <pre><code class="no-highlight">
             $ node app
           </code></pre>
         </section>
@@ -285,23 +333,23 @@ fs.writeFile('letter-to-princess.txt', '...', function() {
           <small>JavaScript 101</small>
           <section data-markdown>
             ### Scope Example 1
-<pre><code>
-var foo = 'kitteh';
+            <pre><code class="javascript">
+              var foo = 'kitteh';
 
-/**
- * This function alters the 'foo' variable that was
- * previously defined in the global scope.
- */
-var example = function() {
-  foo = 'doggie';
-};
+              /**
+               * This function alters the 'foo' variable that was
+               * previously defined in the global scope.
+               */
+              var example = function() {
+                foo = 'doggie';
+              };
 
-console.log('Example 1: foo = ' + foo);
-example();
-console.log('Now foo = ' + foo);
+              console.log('Example 1: foo = ' + foo);
+              example();
+              console.log('Now foo = ' + foo);
 
-console.log("\n");
-</code></pre>
+              console.log("\n");
+            </code></pre>
 
           </section>
           <section data-markdown>
@@ -312,21 +360,19 @@ console.log("\n");
           <section data-markdown>
             ### Scope: Local Variable Scope
 
-            <pre><code>
-/**
- * This function defines its own 'foo' variable that
- * will not alter the one defined in the global scope.
- */
-var example2 = function() {
-  var foo = 'chupacabra';
-  console.log("My foo = " + foo);
-};
+            <pre><code class="javascript">
+              /**
+               * This function defines its own 'foo' variable that
+               * will not alter the one defined in the global scope.
+               */
+              var example2 = function() {
+                var foo = 'chupacabra';
+                console.log("My foo = " + foo);
+              };
 
-console.log('Example 2: foo = ' + foo);
-example2();
-console.log('Now foo = ' + foo);
-
-
+              console.log('Example 2: foo = ' + foo);
+              example2();
+              console.log('Now foo = ' + foo);
             </code></pre>
           </section>
           <section data-markdown>
@@ -337,19 +383,19 @@ console.log('Now foo = ' + foo);
           <section data-markdown>
             ### Hoisting
 
-            <pre><code>
-/**
- * This function attempts to access a variable before
- * it is defined and illustrates hoisting.
- *
- * NOTE: if 'a' had not been defined within this scope,
- * attempting to access it would have thrown a fatal error.
- */
-var example3 = function() {
-  console.log(a);
-  var a = 1;
-  console.log(a);
-};
+            <pre><code class="javascript">
+              /**
+               * This function attempts to access a variable before
+               * it is defined and illustrates hoisting.
+               *
+               * NOTE: if 'a' had not been defined within this scope,
+               * attempting to access it would have thrown a fatal error.
+               */
+              var example3 = function() {
+                console.log(a);
+                var a = 1;
+                console.log(a);
+              };
             </code></pre>
           </section>
           <section data-markdown>
@@ -360,39 +406,37 @@ var example3 = function() {
           <section data-markdown>
             ## This
 
-            <pre><code>
-  addHorn: function() {
-    this.hasHorn = true;
+            <pre><code class="javascript">
+              addHorn: function() {
+                this.hasHorn = true;
 
-    var countHorns = function() {
-      if (this.hasHorn) {
-        return 1;
-      }
-      return 0;
-    };
+                var countHorns = function() {
+                  if (this.hasHorn) {
+                    return 1;
+                  }
+                  return 0;
+                };
 
-  //  console.log('I have ' + countHorns() + ' horns.');
-  }
-
-
+              //  console.log('I have ' + countHorns() + ' horns.');
+              }
             </code></pre>
           </section>
           <section data-markdown>
             ## This
 
-            <pre><code>
-  addHorn: function() {
-    var self = this;
-    self.hasHorn = true;
+            <pre><code class="javascript">
+              addHorn: function() {
+                var self = this;
+                self.hasHorn = true;
 
-    var countHorns = function() {
-      if (self.hasHorn) {
-        return 1;
-      }
-      return 0;
-    };
-  //  console.log('I have ' + countHorns() + ' horns.');
-  }
+                var countHorns = function() {
+                  if (self.hasHorn) {
+                    return 1;
+                  }
+                  return 0;
+                };
+              //  console.log('I have ' + countHorns() + ' horns.');
+              }
             </code></pre>
           </section>
           <section data-markdown>
@@ -410,40 +454,40 @@ var example3 = function() {
           <section data-markdown>
             ## Not a Closure
 
-            <pre><code>
-/**
- * EXAMPLE 1: Not a Closure.
- */
-var foo = function foo(x) {
-  var tmp = 3;
-  function bar(y) {
-    console.log(x + y + (++tmp));
-  }
-  bar(10);
-};
-foo(2);
-foo(2);
-foo(2);
+            <pre><code class="javascript">
+              /**
+               * EXAMPLE 1: Not a Closure.
+               */
+              var foo = function foo(x) {
+                var tmp = 3;
+                function bar(y) {
+                  console.log(x + y + (++tmp));
+                }
+                bar(10);
+              };
+              foo(2);
+              foo(2);
+              foo(2);
             </code></pre>
           </section>
           <section data-markdown>
             ## A Closure
 
-            <pre><code>
-/**
- * EXAMPLE 2: A Closure
- */
+            <pre><code class="javascript">
+              /**
+               * EXAMPLE 2: A Closure
+               */
 
-var foo = function foo(x) {
-  var tmp = 3;
-  return function (y) {
-    console.log(x + y + (++tmp));
-  };
-};
-var bar = foo(2); // bar is now a closure.
-bar(10);
-bar(10);
-bar(10);
+              var foo = function foo(x) {
+                var tmp = 3;
+                return function (y) {
+                  console.log(x + y + (++tmp));
+                };
+              };
+              var bar = foo(2); // bar is now a closure.
+              bar(10);
+              bar(10);
+              bar(10);
            </code></pre>
           </section>
           <section data-markdown>
@@ -468,7 +512,7 @@ bar(10);
 
             [List of libraries](http://nodejs.org/docs/latest/api/)
 
-            <pre><code>
+            <pre><code class="javascript">
               var http = require('http');
               http.createServer(function (req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -483,25 +527,25 @@ bar(10);
 
             * Set the variable ```http``` to the object returened by require.
 
-            <pre><code>var http = require('http');</code></pre>
+            <pre><code class="javascript">var http = require('http');</code></pre>
 
             * Use the ```createServer``` function from the library we just loaded.
 
-            <pre><code>http.createServer(function (req, res) {</code></pre>
+            <pre><code class="javascript">http.createServer(function (req, res) {</code></pre>
 
           </section>
           <section data-markdown>
             module_a.js
 
-            <pre><code>console.log('this is a');</pre></code>
+            <pre><code class="javascript">console.log('this is a');</pre></code>
 
             module_b.js
 
-            <pre><code>console.log(' this is b');</pre></code>
+            <pre><code class="javascript">console.log(' this is b');</pre></code>
 
             main.js
 
-            <pre><code>
+            <pre><code class="javascript">
               require('module_a');
               require('module_b')
             </pre></code>
@@ -516,7 +560,7 @@ bar(10);
           <section data-markdown>
             ### Use relative paths.
 
-            <pre><code>
+            <pre><code class="javascript">
               require('./module_a');
               require('./module_b')
             </pre></code>
@@ -535,7 +579,7 @@ bar(10);
           <section data-markdown>
             #### ```module.exports``` exposes a root level class or object.
 
-            <pre><code>
+            <pre><code class="javascript">
               // world.js
               module.exports = world;
 
@@ -547,7 +591,7 @@ bar(10);
             #### ```exports``` exposes a namespaced class or object.
 
 
-            <pre><code>
+            <pre><code class="javascript">
               // hello.js
               exports.hello = word;
 
@@ -560,7 +604,7 @@ bar(10);
           <section data-markdown>
             #### Using the above.
 
-            <pre><code>
+            <pre><code class="javascript">
               var Hello = require('hello');
               var world = require('world');
 
@@ -623,7 +667,7 @@ bar(10);
             npm install --save colors
             </section>
             <section data-markdown>
-              <pre><code>
+              <pre><code class="javascript">
                 // colorsExample.js
                 var colors = require('colors');
 
@@ -636,7 +680,7 @@ bar(10);
             <section data-markdown>
               ### Package.json
 
-              <pre><code>
+              <pre><code class="javascript">
                 {
                   "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
                   "name": "npmExample",
@@ -671,28 +715,28 @@ bar(10);
           <small>Intro to Events</small>
           <section data-markdown>
             ## Events Example
-            <pre><code>
-  // basic imports
-  var events = require('events');
-  var util = require('util');
+            <pre><code class="javascript">
+              // basic imports
+              var events = require('events');
+              var util = require('util');
 
-  function Poll(feed) {
-    this.guids = [];
-    this.feed = feed;
-    this.poller = setInterval(_.bind(this.poll, this), 1000);
-  };
+              function Poll(feed) {
+                this.guids = [];
+                this.feed = feed;
+                this.poller = setInterval(_.bind(this.poll, this), 1000);
+              };
 
-  util.inherits(Poll, events.EventEmitter);
+              util.inherits(Poll, events.EventEmitter);
 
-  Poll.prototype.getStories = function(callback) {
+              Poll.prototype.getStories = function(callback) {
 
-  // . . .
+              // . . .
 
-    if (newStories.length) {
-      self.emit('fed', null, data);
-    }
-  }
-  exports.Poll = Poll;
+                if (newStories.length) {
+                  self.emit('fed', null, data);
+                }
+              }
+              exports.Poll = Poll;
             </code></pre>
           </section>
        </section>
@@ -713,7 +757,7 @@ bar(10);
 
             Checkout the order of the log messages.
 
-            <pre><code>
+            <pre><code class="javascript">
               console.log("I'm going to read a file synchronously.");
 
               syncContents = fs.readFileSync(__filename);
@@ -729,7 +773,7 @@ bar(10);
 
             Now see how the log messages have changed.
 
-            <pre><code>
+            <pre><code class="javascript">
               console.log("I'm going to read a file asynchronously.");
               fs.readFile(__filename, function(err, data) {
                 asyncContents = data;
@@ -757,7 +801,7 @@ bar(10);
           <section data-markdown>
             ### Don't do complicated stuff in the event looop.
 
-            <pre><code>
+            <pre><code class="javascript">
               var start = Date.now();
 
               setTimeout(function timeout1() {
@@ -797,13 +841,13 @@ bar(10);
 
           ```/hello```
 
-          <pre><code>
-var http = require('http');
-http.createServer(function (req, res) {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
+          <pre><code class="javascript">
+            var http = require('http');
+            http.createServer(function (req, res) {
+              res.writeHead(200, {'Content-Type': 'text/plain'});
+              res.end('Hello World\n');
+            }).listen(1337, '127.0.0.1');
+            console.log('Server running at http://127.0.0.1:1337/');
           </code></pre>
 
           change *1337* to your port number.
@@ -829,7 +873,7 @@ console.log('Server running at http://127.0.0.1:1337/');
             ### Getting started
 
             * Use the ```express``` command to set up some scaffolding for a new application:
-            <pre><code>
+            <pre><code class="no-highlight">
               $ express server
               $ cd server
               $ npm install
@@ -840,7 +884,7 @@ console.log('Server running at http://127.0.0.1:1337/');
 
             * We're going to make a few changes to support the application we're going to build:
               1. Copy the config.js file and client directory from your home directory to the example dirctory:
-                <pre><code>
+                <pre><code class="no-highlight">
                   $ cp ~/config.js ~/train-node/exercises/server/config.js
                   $ cp -r ~/train-node/client ~/train-node/exercises/server/client
                 </code></pre>
@@ -862,11 +906,11 @@ console.log('Server running at http://127.0.0.1:1337/');
           <section data-markdown>
             ### Create the Node.js Endpoint.
 
-            <pre><code>
-app.post('/ping', function(request, response){
-  console.log(request.body);      // your JSON
-  response.send(request.body);    // echo the result back
-});
+            <pre><code class="javascript">
+              app.post('/ping', function(request, response){
+                console.log(request.body);      // your JSON
+                response.send(request.body);    // echo the result back
+              });
             </code></pre>
 
             &nbsp
@@ -886,22 +930,23 @@ app.post('/ping', function(request, response){
           </section>
           <section data-markdown>
             ### Example Drupal Module code.
-            <pre><code>
-  $data = array('title' => $node->title);
-  $data = drupal_json_encode($data);
-  $uri = variable_get('ping_nodejs_uri','http://localhost:3000/ping');
+            <pre><code class="php">
+              $data = array('title' => $node->title);
+              $data = drupal_json_encode($data);
+              $uri = variable_get('ping_nodejs_uri','http://localhost:3000/ping');
 
-  $options = array();
-  $options['headers'] = array('Content-Type' => 'application/json');
-  $options['method'] = 'POST';
-  $options['data'] = $data;
-  $response = drupal_http_request($uri, $options);
+              $options = array();
+              $options['headers'] = array('Content-Type' => 'application/json');
+              $options['method'] = 'POST';
+              $options['data'] = $data;
+              $response = drupal_http_request($uri, $options);
 
-  if($response->code != 200) {
-    drupal_set_message("Got an error: " . $response->error, 'error');
-  } else {
-    drupal_set_message('Successfully contacted node server. Response was: ' . $response->data);
-  }
+              if ($response->code != 200) {
+                drupal_set_message("Got an error: " . $response->error, 'error');
+              }
+              else {
+                drupal_set_message('Successfully contacted node server. Response was: ' . $response->data);
+              }
             </code></pre>
           </section>
           <section data-markdown>
@@ -955,21 +1000,21 @@ app.post('/ping', function(request, response){
 
             Create file: */lib/nodes.js
 
-            <pre><code>
-var request = require('superagent');
+            <pre><code class="javascript">
+              var request = require('superagent');
 
-/**
- * Get Nodes function
- *
- */
-module.exports  = function nodes (url, fn) {
-  request.get(url)
-    .end(function (res) {
-      if (res.body) {
-        return fn(null, res.body);
-      }
-    });
-};
+              /**
+               * Get Nodes function
+               *
+               */
+              module.exports  = function nodes (url, fn) {
+                request.get(url)
+                  .end(function (res) {
+                    if (res.body) {
+                      return fn(null, res.body);
+                    }
+                  });
+              };
             </code></pre>
           </section>
           <section data-markdown>
@@ -978,12 +1023,12 @@ module.exports  = function nodes (url, fn) {
             *npm install --save ejs*
 
             #### add the themeing engine to our app.
-            <pre><code>
-  //  app.set('port', config.port);
-  app.set('view engine', 'ejs');
-  app.set('views', __dirname + '/views');
-  app.set('view options', { layout: false});
-  //  app.use(express.logger('dev'));
+            <pre><code class="javascript">
+              //  app.set('port', config.port);
+              app.set('view engine', 'ejs');
+              app.set('views', __dirname + '/views');
+              app.set('view options', { layout: false});
+              //  app.use(express.logger('dev'));
             </code></pre>
           </section>
           <section data-markdown>
@@ -991,30 +1036,30 @@ module.exports  = function nodes (url, fn) {
 
             Create the file */views/nodes.ejs*
 
-            <pre><code>
-< h1 > Nodes < / h1 >
-<% if (results.length) { %>
-  <ul>
-   <% for (var i = 0; i < results.length; i++) { %>
-     <li><%= results[i].title %></li>
-   <% } %>
-  </ul>
-  <% } else { %>
-  <p>No results </p>
-<% } %>
+            <pre><code class="html">
+              < h1 > Nodes < / h1 >
+              <% if (results.length) { %>
+                <ul>
+                 <% for (var i = 0; i < results.length; i++) { %>
+                   < li ><%= results[i].title %>< / li >
+                 <% } %>
+                </ul>
+                <% } else { %>
+                <p>No results </p>
+              <% } %>
             </code></pre>
           </section>
           <section data-markdown>
             ## Add code to the app.
 
-            <pre><code>
-app.get('/nodes', function (req, res, next) {
-  nodes('http://train-node.local/exercises/drupal/rest/node.json', function (err, nodes) {
-    console.log(nodes);
-    if (err) return next( err);
-    res.render('nodes', { results: nodes });
-  });
-});
+            <pre><code class="javascript">
+              app.get('/nodes', function (req, res, next) {
+                nodes('http://train-node.local/exercises/drupal/rest/node.json', function (err, nodes) {
+                  console.log(nodes);
+                  if (err) return next( err);
+                  res.render('nodes', { results: nodes });
+                });
+              });
             </code></pre>
           </section>
         </section>       <section data-markdown>
@@ -1031,25 +1076,25 @@ app.get('/nodes', function (req, res, next) {
           </section>
           <section data-markdown>
             #### Server
-            <pre><code>
-var io = require('socket.io').listen(80);
+            <pre><code class="javascript">
+              var io = require('socket.io').listen(80);
 
-io.sockets.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-});
+              io.sockets.on('connection', function (socket) {
+                socket.emit('news', { hello: 'world' });
+                socket.on('my other event', function (data) {
+                  console.log(data);
+                });
+              });
             </code></pre>
 
             #### Client
 
-            <pre><code>
-  var socket = io.connect('http://localhost');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
+            <pre><code class="javascript">
+              var socket = io.connect('http://localhost');
+              socket.on('news', function (data) {
+                console.log(data);
+                socket.emit('my other event', { my: 'data' });
+              });
             </code></pre>
           </section>
           <section data-markdown>
@@ -1104,7 +1149,7 @@ io.sockets.on('connection', function (socket) {
 
             * We'll be using the [node-mysql](https://github.com/felixge/node-mysql) library.
             * ```$ npm install mysql@2.0.0-alpha3```
-            <pre><code>
+            <pre><code class="javascript">
               var mysql = require('mysql');
               var conn = mysql.createConnection({
                 host: 'localhost',
@@ -1136,7 +1181,7 @@ io.sockets.on('connection', function (socket) {
             * There's not a real query language in the same sense as MySQL and since the database is schemaless you can throw whatever you like at it:
 
               ```$ mongo```
-            <pre><code>
+            <pre><code class="javascript">
               db.test.insert({
                 title: 'test',
                 message: 'Hello world'
@@ -1154,22 +1199,22 @@ io.sockets.on('connection', function (socket) {
 
             * One of the most useful parts of MongoDB is the ability to store "sub documents" or objects within a primary document:
 
-            <pre><code>
-            db.test.update(
-              { title: 'test'},
-              { $set: {
-                speaker: {
-                  name: 'Elliott Foster',
-                  occupation: 'Hipster Technologist',
-                  interests: [
-                    'JavaScript',
-                    'beer',
-                    'bicycles'
-                  ]
-                }
-              } }
-            );
-            db.test.find({ 'speaker.name': 'Elliott Foster' }).pretty();
+            <pre><code class="javascript">
+              db.test.update(
+                { title: 'test'},
+                { $set: {
+                  speaker: {
+                    name: 'Elliott Foster',
+                    occupation: 'Hipster Technologist',
+                    interests: [
+                      'JavaScript',
+                      'beer',
+                      'bicycles'
+                    ]
+                  }
+                } }
+              );
+              db.test.find({ 'speaker.name': 'Elliott Foster' }).pretty();
             </code></pre>
           </section>
           <section data-markdown>
@@ -1179,7 +1224,7 @@ io.sockets.on('connection', function (socket) {
             ### Node.js and MongoDB
 
             * We'll be using the [mongode](https://github.com/milewise/mongode) library to interact with MongoDB
-            <pre><code>
+            <pre><code class="javascript">
               var mongode = require('mongode');
               var test = mongode.connect('mongo://127.0.0.1/test');
               var collection = test.collection('test');
