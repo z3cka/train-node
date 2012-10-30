@@ -807,8 +807,9 @@
 
             * Use the ```express``` command to set up some scaffolding for a new application:
             <pre><code class="no-highlight">
-              $ express server
-              $ cd server
+              $ cd ~/train-node/exercies
+              $ express myserver
+              $ cd myserver
               $ npm install
             </code></pre>
           </section>
@@ -818,10 +819,30 @@
             * We're going to make a few changes to support the application we're going to build:
               1. Copy the config.js file and client directory from your home directory to the example dirctory:
                 <pre><code class="no-highlight">
-                  $ cp ~/config.js ~/train-node/exercises/server/config.js
-                  $ cp -r ~/train-node/client ~/train-node/exercises/server/client
+                  $ cp ~/config.js ~/train-node/exercises/myserver/config.js
                 </code></pre>
-              1. Edit app.js to remove some pieces we won't be using, include the config file, change the port we listen on, and change the static assets path: [see the diff](https://gist.github.com/3914051).
+          </section>
+          <section data-markdown>
+            ## Edit app.js
+
+            Include the config we copied by adding it after the where path is required. Don't forget to remove the ";" after require('path').
+
+            <pre><code class="diff">
+-  , path = require('path');
++  , path = require('path')
++  , config = require('./config');
+            </code></pre>
+
+            Use the port number from the config file.
+
+            <pre><code class="diff">
+-  app.set('port', process.env.PORT || 3000);
++  app.set('port', config.port);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Try it.
+            ![express works](assets/img/express.png)
           </section>
         </section>
         <section data-markdown>
@@ -882,19 +903,6 @@
               }
             </code></pre>
           </section>
-          <section data-markdown>
-            ## What's wrong with this approach?
-          </section>
-          <section data-markdown>
-            ## What's wrong with this approach?
-
-            We are slowing down the response on the drupal side by waiting for a response from node.js.
-
-            #### How to Fix?
-
-            1. Add the database call to a queue and use cron to clear it.
-            2. Poll Drupal for new content.
-          </section>
         </section>
         <section data-markdown>
           ## Integrating with Drupal II
@@ -951,36 +959,41 @@
             </code></pre>
           </section>
           <section data-markdown>
-            ## Add a theming engine
+            ## Change to our theme engine.
 
-            *npm install --save ejs*
+            [handlebars](https://github.com/donpark/hbs), [hbs handlebars for Expresss](https://github.com/wycats/handlebars.js)
+
+            ```npm install --save hbs```
 
             #### add the themeing engine to our app.
-            <pre><code class="javascript">
-              //  app.set('port', config.port);
-              app.set('view engine', 'ejs');
-              app.set('views', __dirname + '/views');
-              app.set('view options', { layout: false});
-              //  app.use(express.logger('dev'));
+               <pre><code class="diff">
+-  app.set('views', __dirname + '/views');
+-  app.set('view engine', 'jade');
++  app.set('view engine', 'html');
++  app.engine('html', require('hbs').__express);
             </code></pre>
+          </section>
+          <section data-markdown>
+            ## Create the layout.
+
+            Renders the page.
+
+            Create the file ```/views/layout.html```
+
+            ![handlebars layout](assets/img/handlebars-layout.png)
+
+            [gist with layout](https://gist.github.com/3982145)
           </section>
           <section data-markdown>
             ## Create the template
 
-            Create the file */views/nodes.ejs*
+            Render's the content.
 
-            <pre><code class="html">
-              < h1 > Nodes < / h1 >
-              <% if (results.length) { %>
-                <ul>
-                 <% for (var i = 0; i < results.length; i++) { %>
-                   < li ><%= results[i].title %>< / li >
-                 <% } %>
-                </ul>
-                <% } else { %>
-                <p>No results </p>
-              <% } %>
-            </code></pre>
+            Create the file ```/views/nodes.html```
+
+            ![handlebars template](assets/img/handlebars-node-template.png)
+
+            [gist with template](https://gist.github.com/3982229)
           </section>
           <section data-markdown>
             ## Add code to the app.
