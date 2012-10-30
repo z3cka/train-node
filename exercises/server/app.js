@@ -17,6 +17,9 @@ var app = express();
 // Set some configuration.
 app.configure(function(){
   app.set('port', config.port);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'html');
+  app.engine('html', require('hbs').__express);
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -45,6 +48,7 @@ server.listen(app.get('port'), function(){
  * The default routes that the client is aware of have been defined
  * here. It's up to you to fill them out or expand upon them!
  */
+
 
 /**
  * Returns a list of stories to be used on page load.
@@ -210,4 +214,23 @@ setInterval(function newImages() {
   // with the fetched content.
   // Hint: check out the rsj node module for parsing RSS to JSON automagically.
 }, config.pollInterval || 10000);
+
+/**
+ * Post path for Drupal Example.
+ */
+app.post('/ping', function(request, response){
+  console.log(request.body);      // your JSON
+  response.send(request.body);    // echo the result back
+});
+
+/**
+ * Nodes path for Drupal Exmaple.
+ */
+app.get('/nodes', function (req, res, next) {
+  nodes('http://instructor.4ktraining.com/?q=rest/node.json', function (err, nodes) {
+    console.log(nodes);
+    if (err) return next( err);
+    res.render('nodes', { results: nodes });
+  });
+});
 
