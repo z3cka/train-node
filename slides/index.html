@@ -49,16 +49,24 @@
           console.log('Welcome!');
           ```
         </section>
-        <section data-markdown>
-          ## Who we are
+        <section>
+          <h2>Who we are</h2>
 
-          ### Elliott Foster
+          <div class="instructor group">
+            <img src="http://img.fourkitchens.com/sites/default/files/profiles/avatars/elliott-foster-100.png" />
+            <h3>Elliott Foster</h3>
+            <ul>
+              <li><a href="https://twitter.com/elliotttf">https://twitter.com/elliotttf</a></li>
+            </ul>
+          </div>
 
-          * https://twitter.com/elliotttf
-
-          ### Mike Minecki
-
-          * https://twitter.com/mirzu
+          <div class="instructor group">
+            <img src="http://img.fourkitchens.com/sites/default/files/profiles/avatars/mike-100_0.jpg" />
+            <h3>Mike Minecki</h3>
+            <ul>
+              <li><a href="https://twitter.com/mirzu">https://twitter.com/mirzu</a></li>
+            </ul>
+          </div>
         </section>
 
         <section data-markdown>
@@ -443,57 +451,6 @@
             ## This
 
             ![this](/slides/assets/img/this.png)
-          </section>
-          <section data-markdown>
-            ## Closures
-
-            <blockquote>
-              Returning functions for fun and profit.
-            </blockquote>
-          </section>
-          <section data-markdown>
-            ## Not a Closure
-
-            <pre><code class="javascript">
-              /**
-               * EXAMPLE 1: Not a Closure.
-               */
-              var foo = function foo(x) {
-                var tmp = 3;
-                function bar(y) {
-                  console.log(x + y + (++tmp));
-                }
-                bar(10);
-              };
-              foo(2);
-              foo(2);
-              foo(2);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## A Closure
-
-            <pre><code class="javascript">
-              /**
-               * EXAMPLE 2: A Closure
-               */
-
-              var foo = function foo(x) {
-                var tmp = 3;
-                return function (y) {
-                  console.log(x + y + (++tmp));
-                };
-              };
-              var bar = foo(2); // bar is now a closure.
-              bar(10);
-              bar(10);
-              bar(10);
-           </code></pre>
-          </section>
-          <section data-markdown>
-            ## Closures
-
-            ![this](/slides/assets/img/closures.png)
           </section>
           <section data-markdown>
             ## Anonymous and named functions
