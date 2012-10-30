@@ -3,9 +3,9 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , http = require('http')
-  , path = require('path');
+var express = require('express');
+var http = require('http');
+var path = require('path');
 
 var config = require('./config');
 
@@ -174,7 +174,7 @@ app.get('/images', function getImages(req, res) {
  * The refresh<EntityTypes> event will replace the entities on the client
  * side with those in the array.
  */
-io.sockets.on('connection', function(socket) {
+io.sockets.on('connection', function onConnection(socket) {
   // TODO - add a custom welcome message when a user connects!
   var messages = [];
 
@@ -198,14 +198,14 @@ setInterval(function newStories() {
   // the results to the client.
   // Hint: check out the rsj node module for parsing RSS to JSON automagically.
 
-  // TODO (bonus) - save the stories so new clients can load history when the
+  // TODO (bonus) - save the stories so new clients can load history when they
   // connect.
 }, config.pollInterval || 10000);
 
 /**
  * Notifies the client of new images.
  */
-setInterval(function newStories() {
+setInterval(function newImages() {
   // TODO - fetch images from flickr or other feeds and refresh the client
   // with the fetched content.
   // Hint: check out the rsj node module for parsing RSS to JSON automagically.

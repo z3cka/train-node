@@ -162,11 +162,11 @@
               var fs = require('fs')
                 , sys = require('sys');
 
-              fs.readFile('treasure-chamber-report.txt', function(report) {
+              fs.readFile('treasure-chamber-report.txt', function readFile(report) {
                 sys.puts("oh, look at all my money: "+report);
               });
 
-              fs.writeFile('letter-to-princess.txt', '...', function() {
+              fs.writeFile('letter-to-princess.txt', '...', function writeFile() {
                 sys.puts("can't wait to hear back from her!");
               });
             </code></pre>
@@ -508,7 +508,7 @@
 
             <pre><code class="javascript">
               var http = require('http');
-              http.createServer(function (req, res) {
+              http.createServer(function hello(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
                 res.end('Hello World\n');
               }).listen(1337, '127.0.0.1');
@@ -525,7 +525,7 @@
 
             * Use the ```createServer``` function from the library we just loaded.
 
-            <pre><code class="javascript">http.createServer(function (req, res) {</code></pre>
+            <pre><code class="javascript">http.createServer(function hello(req, res) {</code></pre>
 
           </section>
           <section data-markdown>
@@ -769,7 +769,7 @@
 
             <pre><code class="javascript">
               console.log("I'm going to read a file asynchronously.");
-              fs.readFile(__filename, function(err, data) {
+              fs.readFile(__filename, function readFile(err, data) {
                 asyncContents = data;
                 console.log("I'm done reading the file asynchronously.");
                 console.log('I read ' + asyncContents.length + ' characters.');
@@ -837,7 +837,7 @@
 
           <pre><code class="javascript">
             var http = require('http');
-            http.createServer(function (req, res) {
+            http.createServer(function hello(req, res) {
               res.writeHead(200, {'Content-Type': 'text/plain'});
               res.end('Hello World\n');
             }).listen(1337, '127.0.0.1');
@@ -901,7 +901,7 @@
             ### Create the Node.js Endpoint.
 
             <pre><code class="javascript">
-              app.post('/ping', function(request, response){
+              app.post('/ping', function postPing(request, response){
                 console.log(request.body);      // your JSON
                 response.send(request.body);    // echo the result back
               });
@@ -1003,7 +1003,7 @@
                */
               module.exports  = function nodes (url, fn) {
                 request.get(url)
-                  .end(function (res) {
+                  .end(function gotNodes(res) {
                     if (res.body) {
                       return fn(null, res.body);
                     }
@@ -1047,8 +1047,8 @@
             ## Add code to the app.
 
             <pre><code class="javascript">
-              app.get('/nodes', function (req, res, next) {
-                nodes('http://train-node.local/exercises/drupal/rest/node.json', function (err, nodes) {
+              app.get('/nodes', function getNodes(req, res, next) {
+                nodes('http://train-node.local/exercises/drupal/rest/node.json', function renderNodes(err, nodes) {
                   console.log(nodes);
                   if (err) return next( err);
                   res.render('nodes', { results: nodes });
@@ -1073,9 +1073,9 @@
             <pre><code class="javascript">
               var io = require('socket.io').listen(80);
 
-              io.sockets.on('connection', function (socket) {
+              io.sockets.on('connection', function onConnection(socket) {
                 socket.emit('news', { hello: 'world' });
-                socket.on('my other event', function (data) {
+                socket.on('my other event', function onMyOtherEvent(data) {
                   console.log(data);
                 });
               });
@@ -1085,7 +1085,7 @@
 
             <pre><code class="javascript">
               var socket = io.connect('http://localhost');
-              socket.on('news', function (data) {
+              socket.on('news', function onNews(data) {
                 console.log(data);
                 socket.emit('my other event', { my: 'data' });
               });
@@ -1152,7 +1152,7 @@
               });
               conn.connect();
 
-              conn.query('SELECT "Hello world" AS message', function(err, rows, fields) {
+              conn.query('SELECT "Hello world" AS message', function selectResult(err, rows, fields) {
                 if (err) {
                   throw err;
                 }
@@ -1223,12 +1223,12 @@
               var test = mongode.connect('mongo://127.0.0.1/test');
               var collection = test.collection('test');
               var doc = { title: 'test2', message: 'node and mongo, yay!' };
-              collection.insert(doc, {safe:true}, function(err, objects) {
+              collection.insert(doc, {safe:true}, function insertResult(err, objects) {
                 if (err) {
                   console.error(err.message);
                   process.exit(1);
                 }
-                collection.findOne({ title: 'test2' }, function(err, document) {
+                collection.findOne({ title: 'test2' }, function findOneResult(err, document) {
                   if (err) {
                     console.error(err.message);
                     process.exit(1);
