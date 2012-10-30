@@ -227,7 +227,7 @@ app.post('/ping', function(request, response){
  * Nodes path for Drupal Exmaple.
  */
 app.get('/nodes', function (req, res, next) {
-  nodes('http://instructor.4ktraining.com/?q=rest/node.json', function (err, nodes) {
+  nodes(config.drupalNodesUrl, function (err, nodes) {
     console.log(nodes);
     if (err) return next( err);
     res.render('nodes', { results: nodes });
