@@ -452,6 +452,43 @@
 
             ![this](/slides/assets/img/this.png)
           </section>
+          <section data-markdown>
+            ## Anonymous and named functions
+
+            ![spy vs spy](http://upload.wikimedia.org/wikipedia/en/thumb/a/a9/Spy-vs-spy.png/200px-Spy-vs-spy.png)
+          </section>
+          <section data-markdown>
+            ## Anonymous functions
+
+            <pre><code class="javascript">
+              setTimeout(function() {
+                console.trace("I'm anonymous, see?");
+                console.log('==========================');
+              }, 1);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Named functions
+
+            <pre><code class="javascript">
+              setTimeout(function named() {
+                console.trace("I'm named, somebody loves me.");
+                console.log('==========================');
+              }, 1000);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## More named functions
+
+            <pre><code class="javascript">
+              var namedFunc2 = function() {
+                console.trace("I'm a different kind of named function.");
+                console.log('==========================');
+              };
+
+              setTimeout(namedFunc2, 2000);
+            </code></pre>
+          </section>
         </section>
         <section data-markdown>
           ## Using ```require()```, NPM, and modules
