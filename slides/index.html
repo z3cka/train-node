@@ -751,22 +751,28 @@
             * Use a queue
           </section>
         </section>
-        <section data-markdown>
-          ## Your first Server.
+        <section>
+          <small>Hello world server</small>
+          <section data-markdown>
+            ## Your first Server.
 
-          ```/hello```
+            ```~/train-node/hello/app.js```
 
-          <pre><code class="javascript">
-            var http = require('http');
-            http.createServer(function hello(req, res) {
-              res.writeHead(200, {'Content-Type': 'text/plain'});
-              res.end('Hello World\n');
-            }).listen(1337);
-            console.log('Server running at http://127.0.0.1:1337/');
-          </code></pre>
+            * Respond to the HTTP request with a hello world message
+          </section>
+          <section data-markdown>
+            <pre><code class="javascript">
+              var http = require('http');
+              http.createServer(function hello(req, res) {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.end('Hello World\n');
+              }).listen(1337);
+              console.log('Server running at http://127.0.0.1:1337/');
+            </code></pre>
 
-          change *1337* to your port number.
+            change *1337* to your port number.
 
+          </section>
         </section>
         <section data-markdown>
           ## Munch on Lunch
