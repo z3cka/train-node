@@ -502,6 +502,35 @@
             Used to include built in libraries, libraries from package manager and local files.
           </section>
           <section data-markdown>
+            ## Where does ```require()``` look for files?
+
+            * Core libraries
+            * modules in the node_modules directory
+            * locally defined modules _if the module is prefixed with a path_
+              * Paths can be absolute, but this is highly discouraged, use the relative paths or package your own module.
+
+            [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
+          </section>
+          <section data-markdown>
+            module_a.js
+
+            <pre><code class="javascript">console.log('this is a');</pre></code>
+
+            module_b.js
+
+            <pre><code class="javascript">console.log(' this is b');</pre></code>
+
+            main.js
+
+            <pre><code class="javascript">
+              require('./module_a');
+              require('./module_b')
+            </pre></code>
+
+            ```$ node main.js```
+
+          </section>
+          <section data-markdown>
             ## ```require()``` for built in libraries.
 
             [List of libraries](http://nodejs.org/docs/latest/api/)
@@ -528,114 +557,13 @@
             <pre><code class="javascript">http.createServer(function hello(req, res) {</code></pre>
 
           </section>
-          <section data-markdown>
-            module_a.js
-
-            <pre><code class="javascript">console.log('this is a');</pre></code>
-
-            module_b.js
-
-            <pre><code class="javascript">console.log(' this is b');</pre></code>
-
-            main.js
-
-            <pre><code class="javascript">
-              require('module_a');
-              require('module_b')
-            </pre></code>
-
-            ```$ node main.js```
-
-          </section>
-          <section data-markdown>
-            ## Try it.
-          
-          </section>
-          <section data-markdown>
-            ### Use relative paths.
-
-            <pre><code class="javascript">
-              require('./module_a');
-              require('./module_b')
-            </pre></code>
-
-            ```$ node main.js```
-          </section>
-          <section data-markdown>
-            ### Exposing APIs
-
-            * Three different possibilities
-              1. module.exports
-              2. exports
-              3. Altering Prototypes.
-
-          </section>
-          <section data-markdown>
-            #### ```module.exports``` exposes a root level class or object.
-
-            <pre><code class="javascript">
-              // world.js
-              module.exports = world;
-
-              var world = {};
-              world.word = 'world';
-            </code></pre>
-          </section>
-          <section data-markdown>
-            #### ```exports``` exposes a namespaced class or object.
-
-
-            <pre><code class="javascript">
-              // hello.js
-              exports.hello = word;
-
-              function word() {
-                return 'hello';
-              }
-            </code></pre>
-
-          </section>
-          <section data-markdown>
-            #### Using the above.
-
-            <pre><code class="javascript">
-              var Hello = require('hello');
-              var world = require('world');
-
-              var begining = new Hello();
-              var phase = begining.word() + ' ' + world.word;
-            </code></pre>
-
-          </section>
-          <section>
-            <h3> Try it</h3>
-
-            <ul>
-              <li class='fragment'>Didn't work?</li>
-              <li class='fragment'>Don't forget the ./ when requiring local files</li>
-            </ul>
-            <pre class='fragment'><code>
-              var Hello = require('./hello');
-              var world = require('./world');
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## Where does ```require()``` look for files?
-
-            * Core libraries
-            * modules in the node_modules directory
-            * locally defined modules _if the module is prefixed with a path_
-              * Paths can be absolute, but this is highly discouraged, use the relative paths or package your own module.
-
-            [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
-          </section>
           <section>
             <h3>NPM</h3>
 
             <ul>
               <li class='fragment'>Node's Personal Manservant</li>
               <li class='fragment'>Collection of over 16k community built libraries</li>
-              <li class='fragment'>Handles installation and dependency</li>
+              <li class='fragment'>Handles installation and dependencies</li>
               <li class='fragment'>Everything from GPIO libraries to a few CMSs</li>
             </ul>
           </section>
@@ -654,53 +582,63 @@
           <section data-markdown>
             ## Try it
 
-            npm init
+            <pre><code class="no-highlight">
+              $ mkdir ~/train-node/require/colorsExample
+              $ cd ~/train-node/require/colorsExample
+              $ npm init
+              $ npm install colors
+            </code></pre>
 
-            npm install colors
+            To add a library to your package.json file at install time add --save:
 
-            npm install --save colors
-            </section>
-            <section data-markdown>
-              <pre><code class="javascript">
-                // colorsExample.js
-                var colors = require('colors');
+            <pre><code class="no-highlight">
+              npm install --save colors
+            </code></pre>
+          </section>
+          <section data-markdown>
+            * Create a file called colorsExample.js in the colorsExample directory
+            * Here's an example of using the colors library, give it a try and run
+              the script with ```node colorsExample``` when you're done editing.
+            <pre><code class="javascript">
+              // colorsExample.js
+              var colors = require('colors');
 
-                console.log('hello'.green); // outputs green text
-                console.log('i like cake and pies'.underline.red) // outputs red underlined text
-                console.log('inverse the color'.inverse); // inverses the color
-                console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
-              </code></pre>
-            </section>
-            <section data-markdown>
-              ### Package.json
+              console.log('hello'.green); // outputs green text
+              console.log('i like cake and pies'.underline.red) // outputs red underlined text
+              console.log('inverse the color'.inverse); // inverses the color
+              console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Package.json
 
-              <pre><code class="javascript">
-                {
-                  "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
-                  "name": "npmExample",
-                  "description": "An example from the world famous Four Kitchens Node.js training.",
-                  "version": "0.0.1",
-                  "homepage": "http://fourkitchens.com",
-                  "repository": {
-                    "type": "git",
-                    "url": "git://github.com/fourkitchens/train-node.git"
-                  },
-                  "engines": {
-                    "node": "~0.6.8"
-                  },
-                  "dependencies": {},
-                  "devDependencies": {},
-                  "optionalDependencies": {}
-                }
-              </code></pre>
+            <pre><code class="javascript">
+              {
+                "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+                "name": "npmExample",
+                "description": "An example from the world famous Four Kitchens Node.js training.",
+                "version": "0.0.1",
+                "homepage": "http://fourkitchens.com",
+                "repository": {
+                  "type": "git",
+                  "url": "git://github.com/fourkitchens/train-node.git"
+                },
+                "engines": {
+                  "node": "~0.8.8"
+                },
+                "dependencies": {},
+                "devDependencies": {},
+                "optionalDependencies": {}
+              }
+            </code></pre>
 
-              [package.json reference](http://package.json.jit.su/)
-            </section>
+            [package.json reference](http://package.json.jit.su/)
+          </section>
         </section>
         <section data-markdown>
           ## Intro to events
 
-          * Lots of node functions that emit events.
+          * Lots of node functions emit events.
           * Eventually you'll write your own.
 
           [Events Explained.](http://howtonode.org/demystifying-events-in-node)
@@ -713,18 +651,19 @@
               // basic imports
               var events = require('events');
               var util = require('util');
+              var _ = require('lodash');
 
               function Poll(feed) {
                 this.guids = [];
                 this.feed = feed;
                 this.poller = setInterval(_.bind(this.poll, this), 1000);
               };
-
               util.inherits(Poll, events.EventEmitter);
 
               Poll.prototype.getStories = function(callback) {
+                var self = this;
 
-              // . . .
+                // . . .
 
                 if (newStories.length) {
                   self.emit('fed', null, data);
