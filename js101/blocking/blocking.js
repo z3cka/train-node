@@ -9,6 +9,7 @@ var start = Date.now();
 setTimeout(function timeout1() {
   console.log('We started execution ' + (Date.now() - start) + 'ms ago.');
 
+  // Simulate a long running (and blocking) process.
   for (var x = 0; x < 3999999999; x++) {}
 
   console.log('Done with timeout1().');
