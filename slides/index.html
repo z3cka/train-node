@@ -1065,7 +1065,8 @@
               });
             </code></pre>
           </section>
-        </section>       <section data-markdown>
+        </section>
+        <section data-markdown>
           ## Socket.io
         </section>
         <section>
@@ -1103,27 +1104,87 @@
           <section data-markdown>
             ### What you'll build
 
-            * A polling loop to grab a list of stories from [http://localhost:3000](http://localhost:3000).
-              * The result will be an array of JSON objects. Store this
-                in memory so it can be made available to the client.
-            * An endpoint for the client to fetch the latest stories (/stories)
-          </section>
-          <section data-markdown>
-            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x).
-              The client is currently aware of two events:
-                1. refresh - a full list of stories that will replace those displayed
-                   on the client page.
-                1. newStories - a partial list of new stories, if you choose to use
-                   this event you'll need to parse out any new stories from those
-                   fetched from the feed.
-          </section>
-          <section data-markdown>
-            ### Bonus challenge!
+            ![client](/assets/img/client.png)
 
-            1. Store the stories in either MySQL or MongoDB. Use this list to avoid
-               creating duplicate content in case the feed re-sends an item or you
-               need to restart your node server.
-            </section>
+            * A backend to this...
+          </section>
+          <section data-markdown>
+            ![block diagram](/assets/img/block-diagram.png)
+          </section>
+          <section data-markdown>
+            ### What you'll build
+
+            * A loop to fill out content in the stories region
+            * A [socket.io server](https://github.com/learnboost/socket.io#express-3x).
+              The client is currently aware of three entities and two events each...
+          </section>
+          <section data-markdown>
+            ### Story
+
+            * story - contains a title, description, and link.
+              <pre><code class="javascript">
+                {
+                  title: 'Story title',
+                  description: 'Story body text',
+                  link: 'URL to the story'
+                }
+              </code></pre>
+            * socket.io events:
+              * newStories - array of story objects to add to the region.
+              * refreshStories - array of story objects to replace what's
+                in the region with.
+          </section>
+          <section data-markdown>
+            ### Message
+
+            * message - contains a name, message, and time.
+              <pre><code class="javascript">
+                {
+                  name: 'Message Author',
+                  message: 'Message body text!',
+                  time: new Date()
+                }
+              </code></pre>
+            * socket.io events:
+              * newMessages - array of message objects to add to the region.
+              * refreshMessages - array of message objects to replace what's
+                in the region with.
+          </section>
+          <section data-markdown>
+            ### Image (bonus)
+
+            * image - contains a picture (URL) and link.
+              <pre><code class="javascript">
+                {
+                  picture: 'URL to the image',
+                  link: 'URL to where the image should be linked to'
+                }
+              </code></pre>
+            * socket.io events:
+              * newImages - array of image objects to add to the region.
+              * refreshImages - array of image objects to replace what's
+                in the region with.
+          </section>
+          <section data-markdown>
+            ### Bonus challenges!
+
+            1. Save new stories in memory (a variable) so they are accessible to
+               your application.
+            1. Save messages in memory.
+            1. Serve saved stories and messages to clients when they (re)connect.
+            1. Fetch custom stories from RSS feeds, third party APIs, or your Drupal site!
+          </section>
+          <section data-markdown>
+            ### Bonus challenges, cont
+
+            1. Fetch custom images and save them in memory.
+            1. Serve custom images to clients when they (re)connect.
+            1. Store the stories, messages, and images in either MySQL or MongoDB.
+               Use this list to avoid creating duplicate content in case the feed
+               re-sends an item or you need to restart your node server.
+               * Hint: see the next set of slides for some tips on working with
+                 databases in node.
+          </section>
         </section>
 
         <section data-markdown>
