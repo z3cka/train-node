@@ -558,6 +558,31 @@
             [NPM help (if --help is too old school for you.)](https://npmjs.org/doc/)
           </section>
           <section data-markdown>
+            ### Package.json
+
+            <pre><code class="javascript">
+              {
+                "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+                "name": "npmExample",
+                "description": "An example from the world famous Four Kitchens Node.js training.",
+                "version": "0.0.1",
+                "homepage": "http://fourkitchens.com",
+                "repository": {
+                  "type": "git",
+                  "url": "git://github.com/fourkitchens/train-node.git"
+                },
+                "engines": {
+                  "node": "~0.8.8"
+                },
+                "dependencies": {},
+                "devDependencies": {},
+                "optionalDependencies": {}
+              }
+            </code></pre>
+
+            [package.json reference](http://package.json.jit.su/)
+          </section>
+          <section data-markdown>
             ## Try it
 
             <pre><code class="no-highlight">
@@ -586,31 +611,6 @@
               console.log('inverse the color'.inverse); // inverses the color
               console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
             </code></pre>
-          </section>
-          <section data-markdown>
-            ### Package.json
-
-            <pre><code class="javascript">
-              {
-                "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
-                "name": "npmExample",
-                "description": "An example from the world famous Four Kitchens Node.js training.",
-                "version": "0.0.1",
-                "homepage": "http://fourkitchens.com",
-                "repository": {
-                  "type": "git",
-                  "url": "git://github.com/fourkitchens/train-node.git"
-                },
-                "engines": {
-                  "node": "~0.8.8"
-                },
-                "dependencies": {},
-                "devDependencies": {},
-                "optionalDependencies": {}
-              }
-            </code></pre>
-
-            [package.json reference](http://package.json.jit.su/)
           </section>
         </section>
         <section data-markdown>
