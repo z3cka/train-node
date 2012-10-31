@@ -1,0 +1,7 @@
+{
+  "port": "3001",
+  "pollTimeout": "1000",
+  "feeds": [
+    "http://reddit.com/new/.rss"
+  ]
+}

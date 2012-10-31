@@ -1,0 +1,4 @@
+name = Ping Node
+description = Pings a Node.js server when a Node is saved.
+core = 7.x
+package = Four Kitchens Node Training

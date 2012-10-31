@@ -1,0 +1,27 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "susy";
+@import "respond-to";
+
+@import "../vendor/h5bp/css/style.css";
+@import "../js/plugins/flexslider/flexslider.css";
+
+// ---------------------------------------------------------------------------
+// Basic Grid
+
+$total-columns  : 12;
+$column-width   : 4em;
+$gutter-width   : 1em;
+$grid-padding   : $gutter-width;
+
+$show-grid-backgrounds  : true;
+
+$breakpoints: 'smartphone' (320px),
+              'fourhundred' (415px),
+              'smartphone landscape' (480px),
+              'tablet' (768px),
+              'desktop' (980px),
+              'smartphone only' (320px 767px),
+              'smartphone landscape only' (480px 767px),
+              'tablet only' (768px 979px);
