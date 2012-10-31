@@ -34,7 +34,7 @@ console.log('=============================');
  */
 var example2 = function() {
   var pet = 'chupacabra';
-  console.log("My pet is a " + pet);
+  console.log("My function's pet is a " + pet);
 };
 
 console.log('Example 2: My pet is a ' + pet);
