@@ -1,8 +1,0 @@
-# Ignore configuration files that may contain sensitive information.
-# For Training Wheels, don't ignore the settings file.
-#sites/*/settings*.php
-
-# Ignore paths that contain user-generated content.
-# For Training Wheels, need files.
-#sites/*/files
-sites/*/private
