@@ -338,6 +338,15 @@
             * ```CTRL+C``` - to stop a node process that does not automatically exit.
 
           </section>
+          <section data-markdown>
+            ## Environment Variables
+
+            * A unique port has been assigned to each of you, it's in the
+              ```~/port-xxxxx``` file in your home directory. You'll need
+              this when we start a node server.
+            * The ```~/config.json``` file in your home directory can be used to
+              inject settings in your node code (more on that later).
+          </section>
         </section>
         <section data-markdown>
           ## ```console.log()```
@@ -839,7 +848,7 @@
             * We're going to make a few changes to support the application we're going to build:
               1. Copy the config.js file and client directory from your home directory to the example dirctory:
                 <pre><code class="no-highlight">
-                  $ cp ~/config.js ~/train-node/exercises/myserver/config.js
+                  $ cp ~/config.json ~/train-node/exercises/myserver/config.js
                 </code></pre>
           </section>
           <section data-markdown>
