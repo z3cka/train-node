@@ -8,7 +8,7 @@ var http = require('http');
 var path = require('path');
 
 var config = require('./config');
-var nodes = require('./lib/nodes');
+var nodes = require('./routes/nodes');
 
 /**
  * Server and socket.io definition.
