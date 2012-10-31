@@ -6,7 +6,7 @@
  */
 
 /**
- * Implements hook_node_insert().
+ * Implements hook_node_view().
  */
 function ping_nodejs_node_view($node) {
 

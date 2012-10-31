@@ -68,7 +68,15 @@
             </ul>
           </div>
         </section>
+        <section data-markdown>
+          # Wifi
 
+          * Wifi network:
+          * Wifi password:
+
+          To test it visit our etherpad (chefpad) and put in your name and your favorite car. [http://chefpad.org/p/badcamp-nodejs](http://chefpad.org/p/badcamp-nodejs)
+
+        </section>
         <section data-markdown>
           ## What you'll walk away with
 
@@ -216,7 +224,7 @@
           <section data-markdown>
             ### What is it node.js NOT good for
 
-            * Web server
+            * General purpose web server
             * (Large) static assets
             * Complex systems (business logic)
             * Lots of processing - use C or PHP
@@ -224,11 +232,11 @@
           <section data-markdown>
             ### What We've used it for
 
-            * RSS Hub
-            * Interactive game
+            * [RSS Hub](https://github.com/elliotttf/PubHub)
+            * [Interactive game](http://drupalpoetry.com)
             * Realtime video commenting
-            * IRC Bot
-            * Parsing HTML
+            * [IRC Bot](http://hubot.github.com/)
+            * [Parsing HTML](https://github.com/tmpvar/jsdom)
           </section>
           <section data-markdown>
             ### What about the community?
@@ -255,7 +263,7 @@
         <section data-markdown>
           ## Lets get into it!
 
-          ![Adventure Time](/slides/assets/img/adventuretime.jpeg)
+          ![Adventure Time](/slides/assets/img/adventuretime.png)
         </section>
         <section data-markdown>
           ## Frustrated?
@@ -263,6 +271,18 @@
           * Who here has been confused, lost, or frustrated?
           * Raise your hand! It's ok to be confused, lost, or frustrated!
           * If you are lost tell us, it's normal and you're not slowing us down.
+          * We're here to help and enable!
+        </section>
+        <section data-markdown>
+          ## Shy?
+
+          <ul>
+            <li class="fragment">So are we.</li>
+            <li class="fragment">We have candy and will give it to you for asking questions.</li>
+          </ul>
+
+          ![engineer](assets/img/penguin.jpg)
+
         </section>
         <section>
           <small>Your environment</small>
@@ -491,6 +511,11 @@
           </section>
         </section>
         <section data-markdown>
+          ## WAT
+
+          [![wat](assets/img/wat.png)](assets/video/wat.mov)
+        </section>
+        <section data-markdown>
           ## Using ```require()```, NPM, and modules
         </section>
         <section>
@@ -512,6 +537,10 @@
             [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
           </section>
           <section data-markdown>
+            <pre><code class="no-highlight">
+              ~/train-node/require/modules
+            </code></pre>
+
             module_a.js
 
             <pre><code class="javascript">console.log('this is a');</pre></code>
@@ -558,6 +587,31 @@
             [NPM help (if --help is too old school for you.)](https://npmjs.org/doc/)
           </section>
           <section data-markdown>
+            ### Package.json
+
+            <pre><code class="javascript">
+              {
+                "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+                "name": "npmExample",
+                "description": "An example from the world famous Four Kitchens Node.js training.",
+                "version": "0.0.1",
+                "homepage": "http://fourkitchens.com",
+                "repository": {
+                  "type": "git",
+                  "url": "git://github.com/fourkitchens/train-node.git"
+                },
+                "engines": {
+                  "node": "~0.8.8"
+                },
+                "dependencies": {},
+                "devDependencies": {},
+                "optionalDependencies": {}
+              }
+            </code></pre>
+
+            [package.json reference](http://package.json.jit.su/)
+          </section>
+          <section data-markdown>
             ## Try it
 
             <pre><code class="no-highlight">
@@ -586,31 +640,6 @@
               console.log('inverse the color'.inverse); // inverses the color
               console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
             </code></pre>
-          </section>
-          <section data-markdown>
-            ### Package.json
-
-            <pre><code class="javascript">
-              {
-                "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
-                "name": "npmExample",
-                "description": "An example from the world famous Four Kitchens Node.js training.",
-                "version": "0.0.1",
-                "homepage": "http://fourkitchens.com",
-                "repository": {
-                  "type": "git",
-                  "url": "git://github.com/fourkitchens/train-node.git"
-                },
-                "engines": {
-                  "node": "~0.8.8"
-                },
-                "dependencies": {},
-                "devDependencies": {},
-                "optionalDependencies": {}
-              }
-            </code></pre>
-
-            [package.json reference](http://package.json.jit.su/)
           </section>
         </section>
         <section data-markdown>
@@ -747,22 +776,28 @@
             * Use a queue
           </section>
         </section>
-        <section data-markdown>
-          ## Your first Server.
+        <section>
+          <small>Hello world server</small>
+          <section data-markdown>
+            ## Your first Server.
 
-          ```/hello```
+            ```~/train-node/hello/app.js```
 
-          <pre><code class="javascript">
-            var http = require('http');
-            http.createServer(function hello(req, res) {
-              res.writeHead(200, {'Content-Type': 'text/plain'});
-              res.end('Hello World\n');
-            }).listen(1337, '127.0.0.1');
-            console.log('Server running at http://127.0.0.1:1337/');
-          </code></pre>
+            * Respond to the HTTP request with a hello world message
+          </section>
+          <section data-markdown>
+            <pre><code class="javascript">
+              var http = require('http');
+              http.createServer(function hello(req, res) {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.end('Hello World\n');
+              }).listen(1337);
+              console.log('Server running at http://127.0.0.1:1337/');
+            </code></pre>
 
-          change *1337* to your port number.
+            change *1337* to your port number.
 
+          </section>
         </section>
         <section data-markdown>
           ## Munch on Lunch
@@ -857,7 +892,7 @@
 
             1. Stub drupal module is created already.
             2. We'll put the code that talks to node in a node_view hook.
-            3. Hint: we'll use drupal_json_encode() and drupal_http_request()
+            3. Hint: we'll use drupal\_json\_encode() and drupal\_http\_request()
             4. Be sure to handle errors.
           </section>
           <section data-markdown>
