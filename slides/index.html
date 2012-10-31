@@ -1255,6 +1255,7 @@
       <aside class="controls">
         <a class="left" href="#">&#x25C4;</a>
         <a class="right" href="#">&#x25BA;</a>
+        <span id="current-slide"></span>
         <a class="up" href="#">&#x25B2;</a>
         <a class="down" href="#">&#x25BC;</a>
       </aside>
@@ -1289,7 +1290,11 @@
           { src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
         ]
       });
-      
+
+      var currentSlide = document.getElementById('current-slide');
+      Reveal.addEventListener('slidechanged', function(data) {
+        currentSlide.innerHTML = data.indexh + '/' + data.indexv;
+      });
     </script>
 
   </body>
