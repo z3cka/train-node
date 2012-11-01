@@ -452,7 +452,26 @@
               }, 1);
             </code></pre>
           </section>
+          <section data-markdown>
+            ## Use named functions.
 
+            * Makes it easier to find what is wrong in the stack trace
+            * Whats a stack trace?
+          </section>
+          <section data-markdown>
+            ## Stack Trace
+
+            * Node outputs a list of which functions were called when your code broke
+            * Makes it easier to find out where the error was.
+          </section>
+          <section data-markdown>
+            ## Stack Trace Example.
+
+            * First we'll try using console.trace
+            * Second we'll uncomment a real mistake and we'll see how it works.
+
+            ![stacktrace](assets/img/stacktrace.png)
+          </section>
           <section data-markdown>
             ### Scope Example 1
             <pre><code class="javascript">
