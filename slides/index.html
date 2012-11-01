@@ -481,7 +481,40 @@
             ![result](assets/img/scope3.png)
           </section>
           <section data-markdown>
-            ### This
+            ### Hashes (AKA Objects)
+
+            * A hash is an object, they can contain properties:
+
+            <pre><code class="javacript">
+              var awesomeCompany = {
+                name: 'Four Kitchens',
+                location: 'Austin, TX'
+              };
+
+              console.log(awesomeCompany.name + ' is awesome!');
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Hashes (AKA Objects)
+
+            * They can also contain functions:
+
+            <pre><code class="javascript">
+              var awesomeCompany = {
+                name: 'Four Kitchens',
+                location: 'Austin, TX',
+                knowsNode: function() {
+                  return true;
+                }
+              };
+
+              if (awesomeCompany.knowsNode()) {
+                console.log(awesomeCompany.name + ' knows node!');
+              }
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## This
 
             <pre><code class="javascript">
               function Unicorn() { this.horns = 0; }
