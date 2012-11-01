@@ -412,14 +412,25 @@
             ![spy vs spy](assets/img/spy-vs-spy.png)
           </section>
           <section data-markdown>
-            ## Anonymous functions
+            ## Functions in Javascript.
+
+            * Functions are objects.
+            * Functions can be passed in as arguments.
+            * Refered to as a callback.
+          </section>
+          <section data-markdown>
+            ## Functions
+
 
             <pre><code class="javascript">
-              setTimeout(function() {
-                console.trace("I'm anonymous, see?");
+              var Func = function() {
+                console.trace("I'm a function.");
                 console.log('==========================');
-              }, 1);
+              };
+
+              setTimeout(Func, 2000);
             </code></pre>
+
           </section>
           <section data-markdown>
             ## Named functions
@@ -432,17 +443,16 @@
             </code></pre>
           </section>
           <section data-markdown>
-            ## More named functions
+            ## Anonymous functions
 
             <pre><code class="javascript">
-              var namedFunc2 = function() {
-                console.trace("I'm a different kind of named function.");
+              setTimeout(function() {
+                console.trace("I'm anonymous, see?");
                 console.log('==========================');
-              };
-
-              setTimeout(namedFunc2, 2000);
+              }, 1);
             </code></pre>
           </section>
+
           <section data-markdown>
             ### Scope Example 1
             <pre><code class="javascript">
