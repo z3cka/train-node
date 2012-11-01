@@ -409,6 +409,72 @@
         <section>
           <small>JavaScript 101</small>
           <section data-markdown>
+            ## Anonymous and named functions
+
+            ![spy vs spy](assets/img/spy-vs-spy.png)
+          </section>
+          <section data-markdown>
+            ## Functions in Javascript.
+
+            * Functions are objects.
+            * Functions can be passed in as arguments.
+            * Refered to as a callback.
+          </section>
+          <section data-markdown>
+            ## Functions
+
+
+            <pre><code class="javascript">
+              var Func = function() {
+                console.trace("I'm a function.");
+                console.log('==========================');
+              };
+
+              setTimeout(Func, 2000);
+            </code></pre>
+
+          </section>
+          <section data-markdown>
+            ## Named functions
+
+            <pre><code class="javascript">
+              setTimeout(function named() {
+                console.trace("I'm named, somebody loves me.");
+                console.log('==========================');
+              }, 1000);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Anonymous functions
+
+            <pre><code class="javascript">
+              setTimeout(function() {
+                console.trace("I'm anonymous, see?");
+                console.log('==========================');
+              }, 1);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Use named functions.
+
+            * Makes it easier to find what is wrong in the stack trace
+            * Whats a stack trace?
+          </section>
+          <section data-markdown>
+            ## Stack Trace
+
+            * Node outputs a list of which functions were called when your code broke
+            * Makes it easier to find out where the error was.
+          </section>
+          <section data-markdown>
+            ## Stack Trace Example.
+
+            * First we'll try using console.trace
+            * Second we'll uncomment a real mistake and we'll see how it works.
+
+            ![stacktrace](assets/img/stacktrace.png)
+          </section>
+          <section data-markdown>
             ### Scope Example 1
             <pre><code class="javascript">
               var pet = 'kitteh';
@@ -456,29 +522,6 @@
             ### Scope: Local Variable Scope
 
             ![result](assets/img/scope2.png)
-          </section>
-          <section data-markdown>
-            ### Hoisting
-
-            <pre><code class="javascript">
-              /**
-               * This function attempts to access a variable before
-               * it is defined and illustrates hoisting.
-               *
-               * NOTE: if 'fictionalPet' had not been defined within this scope,
-               * attempting to access it would have thrown a fatal error.
-               */
-              var example3 = function() {
-                console.log('I wish I had a ' + fictionalPet);
-                var fictionalPet = 'unicorn';
-                console.log('No really, I wish I had a ' + fictionalPet);
-              };
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### Scope: Hoisting
-
-            ![result](assets/img/scope3.png)
           </section>
           <section data-markdown>
             ### Hashes (AKA Objects)
@@ -595,43 +638,6 @@
           <section data-markdown>
             ### Yay!
             ![yay](assets/img/this-yay.jpg)
-          </section>
-          <section data-markdown>
-            ## Anonymous and named functions
-
-            ![spy vs spy](assets/img/spy-vs-spy.png)
-          </section>
-          <section data-markdown>
-            ## Anonymous functions
-
-            <pre><code class="javascript">
-              setTimeout(function() {
-                console.trace("I'm anonymous, see?");
-                console.log('==========================');
-              }, 1);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## Named functions
-
-            <pre><code class="javascript">
-              setTimeout(function named() {
-                console.trace("I'm named, somebody loves me.");
-                console.log('==========================');
-              }, 1000);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## More named functions
-
-            <pre><code class="javascript">
-              var namedFunc2 = function() {
-                console.trace("I'm a different kind of named function.");
-                console.log('==========================');
-              };
-
-              setTimeout(namedFunc2, 2000);
-            </code></pre>
           </section>
         </section>
         <section data-markdown>
