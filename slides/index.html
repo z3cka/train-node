@@ -407,6 +407,43 @@
         <section>
           <small>JavaScript 101</small>
           <section data-markdown>
+            ## Anonymous and named functions
+
+            ![spy vs spy](assets/img/spy-vs-spy.png)
+          </section>
+          <section data-markdown>
+            ## Anonymous functions
+
+            <pre><code class="javascript">
+              setTimeout(function() {
+                console.trace("I'm anonymous, see?");
+                console.log('==========================');
+              }, 1);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Named functions
+
+            <pre><code class="javascript">
+              setTimeout(function named() {
+                console.trace("I'm named, somebody loves me.");
+                console.log('==========================');
+              }, 1000);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## More named functions
+
+            <pre><code class="javascript">
+              var namedFunc2 = function() {
+                console.trace("I'm a different kind of named function.");
+                console.log('==========================');
+              };
+
+              setTimeout(namedFunc2, 2000);
+            </code></pre>
+          </section>
+          <section data-markdown>
             ### Scope Example 1
             <pre><code class="javascript">
               var pet = 'kitteh';
@@ -456,29 +493,6 @@
             ![result](assets/img/scope2.png)
           </section>
           <section data-markdown>
-            ### Hoisting
-
-            <pre><code class="javascript">
-              /**
-               * This function attempts to access a variable before
-               * it is defined and illustrates hoisting.
-               *
-               * NOTE: if 'fictionalPet' had not been defined within this scope,
-               * attempting to access it would have thrown a fatal error.
-               */
-              var example3 = function() {
-                console.log('I wish I had a ' + fictionalPet);
-                var fictionalPet = 'unicorn';
-                console.log('No really, I wish I had a ' + fictionalPet);
-              };
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### Scope: Hoisting
-
-            ![result](assets/img/scope3.png)
-          </section>
-          <section data-markdown>
             ## This
 
             <pre><code class="javascript">
@@ -518,43 +532,6 @@
             ## This
 
             ![this](assets/img/this.png)
-          </section>
-          <section data-markdown>
-            ## Anonymous and named functions
-
-            ![spy vs spy](assets/img/spy-vs-spy.png)
-          </section>
-          <section data-markdown>
-            ## Anonymous functions
-
-            <pre><code class="javascript">
-              setTimeout(function() {
-                console.trace("I'm anonymous, see?");
-                console.log('==========================');
-              }, 1);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## Named functions
-
-            <pre><code class="javascript">
-              setTimeout(function named() {
-                console.trace("I'm named, somebody loves me.");
-                console.log('==========================');
-              }, 1000);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## More named functions
-
-            <pre><code class="javascript">
-              var namedFunc2 = function() {
-                console.trace("I'm a different kind of named function.");
-                console.log('==========================');
-              };
-
-              setTimeout(namedFunc2, 2000);
-            </code></pre>
           </section>
         </section>
         <section data-markdown>

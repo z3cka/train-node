@@ -44,7 +44,8 @@ console.log('Now my pet is a ' + pet);
 console.log("\n");
 
 /**
- * EXAMPLE 3: hoisting.
+ * BONUS EXAMPLE 3: hoisting (We won't go over this in class but it's fun to know).
+ * Delete the uncomment lines to try it.
  */
 console.log('=============================');
 
@@ -55,6 +56,7 @@ console.log('=============================');
  * NOTE: if 'fictionalPet' had not been defined within this scope,
  * attempting to access it would have thrown a fatal error.
  */
+/* //uncomment
 var example3 = function() {
   console.log('I wish I had a ' + fictionalPet);
   var fictionalPet = 'unicorn';
@@ -63,4 +65,4 @@ var example3 = function() {
 
 console.log('Example 3: hoisting');
 example3();
-
+*/ //uncomment
