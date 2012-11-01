@@ -199,20 +199,25 @@ io.sockets.on('connection', function onConnection(socket) {
 setInterval(function newStories() {
   // TODO - create some story content to send to the client.
 
-  // TODO (bonus) - fetch story content from a feed or external API and send
-  // the results to the client.
-  // Hint: check out the rsj node module for parsing RSS to JSON automagically.
+  // TODO - fetch stories from your Drupal site and send them to the client.
+  // NOTE: You might want to filter out only new ones so you don't create
+  // duplicate content on the client.
+  // @see routes/nodes.js
 
   // TODO (bonus) - save the stories so new clients can load history when they
   // connect.
+
+  // TODO (bonus) - fetch story content from a feed or external API and send
+  // the results to the client.
+  // Hint: check out the rsj node module for parsing RSS to JSON automagically.
 }, config.pollInterval || 10000);
 
 /**
  * Notifies the client of new images.
  */
 setInterval(function newImages() {
-  // TODO - fetch images from flickr or other feeds and refresh the client
-  // with the fetched content.
+  // TODO (bonus) - fetch images from flickr or other feeds and refresh the
+  // client with the fetched content.
   // Hint: check out the rsj node module for parsing RSS to JSON automagically.
 }, config.pollInterval || 10000);
 
