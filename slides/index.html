@@ -479,45 +479,87 @@
             ![result](assets/img/scope3.png)
           </section>
           <section data-markdown>
-            ## This
+            ### This
 
             <pre><code class="javascript">
-              addHorn: function() {
-                this.hasHorn = true;
+              function Unicorn() { this.horns = 0; }
 
-                var countHorns = function() {
-                  if (this.hasHorn) {
-                    return 1;
+              Unicorn.prototype.addHorn = function(horns) {
+                this.horns = horns;
+
+                /**
+                 * Checks that the unicorn has at least one horn
+                 * (we won't judge if there's more) and print
+                 * a message.
+                 */
+                setTimeout(function countHorns() {
+                  if (this.horns > 0) {
+                    console.log("I'm a unicorn!");
                   }
-                  return 0;
-                };
-
-              //  console.log('I have ' + countHorns() + ' horns.');
-              }
+                  else {
+                    console.log('I have 0 horns.');
+                    console.log("I'm either a horse or the scope of 'this' isn't what you thought it was!");
+                  }
+                }, 1);
+              };
             </code></pre>
           </section>
           <section data-markdown>
-            ## This
+            ### This
 
             <pre><code class="javascript">
-              addHorn: function() {
+              var unicorn = new Unicorn();
+              unicorn.addHorns(1);
+            </code></pre>
+
+            ![output](assets/img/this1.png)
+          </section>
+          <section data-markdown>
+            ### Whyyy!?!?
+            ![whyyyy](assets/img/this-wat.jpg)
+          </section>
+          <section data-markdown>
+            ### Whyyy!?!?
+
+            * Remember when we said everything's an object?
+            * The value of ```this``` changed when we entered the ```countHorns()``` function.
+          </section>
+          <section data-markdown>
+            ### Ok, let's fix it!
+
+            <pre><code class="javascript">
+              /**
+               * Update the Unicorn prototype to be aware of
+               * the scope of 'this'.
+               */
+              Unicorn.prototype.addHorn = function(horns) {
+                // Assign the local variable 'self' to the value of 'this' so we can still
+                // access 'this' in other scopes.
                 var self = this;
-                self.hasHorn = true;
+                self.horns = horns;
 
-                var countHorns = function() {
-                  if (self.hasHorn) {
-                    return 1;
+                setTimeout(function countHorns() {
+                  if (self.horns > 0) {
+                    console.log("I'm a unicorn!");
                   }
-                  return 0;
-                };
-              //  console.log('I have ' + countHorns() + ' horns.');
-              }
+                  else {
+                    console.log("I have 0 horns. I must be a horse!");
+                  }
+                }, 1);
+              };
             </code></pre>
           </section>
           <section data-markdown>
-            ## This
-
-            ![this](assets/img/this.png)
+            ### This (fixed)
+            <pre><code class="javascript">
+              var unicorn2 = new Unicorn();
+              unicorn2.addHorn(2);
+            </code></pre>
+            ![output](assets/img/this2.png)
+          </section>
+          <section data-markdown>
+            ### Yay!
+            ![yay](assets/img/this-yay.jpg)
           </section>
           <section data-markdown>
             ## Anonymous and named functions
