@@ -704,29 +704,28 @@
         <section>
           <small>Intro to Events</small>
           <section data-markdown>
-            ## Events Example
+            ## Roll your own
             <pre><code class="javascript">
               // basic imports
               var events = require('events');
               var util = require('util');
-              var _ = require('lodash');
 
-              function Poll(feed) {
-                this.guids = [];
-                this.feed = feed;
-                this.poller = setInterval(_.bind(this.poll, this), 1000);
-              };
+              function Poll(feed) { this.feed = feed; };
               util.inherits(Poll, events.EventEmitter);
 
               Poll.prototype.getStories = function(callback) {
                 var self = this;
 
-                // . . .
-
-                if (newStories.length) {
-                  self.emit('fed', null, data);
-                }
-              }
+                /**
+                 * Assume fetchStories grabs an array of content and
+                 * executes this callback on completion.
+                 */
+                fetchStories(self.feed, function gotStories(err, newStories) {
+                  if (!err && newStories.length) {
+                    self.emit('fed', null, newStories);
+                  }
+                });
+              };
               exports.Poll = Poll;
             </code></pre>
           </section>
