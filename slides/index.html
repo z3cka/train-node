@@ -1105,7 +1105,6 @@
 
             #### add the themeing engine to our app.
                <pre><code class="diff">
--  app.set('views', __dirname + '/views');
 -  app.set('view engine', 'jade');
 +  app.set('view engine', 'html');
 +  app.engine('html', require('hbs').__express);
