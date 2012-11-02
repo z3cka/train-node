@@ -47,8 +47,7 @@
             <img src="assets/img/druplicon.png" class="logo-drupal no-border"> <img src="assets/img/nodejs.png" class="logo-node no-border">
           </div>
 
-          * Wifi network:
-          * Wifi password:
+          * Wifi: credentials will be provided when you pick up your badge!
 
           To test test out the internet visit our etherpad (chefpad) and put in your name, your spice and your favorite car. [http://chefpad.org/p/badcamp-nodejs](http://chefpad.org/p/badcamp-nodejs)
         </section>
@@ -92,11 +91,25 @@
 
           * Callbacks!
             * You'll know why that's funny
-          * Some more JS Chops
-          * Some Async programming skillz
-          * A small Socket.io app
+          * A Socket.io app
           * A chance to use the Express Node.js framework.
           * A few strategies on how to work node into your Drupal projects.
+        </section>
+        <section data-markdown>
+          ## What we'll build
+
+          A "real-time" webapp.
+
+          * Pulls nodes from Drupal
+          * Has the basis for a chat
+          * BONUS: Pulls images from Flickr
+
+        </section>
+        <section data-markdown>
+          ## What we'll build
+
+
+          ![block diagram](assets/img/client.png)
         </section>
         <section data-markdown>
           ## Class outline.
@@ -104,14 +117,15 @@
           * Intro to node.js
           * Console.log
           * JS 101
-          * Using Require() *NPM? & Modules*
-          * Intro to Events
-          * Database intro
           * Async programing
-          * Socket.io
+          * Using Require() *NPM? & Modules*
+          * Quick intro to Events
+          * Writing an http server
+          * Your first Server
           * **Lunch**
           * Integrating with Drupal 1
           * Integrating with Drupal 2
+          * Socket.io
         </section>
         <section data-markdown>
           ## Frustrated?
@@ -370,15 +384,6 @@
             * ```CTRL+C``` - to stop a node process that does not automatically exit.
 
           </section>
-          <section data-markdown>
-            ## Environment Variables
-
-            * A unique port has been assigned to each of you, it's in the
-              ```~/port-xxxxx``` file in your home directory. You'll need
-              this when we start a node server.
-            * The ```~/config.json``` file in your home directory can be used to
-              inject settings in your node code (more on that later).
-          </section>
         </section>
         <section data-markdown>
           ## ```console.log()```
@@ -544,6 +549,15 @@
             ![log jam](assets/img/log_jam.jpg)
           </section>
           <section data-markdown>
+            ## Remember the King with servants?
+
+            * Every morning the servants line up.
+            * One at a time they come into his throne room.
+            * They report on what they've done.
+            * Sometimes the king gives them more to do.
+            * Always one at a time, so the king can focus.
+          </section>
+          <section data-markdown>
             ## Syncrounous example
 
             Checkout the order of the log messages.
@@ -632,41 +646,13 @@
           </section>
         </section>
         <section data-markdown>
-          ## Intro to events
+          ## Events
 
           * Lots of node functions emit events.
+          * Events are what trigger our callbacks.
           * Eventually you'll write your own.
 
           [Events Explained.](http://howtonode.org/demystifying-events-in-node)
-        </section>
-        <section>
-          <small>Intro to Events</small>
-          <section data-markdown>
-            ## Roll your own
-            <pre><code class="javascript">
-              // basic imports
-              var events = require('events');
-              var util = require('util');
-
-              function Poll(feed) { this.feed = feed; };
-              util.inherits(Poll, events.EventEmitter);
-
-              Poll.prototype.getStories = function(callback) {
-                var self = this;
-
-                /**
-                 * Assume fetchStories grabs an array of content and
-                 * executes this callback on completion.
-                 */
-                fetchStories(self.feed, function gotStories(err, newStories) {
-                  if (!err && newStories.length) {
-                    self.emit('fed', null, newStories);
-                  }
-                });
-              };
-              exports.Poll = Poll;
-            </code></pre>
-          </section>
         </section>
         <section data-markdown>
           ## WAT
@@ -807,6 +793,15 @@
         </section>
         <section>
           <small>Hello world server</small>
+          <section data-markdown>
+            ## Port Number
+
+            * A unique port has been assigned to each of you, it's in the
+              ```~/port-xxxxx``` file in your home directory. You'll need
+              this when we start a node server.
+            * The ```~/config.json``` file in your home directory can be used to
+              inject settings in your node code (more on that later).
+          </section>
           <section data-markdown>
             ## Your first Server.
 
@@ -1038,7 +1033,7 @@
 
             <pre><code class="javascript">
               app.get('/nodes', function getNodes(req, res, next) {
-                nodes('http://train-node.local/exercises/drupal/rest/node.json', function renderNodes(err, nodes) {
+                nodes('http://instructor.nodejs.4kclass.com/exercises/drupal/rest/node.json', function renderNodes(err, nodes) {
                   console.log(nodes);
                   if (err) return next( err);
                   res.render('nodes', { results: nodes });
@@ -1407,6 +1402,35 @@
                   process.exit(0);
                 });
               });
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <small>Writing your own events</small>
+          <section data-markdown>
+            ## Roll your own
+            <pre><code class="javascript">
+              // basic imports
+              var events = require('events');
+              var util = require('util');
+
+              function Poll(feed) { this.feed = feed; };
+              util.inherits(Poll, events.EventEmitter);
+
+              Poll.prototype.getStories = function(callback) {
+                var self = this;
+
+                /**
+                 * Assume fetchStories grabs an array of content and
+                 * executes this callback on completion.
+                 */
+                fetchStories(self.feed, function gotStories(err, newStories) {
+                  if (!err && newStories.length) {
+                    self.emit('fed', null, newStories);
+                  }
+                });
+              };
+              exports.Poll = Poll;
             </code></pre>
           </section>
         </section>
