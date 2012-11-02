@@ -623,41 +623,13 @@
           </section>
         </section>
         <section data-markdown>
-          ## Intro to events
+          ## Events
 
           * Lots of node functions emit events.
+          * Events are what trigger our callbacks.
           * Eventually you'll write your own.
 
           [Events Explained.](http://howtonode.org/demystifying-events-in-node)
-        </section>
-        <section>
-          <small>Intro to Events</small>
-          <section data-markdown>
-            ## Roll your own
-            <pre><code class="javascript">
-              // basic imports
-              var events = require('events');
-              var util = require('util');
-
-              function Poll(feed) { this.feed = feed; };
-              util.inherits(Poll, events.EventEmitter);
-
-              Poll.prototype.getStories = function(callback) {
-                var self = this;
-
-                /**
-                 * Assume fetchStories grabs an array of content and
-                 * executes this callback on completion.
-                 */
-                fetchStories(self.feed, function gotStories(err, newStories) {
-                  if (!err && newStories.length) {
-                    self.emit('fed', null, newStories);
-                  }
-                });
-              };
-              exports.Poll = Poll;
-            </code></pre>
-          </section>
         </section>
         <section data-markdown>
           ## WAT
@@ -1407,6 +1379,35 @@
                   process.exit(0);
                 });
               });
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <small>Writing your own events</small>
+          <section data-markdown>
+            ## Roll your own
+            <pre><code class="javascript">
+              // basic imports
+              var events = require('events');
+              var util = require('util');
+
+              function Poll(feed) { this.feed = feed; };
+              util.inherits(Poll, events.EventEmitter);
+
+              Poll.prototype.getStories = function(callback) {
+                var self = this;
+
+                /**
+                 * Assume fetchStories grabs an array of content and
+                 * executes this callback on completion.
+                 */
+                fetchStories(self.feed, function gotStories(err, newStories) {
+                  if (!err && newStories.length) {
+                    self.emit('fed', null, newStories);
+                  }
+                });
+              };
+              exports.Poll = Poll;
             </code></pre>
           </section>
         </section>
