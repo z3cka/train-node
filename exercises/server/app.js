@@ -193,6 +193,7 @@ io.sockets.on('connection', function onConnection(socket) {
  * creating random data or polling RSS feeds, external APIs, etc.
  */
 
+var count = 0;
 /**
  * Notifies the client of new stories.
  */
