@@ -2,7 +2,6 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -220,7 +219,7 @@ setInterval(function newStories() {
 setInterval(function newImages() {
   // TODO (bonus) - fetch images from flickr or other feeds and refresh the
   // client with the fetched content.
-  // Hint: check out the rsj node module for parsing RSS to JSON automagically.
+  // Try this one: http://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=badcamp&nojsoncallback=1
 }, config.pollInterval || 10000);
 
 /**
