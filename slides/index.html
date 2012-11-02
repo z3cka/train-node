@@ -530,59 +530,6 @@
 
             ![stacktrace](assets/img/stacktrace.png)
           </section>
-          <section data-markdown>
-            ### Scope Example 1
-            <pre><code class="javascript">
-              var pet = 'kitteh';
-
-              /**
-               * This function alters the 'pet' variable that was
-               * previously defined in the global scope.
-               */
-              var example = function() {
-                pet = 'doggie';
-              };
-
-              console.log('Example 1: My pet is a ' + pet);
-              example();
-              console.log('Now my pet is a ' + pet);
-
-              console.log("\n");
-            </code></pre>
-
-          </section>
-          <section data-markdown>
-            ### Scope: Global Variable Scope
-
-            ![result](assets/img/scope1.png)
-          </section>
-          <section data-markdown>
-            ## This
-
-            <pre><code class="javascript">
-              function Unicorn() { this.horns = 0; }
-
-              Unicorn.prototype.addHorn = function(horns) {
-                this.horns = horns;
-
-                /**
-                 * Checks that the unicorn has at least one horn
-                 * (we won't judge if there's more) and print
-                 * a message.
-                 */
-                setTimeout(function countHorns() {
-                  if (this.horns > 0) {
-                    console.log("I'm a unicorn!");
-                  }
-                  else {
-                    console.log('I have 0 horns.');
-                    console.log("I'm either a horse or the scope of 'this' isn't what you thought it was!");
-                  }
-                }, 1);
-              };
-            </code></pre>
-          </section>
-
         </section>
        <section data-markdown>
          ## Asynchronous programming
