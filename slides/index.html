@@ -1278,7 +1278,126 @@
                  databases in node.
           </section>
         </section>
+        <section data-markdown>
+          ![get on with it](assets/img/get-on-with-it.jpg)
+        </section>
+        <section>
+          <small>The exercises</small>
+          <section data-markdown>
+            ### Where's the code?
 
+            <pre><code class="no-highlight">
+              ~/train-node/exercises/server/app.js
+            </code></pre>
+
+            * This is where you'll be living for the remainder of the class.
+              The code is highly commented.
+            * Anything marked with ```TODO``` is a task we're going to guide
+              the class through.
+            * Anything with ```(bonus)``` is a bonus task that we'll guide you through
+              if we get to it, but feel free to tackle these on your own if you
+              complete the other tasks.
+          </section>
+          <section data-markdown>
+            ### Create some story content.
+
+            <pre><code class="javascript">
+              // Keep a counter.
+              var count = 0;
+              /**
+               * Notifies the client of new stories.
+               */
+              setInterval(function newStories() {
+                // Increment the counter.
+                count++;
+
+                // Create some story content to send to the client.
+                var newStories = [
+                  {
+                    title: 'New story ' + count,
+                    description: 'New story text for ' + count,
+                    link: 'http://fourkitchens.com'
+                  }
+                ];
+
+                // Broadcast the new stories to all clients.
+                io.sockets.emit('newStories', newStories);
+              }, config.pollInterval || 10000);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Create stories from Drupal
+
+            <pre><code class="javascript">
+              /**
+               * Notifies the client of new stories.
+               */
+              setInterval(function newStories() {
+                nodes('http://instructor.nodejs.4kclass.com/rest/node.json', function gotNodes(err, nodes) {
+                  if (err) { return next(err); }
+
+                  var newStories = [];
+
+                  nodes.forEach(function eachNode(node) {
+                    newStories.push({
+                      title: node.title,
+                      description: node.title + ' (nid: ' + node.nid + ')',
+                      link: 'http://instructor.nodejs.4kclass.com/node/' + node.nid
+                    });
+                  });
+
+                  io.sockets.emit('newStories', newStories);
+                });
+              });
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Create stories from Drupal
+
+            * Create new content on your Drupal site, you should see it show
+              up on the client the next time the site is polled.
+            * Want to make it better? Keep a variable with the nodes you've
+              already received and only emit the new ones.
+          </section>
+          <section data-markdown>
+            ### Welcome new clients
+
+            <pre><code class="javascript">
+              app.get('/messages', function getMessages(req, res) {
+                var messages = [
+                  {
+                    name: 'Training bot',
+                    message: 'Welcome to node.js training!',
+                    time: new Date()
+                  }
+                ];
+
+                res.json(messages);
+              });
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Message chat
+
+            <pre><code class="javascript">
+              app.post('/message', function postMessage(req, res) {
+                res.writeHead(204);
+                res.end();
+
+                var newMessages = [req.body];
+                io.sockets.emit('newMessages', newMessages);
+              });
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Message chat
+
+            * Try opening your client site in another browser and start
+              sending messages!
+            * Want to make it better? Store the new messages so you can
+              serve chat history to new clients.
+          </section>
+        </section>
         <section data-markdown>
           ## Working with Databases
         </section>

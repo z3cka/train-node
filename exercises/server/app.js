@@ -85,6 +85,7 @@ app.post('/message', function postMessage(req, res) {
   res.end();
 
   // TODO - notify other sockets of the new message.
+  // Hint: the new message is in the req.body hash.
 
   // TODO (bonus) - save the message locally so new clients can fetch
   // history when they connect.
@@ -193,26 +194,32 @@ io.sockets.on('connection', function onConnection(socket) {
  * creating random data or polling RSS feeds, external APIs, etc.
  */
 
+var count = 0;
 /**
  * Notifies the client of new stories.
  */
 setInterval(function newStories() {
   // TODO - create some story content to send to the client.
 
-  // TODO (bonus) - fetch story content from a feed or external API and send
-  // the results to the client.
-  // Hint: check out the rsj node module for parsing RSS to JSON automagically.
+  // TODO - fetch stories from your Drupal site and send them to the client.
+  // NOTE: You might want to filter out only new ones so you don't create
+  // duplicate content on the client.
+  // @see routes/nodes.js
 
   // TODO (bonus) - save the stories so new clients can load history when they
   // connect.
+
+  // TODO (bonus) - fetch story content from a feed or external API and send
+  // the results to the client.
+  // Hint: check out the rsj node module for parsing RSS to JSON automagically.
 }, config.pollInterval || 10000);
 
 /**
  * Notifies the client of new images.
  */
 setInterval(function newImages() {
-  // TODO - fetch images from flickr or other feeds and refresh the client
-  // with the fetched content.
+  // TODO (bonus) - fetch images from flickr or other feeds and refresh the
+  // client with the fetched content.
   // Hint: check out the rsj node module for parsing RSS to JSON automagically.
 }, config.pollInterval || 10000);
 
