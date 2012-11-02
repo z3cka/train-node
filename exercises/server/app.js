@@ -85,6 +85,7 @@ app.post('/message', function postMessage(req, res) {
   res.end();
 
   // TODO - notify other sockets of the new message.
+  // Hint: the new message is in the req.body hash.
 
   // TODO (bonus) - save the message locally so new clients can fetch
   // history when they connect.

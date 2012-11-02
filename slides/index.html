@@ -1315,7 +1315,7 @@
             </code></pre>
           </section>
           <section data-markdown>
-            ### Create some stories from Drupal
+            ### Create stories from Drupal
 
             <pre><code class="javascript">
               /**
@@ -1330,7 +1330,7 @@
                   nodes.forEach(function eachNode(node) {
                     newStories.push({
                       title: node.title,
-                      description: node.body,
+                      description: node.title + ' (nid: ' + node.nid + ')',
                       link: 'http://instructor.nodejs.4kclass.com/node/' + node.nid
                     });
                   });
@@ -1339,6 +1339,52 @@
                 });
               });
             </code></pre>
+          </section>
+          <section data-markdown>
+            ### Create stories from Drupal
+
+            * Create new content on your Drupal site, you should see it show
+              up on the client the next time the site is polled.
+            * Want to make it better? Keep a variable with the nodes you've
+              already received and only emit the new ones.
+          </section>
+          <section data-markdown>
+            ### Welcome new clients
+
+            <pre><code class="javascript">
+              app.get('/messages', function getMessages(req, res) {
+                var messages = [
+                  {
+                    name: 'Training bot',
+                    message: 'Welcome to node.js training!',
+                    time: new Date()
+                  }
+                ];
+
+                res.json(messages);
+              });
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Message chat
+
+            <pre><code class="javascript">
+              app.post('/message', function postMessage(req, res) {
+                res.writeHead(204);
+                res.end();
+
+                var newMessages = [req.body];
+                io.sockets.emit('newMessages', newMessages);
+              });
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Message chat
+
+            * Try opening your client site in another browser and start
+              sending messages!
+            * Want to make it better? Store the new messages so you can
+              serve chat history to new clients.
           </section>
         </section>
         <section data-markdown>

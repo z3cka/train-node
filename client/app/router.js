@@ -20,6 +20,7 @@ function(app, conf, Images, Stories, Messages) {
       app.layout.render();
       this.images.fetch();
       this.stories.fetch();
+      this.messages.fetch();
     },
 
     initialize: function() {
