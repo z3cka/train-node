@@ -172,10 +172,10 @@
             ## What do you mean by slow?
           </section>
           <section data-markdown>
-            ## We actually mean bad at handling concurency.
+            ## We actually mean bad at handling concurrency.
           </section>
           <section data-markdown>
-            ### Why is PHP/Drupal bad at handling concurency?
+            ### Why is PHP/Drupal bad at handling concurrency?
 
             * Big memory foot print.
               * If you need to load 100Meg of Code to deliver 4 lines of JSON. . .
@@ -408,6 +408,62 @@
         <section>
           <small>JavaScript 101</small>
           <section data-markdown>
+            ### Hashes (AKA Objects)
+
+            * A hash is an object, they can contain properties:
+
+            <pre><code class="javacript">
+              var awesomeCompany = {
+                name: 'Four Kitchens',
+                location: 'Austin, TX'
+              };
+
+              console.log(awesomeCompany.name + ' is awesome!');
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Hashes (AKA Objects)
+
+            * They can also contain functions:
+
+            <pre><code class="javascript">
+              var awesomeCompany = {
+                name: 'Four Kitchens',
+                location: 'Austin, TX',
+                knowsNode: function() {
+                  return true;
+                }
+              };
+
+              if (awesomeCompany.knowsNode()) {
+                console.log(awesomeCompany.name + ' knows node!');
+              }
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Scope: Local Variable Scope
+
+            <pre><code class="javascript">
+              /**
+               * This function defines its own 'pet' variable that
+               * will not alter the one defined in the global scope.
+               */
+              var example2 = function() {
+                var pet = 'chupacabra';
+                console.log("My function's pet is a " + pet);
+              };
+
+              console.log('Example 2: My pet is a ' + pet);
+              example2();
+              console.log('Now my pet is a ' + pet);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Scope: Local Variable Scope
+
+            ![result](assets/img/scope2.png)
+          </section>
+          <section data-markdown>
             ## Anonymous and named functions
 
             ![spy vs spy](assets/img/spy-vs-spy.png)
@@ -419,6 +475,7 @@
             * Functions can be passed in as arguments.
             * Refered to as a callback.
           </section>
+
           <section data-markdown>
             ## Functions
 
@@ -500,62 +557,6 @@
             ![result](assets/img/scope1.png)
           </section>
           <section data-markdown>
-            ### Scope: Local Variable Scope
-
-            <pre><code class="javascript">
-              /**
-               * This function defines its own 'pet' variable that
-               * will not alter the one defined in the global scope.
-               */
-              var example2 = function() {
-                var pet = 'chupacabra';
-                console.log("My function's pet is a " + pet);
-              };
-
-              console.log('Example 2: My pet is a ' + pet);
-              example2();
-              console.log('Now my pet is a ' + pet);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### Scope: Local Variable Scope
-
-            ![result](assets/img/scope2.png)
-          </section>
-          <section data-markdown>
-            ### Hashes (AKA Objects)
-
-            * A hash is an object, they can contain properties:
-
-            <pre><code class="javacript">
-              var awesomeCompany = {
-                name: 'Four Kitchens',
-                location: 'Austin, TX'
-              };
-
-              console.log(awesomeCompany.name + ' is awesome!');
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### Hashes (AKA Objects)
-
-            * They can also contain functions:
-
-            <pre><code class="javascript">
-              var awesomeCompany = {
-                name: 'Four Kitchens',
-                location: 'Austin, TX',
-                knowsNode: function() {
-                  return true;
-                }
-              };
-
-              if (awesomeCompany.knowsNode()) {
-                console.log(awesomeCompany.name + ' knows node!');
-              }
-            </code></pre>
-          </section>
-          <section data-markdown>
             ## This
 
             <pre><code class="javascript">
@@ -581,241 +582,8 @@
               };
             </code></pre>
           </section>
-          <section data-markdown>
-            ### This
 
-            <pre><code class="javascript">
-              var unicorn = new Unicorn();
-              unicorn.addHorns(1);
-            </code></pre>
-
-            ![output](assets/img/this1.png)
-          </section>
-          <section data-markdown>
-            ### Whyyy!?!?
-            ![whyyyy](assets/img/this-wat.jpg)
-          </section>
-          <section data-markdown>
-            ### Whyyy!?!?
-
-            * Remember when we said everything's an object?
-            * The value of ```this``` changed when we entered the ```countHorns()``` function.
-          </section>
-          <section data-markdown>
-            ### Ok, let's fix it!
-
-            <pre><code class="javascript">
-              /**
-               * Update the Unicorn prototype to be aware of
-               * the scope of 'this'.
-               */
-              Unicorn.prototype.addHorn = function(horns) {
-                // Assign the local variable 'self' to the value of 'this' so we can still
-                // access 'this' in other scopes.
-                var self = this;
-                self.horns = horns;
-
-                setTimeout(function countHorns() {
-                  if (self.horns > 0) {
-                    console.log("I'm a unicorn!");
-                  }
-                  else {
-                    console.log("I have 0 horns. I must be a horse!");
-                  }
-                }, 1);
-              };
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### This (fixed)
-            <pre><code class="javascript">
-              var unicorn2 = new Unicorn();
-              unicorn2.addHorn(2);
-            </code></pre>
-            ![output](assets/img/this2.png)
-          </section>
-          <section data-markdown>
-            ### Yay!
-            ![yay](assets/img/this-yay.jpg)
-          </section>
         </section>
-        <section data-markdown>
-          ## WAT
-
-          [![wat](assets/img/wat.png)](assets/video/wat.mov)
-        </section>
-        <section data-markdown>
-          ## Using ```require()```, NPM, and modules
-        </section>
-        <section>
-          <small> Using require(), NPM, and modules </small>
-
-          <section data-markdown>
-            ## ```require()```
-
-            Used to include built in libraries, libraries from package manager and local files.
-          </section>
-          <section data-markdown>
-            ## Where does ```require()``` look for files?
-
-            * Core libraries
-            * modules in the node_modules directory
-            * locally defined modules _if the module is prefixed with a path_
-              * Paths can be absolute, but this is highly discouraged, use the relative paths or package your own module.
-
-            [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
-          </section>
-          <section data-markdown>
-            <pre><code class="no-highlight">
-              ~/train-node/require/modules
-            </code></pre>
-
-            module_a.js
-
-            <pre><code class="javascript">console.log('this is a');</pre></code>
-
-            module_b.js
-
-            <pre><code class="javascript">console.log(' this is b');</pre></code>
-
-            main.js
-
-            <pre><code class="javascript">
-              // Note the relative paths, leaving this off for libraries you
-              // define is a common mistake.
-              require('./module_a');
-              require('./module_b')
-            </pre></code>
-
-            ```$ node main.js```
-
-          </section>
-          <section data-markdown>
-            ## ```require()``` for built in libraries.
-
-            [List of libraries](http://nodejs.org/docs/latest/api/)
-          </section>
-          <section>
-            <h3>NPM</h3>
-
-            <ul>
-              <li class='fragment'>Node's Personal Manservant</li>
-              <li class='fragment'>Collection of over 16k community built libraries</li>
-              <li class='fragment'>Handles installation and dependencies</li>
-              <li class='fragment'>Everything from GPIO libraries to a few CMSs</li>
-            </ul>
-          </section>
-          <section data-markdown>
-            ## NPM Commands
-
-            * npm install <module> - install module
-              * add -g to install at the system level.
-            * npm install --save <module> - installs module and adds it to your local package.json file.
-            * npm install - installs everything from the local package.json file.
-            * npm init - creates an empty package.json file
-            * npm search - search for modules
-
-            [NPM help (if --help is too old school for you.)](https://npmjs.org/doc/)
-          </section>
-          <section data-markdown>
-            ### Package.json
-
-            <pre><code class="javascript">
-              {
-                "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
-                "name": "npmExample",
-                "description": "An example from the world famous Four Kitchens Node.js training.",
-                "version": "0.0.1",
-                "homepage": "http://fourkitchens.com",
-                "repository": {
-                  "type": "git",
-                  "url": "git://github.com/fourkitchens/train-node.git"
-                },
-                "engines": {
-                  "node": "~0.8.8"
-                },
-                "dependencies": {},
-                "devDependencies": {},
-                "optionalDependencies": {}
-              }
-            </code></pre>
-
-            [package.json reference](http://package.json.jit.su/)
-          </section>
-          <section data-markdown>
-            ## Try it
-
-            <pre><code class="no-highlight">
-              $ mkdir ~/train-node/require/colorsExample
-              $ cd ~/train-node/require/colorsExample
-              $ npm init
-              $ npm install colors
-            </code></pre>
-
-            To add a library to your package.json file at install time add --save:
-
-            <pre><code class="no-highlight">
-              npm install --save colors
-            </code></pre>
-          </section>
-          <section data-markdown>
-            * Create a file called colorsExample.js in the colorsExample directory
-            * Here's an example of using the colors library, give it a try and run
-              the script with ```node colorsExample``` when you're done editing.
-            <pre><code class="javascript">
-              // colorsExample.js
-              var colors = require('colors');
-
-              console.log('hello'.green); // outputs green text
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## More fun with colors
-
-            <pre><code>
-              console.log('i like cake and pies'.underline.red) // outputs red underlined text
-              console.log('inverse the color'.inverse); // inverses the color
-              console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
-            </code></pre>
-          </section>
-        </section>
-        <section data-markdown>
-          ## Intro to events
-
-          * Lots of node functions emit events.
-          * Eventually you'll write your own.
-
-          [Events Explained.](http://howtonode.org/demystifying-events-in-node)
-        </section>
-        <section>
-          <small>Intro to Events</small>
-          <section data-markdown>
-            ## Roll your own
-            <pre><code class="javascript">
-              // basic imports
-              var events = require('events');
-              var util = require('util');
-
-              function Poll(feed) { this.feed = feed; };
-              util.inherits(Poll, events.EventEmitter);
-
-              Poll.prototype.getStories = function(callback) {
-                var self = this;
-
-                /**
-                 * Assume fetchStories grabs an array of content and
-                 * executes this callback on completion.
-                 */
-                fetchStories(self.feed, function gotStories(err, newStories) {
-                  if (!err && newStories.length) {
-                    self.emit('fed', null, newStories);
-                  }
-                });
-              };
-              exports.Poll = Poll;
-            </code></pre>
-          </section>
-       </section>
        <section data-markdown>
          ## Asynchronous programming
        </section>
@@ -916,6 +684,180 @@
             * Use a queue
           </section>
         </section>
+        <section data-markdown>
+          ## Intro to events
+
+          * Lots of node functions emit events.
+          * Eventually you'll write your own.
+
+          [Events Explained.](http://howtonode.org/demystifying-events-in-node)
+        </section>
+        <section>
+          <small>Intro to Events</small>
+          <section data-markdown>
+            ## Roll your own
+            <pre><code class="javascript">
+              // basic imports
+              var events = require('events');
+              var util = require('util');
+
+              function Poll(feed) { this.feed = feed; };
+              util.inherits(Poll, events.EventEmitter);
+
+              Poll.prototype.getStories = function(callback) {
+                var self = this;
+
+                /**
+                 * Assume fetchStories grabs an array of content and
+                 * executes this callback on completion.
+                 */
+                fetchStories(self.feed, function gotStories(err, newStories) {
+                  if (!err && newStories.length) {
+                    self.emit('fed', null, newStories);
+                  }
+                });
+              };
+              exports.Poll = Poll;
+            </code></pre>
+          </section>
+        </section>
+        <section data-markdown>
+          ## WAT
+
+          [![wat](assets/img/wat.png)](assets/video/wat.mov)
+        </section>
+        <section data-markdown>
+          ## Using ```require()```, NPM, and modules
+        </section>
+        <section>
+          <small> Using require(), NPM, and modules </small>
+
+          <section data-markdown>
+            ## ```require()```
+
+            * Used to include built in libraries, libraries from package manager and local files.
+
+            * Automatically handles dependenies.
+          </section>
+          <section data-markdown>
+            <pre><code class="no-highlight">
+              ~/train-node/require/modules
+            </code></pre>
+
+            module_a.js
+
+            <pre><code class="javascript">console.log('this is a');</pre></code>
+
+            module_b.js
+
+            <pre><code class="javascript">console.log(' this is b');</pre></code>
+
+            main.js
+
+            <pre><code class="javascript">
+              // Note the relative paths, leaving this off for libraries you
+              // define is a common mistake.
+              require('./module_a');
+              require('./module_b')
+            </pre></code>
+
+            ```$ node main.js```
+
+          </section>
+          <section data-markdown>
+            ### Dependency Handling AKA Package.json
+
+            <pre><code class="javascript">
+              {
+                "author": "Four Kitchens <shout@fourkitchens.com> (http://fourkitchens.com/)",
+                "name": "npmExample",
+                "description": "An example from the world famous Four Kitchens Node.js training.",
+                "version": "0.0.1",
+                "homepage": "http://fourkitchens.com",
+                "repository": {
+                  "type": "git",
+                  "url": "git://github.com/fourkitchens/train-node.git"
+                },
+                "engines": {
+                  "node": "~0.8.8"
+                },
+                "dependencies": {},
+                "devDependencies": {},
+                "optionalDependencies": {}
+              }
+            </code></pre>
+
+            [package.json reference](http://package.json.jit.su/)
+          </section>
+          <section>
+            <h3>NPM</h3>
+
+            <ul>
+              <li class='fragment'>Node's Personal Manservant</li>
+              <li class='fragment'>Collection of over 16k community built libraries</li>
+              <li class='fragment'>Handles installation and dependencies</li>
+              <li class='fragment'>Everything from GPIO libraries to a few CMSs</li>
+            </ul>
+          </section>
+          <section data-markdown>
+            ## NPM Commands
+
+            * npm install <module> - install module
+              * add -g to install at the system level.
+            * npm install --save <module> - installs module and adds it to your local package.json file.
+            * npm install - installs everything from the local package.json file.
+            * npm init - creates an empty package.json file
+            * npm search - search for modules
+
+            [NPM help (if --help is too old school for you.)](https://npmjs.org/doc/)
+          </section>
+          <section data-markdown>
+            ## Try it
+
+            <pre><code class="no-highlight">
+              $ mkdir ~/train-node/require/colorsExample
+              $ cd ~/train-node/require/colorsExample
+              $ npm init
+              $ npm install colors
+            </code></pre>
+
+            To add a library to your package.json file at install time add --save:
+
+            <pre><code class="no-highlight">
+              npm install --save colors
+            </code></pre>
+          </section>
+          <section data-markdown>
+            * Create a file called colorsExample.js in the colorsExample directory
+            * Here's an example of using the colors library, give it a try and run
+              the script with ```node colorsExample``` when you're done editing.
+            <pre><code class="javascript">
+              // colorsExample.js
+              var colors = require('colors');
+
+              console.log('hello'.green); // outputs green text
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## More fun with colors
+
+            <pre><code>
+              console.log('i like cake and pies'.underline.red) // outputs red underlined text
+              console.log('inverse the color'.inverse); // inverses the color
+              console.log('OMG Rainbows!'.rainbow); // rainbow (ignores spaces)
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Where does ```require()``` look for files?
+
+            * Core libraries
+            * modules in the node_modules directory
+            * locally defined modules _if the module is prefixed with a path_
+              * Paths can be absolute, but this is highly discouraged, use the relative paths or package your own module.
+
+            [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
+          </section>
+        </section>
         <section>
           <small>Hello world server</small>
           <section data-markdown>
@@ -928,7 +870,7 @@
           <section data-markdown>
             <pre><code class="javascript">
               var http = require('http');
-              http.createServer(function hello(req, res) {
+              http.createServer(function hello(request, response) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
                 res.end('Hello World\n');
               }).listen(1337);
@@ -1520,6 +1462,63 @@
               });
             </code></pre>
           </section>
+        </section>
+        <section data-markdown>
+          ### This
+
+          <pre><code class="javascript">
+            var unicorn = new Unicorn();
+            unicorn.addHorns(1);
+          </code></pre>
+
+          ![output](assets/img/this1.png)
+        </section>
+        <section data-markdown>
+          ### Whyyy!?!?
+          ![whyyyy](assets/img/this-wat.jpg)
+        </section>
+        <section data-markdown>
+          ### Whyyy!?!?
+
+          * Remember when we said everything's an object?
+          * The value of ```this``` changed when we entered the ```countHorns()``` function.
+        </section>
+        <section data-markdown>
+          ### Ok, let's fix it!
+
+          <pre><code class="javascript">
+            /**
+             * Update the Unicorn prototype to be aware of
+             * the scope of 'this'.
+             */
+            Unicorn.prototype.addHorn = function(horns) {
+              // Assign the local variable 'self' to the value of 'this' so we can still
+              // access 'this' in other scopes.
+              var self = this;
+              self.horns = horns;
+
+              setTimeout(function countHorns() {
+                if (self.horns > 0) {
+                  console.log("I'm a unicorn!");
+                }
+                else {
+                  console.log("I have 0 horns. I must be a horse!");
+                }
+              }, 1);
+            };
+          </code></pre>
+        </section>
+        <section data-markdown>
+          ### This (fixed)
+          <pre><code class="javascript">
+            var unicorn2 = new Unicorn();
+            unicorn2.addHorn(2);
+          </code></pre>
+          ![output](assets/img/this2.png)
+        </section>
+        <section data-markdown>
+          ### Yay!
+          ![yay](assets/img/this-yay.jpg)
         </section>
       </div>
 
