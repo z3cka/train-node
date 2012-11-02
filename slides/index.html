@@ -97,7 +97,20 @@
           * A few strategies on how to work node into your Drupal projects.
         </section>
         <section data-markdown>
-          ![block diagram](assets/img/block-diagram.png)
+          ## What we'll build
+
+          A "real-time" webapp.
+
+          * Pulls nodes from Drupal
+          * Has the basis for a chat
+          * BONUS: Pulls images from Flickr
+
+        </section>
+        <section data-markdown>
+          ## What we'll build
+
+
+          ![block diagram](assets/img/client.png)
         </section>
         <section data-markdown>
           ## Class outline.
@@ -105,10 +118,11 @@
           * Intro to node.js
           * Console.log
           * JS 101
-          * Using Require() *NPM? & Modules*
-          * Intro to Events
           * Async programing
+          * Using Require() *NPM? & Modules*
+          * Quick intro to Events
           * Writing an http server
+          * Your first Server
           * **Lunch**
           * Integrating with Drupal 1
           * Integrating with Drupal 2
@@ -1020,7 +1034,7 @@
 
             <pre><code class="javascript">
               app.get('/nodes', function getNodes(req, res, next) {
-                nodes('http://train-node.local/exercises/drupal/rest/node.json', function renderNodes(err, nodes) {
+                nodes('http://instructor.nodejs.4kclass.com/exercises/drupal/rest/node.json', function renderNodes(err, nodes) {
                   console.log(nodes);
                   if (err) return next( err);
                   res.render('nodes', { results: nodes });
