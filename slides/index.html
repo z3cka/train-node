@@ -47,9 +47,7 @@
             <img src="assets/img/druplicon.png" class="logo-drupal no-border"> <img src="assets/img/nodejs.png" class="logo-node no-border">
           </div>
 
-          * Wifi: credentials will be provided when you pick up your badge!
-
-          To test test out the internet visit our etherpad (chefpad) and put in your name, your spice and your favorite car. [http://chefpad.org/p/badcamp-nodejs](http://chefpad.org/p/badcamp-nodejs)
+          To test test out the internet visit our etherpad (chefpad) and put in your name, your spice and your favorite car. [http://bit.ly/12ERwzm](http://bit.ly/12ERwzm)
         </section>
         <section data-markdown>
           ## Hello Class
@@ -445,96 +443,7 @@
               }
             </code></pre>
           </section>
-          <section data-markdown>
-            ### Scope: Local Variable Scope
-
-            <pre><code class="javascript">
-              /**
-               * This function defines its own 'pet' variable that
-               * will not alter the one defined in the global scope.
-               */
-              var example2 = function() {
-                var pet = 'chupacabra';
-                console.log("My function's pet is a " + pet);
-              };
-
-              console.log('Example 2: My pet is a ' + pet);
-              example2();
-              console.log('Now my pet is a ' + pet);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### Scope: Local Variable Scope
-
-            ![result](assets/img/scope2.png)
-          </section>
-          <section data-markdown>
-            ## Anonymous and named functions
-
-            ![spy vs spy](assets/img/spy-vs-spy.png)
-          </section>
-          <section data-markdown>
-            ## Functions in Javascript.
-
-            * Functions are objects.
-            * Functions can be passed in as arguments.
-            * Refered to as a callback.
-          </section>
-
-          <section data-markdown>
-            ## Functions
-
-
-            <pre><code class="javascript">
-              var Func = function() {
-                console.trace("I'm a function.");
-                console.log('==========================');
-              };
-
-              setTimeout(Func, 2000);
-            </code></pre>
-
-          </section>
-          <section data-markdown>
-            ## Named functions
-
-            <pre><code class="javascript">
-              setTimeout(function named() {
-                console.trace("I'm named, somebody loves me.");
-                console.log('==========================');
-              }, 1000);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## Anonymous functions
-
-            <pre><code class="javascript">
-              setTimeout(function() {
-                console.trace("I'm anonymous, see?");
-                console.log('==========================');
-              }, 1);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## Use named functions.
-
-            * Makes it easier to find what is wrong in the stack trace
-            * Whats a stack trace?
-          </section>
-          <section data-markdown>
-            ## Stack Trace
-
-            * Node outputs a list of which functions were called when your code broke
-            * Makes it easier to find out where the error was.
-          </section>
-          <section data-markdown>
-            ## Stack Trace Example.
-
-            * First we'll try using console.trace
-            * Second we'll uncomment a real mistake and we'll see how it works.
-
-            ![stacktrace](assets/img/stacktrace.png)
-          </section>
+          
         </section>
        <section data-markdown>
          ## Asynchronous programming
@@ -1434,6 +1343,96 @@
             </code></pre>
           </section>
         </section>
+        <section data-markdown>
+            ### Scope: Local Variable Scope
+
+            <pre><code class="javascript">
+              /**
+               * This function defines its own 'pet' variable that
+               * will not alter the one defined in the global scope.
+               */
+              var example2 = function() {
+                var pet = 'chupacabra';
+                console.log("My function's pet is a " + pet);
+              };
+
+              console.log('Example 2: My pet is a ' + pet);
+              example2();
+              console.log('Now my pet is a ' + pet);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Scope: Local Variable Scope
+
+            ![result](assets/img/scope2.png)
+          </section>
+          <section data-markdown>
+            ## Anonymous and named functions
+
+            ![spy vs spy](assets/img/spy-vs-spy.png)
+          </section>
+          <section data-markdown>
+            ## Functions in Javascript.
+
+            * Functions are objects.
+            * Functions can be passed in as arguments.
+            * Refered to as a callback.
+          </section>
+
+          <section data-markdown>
+            ## Functions
+
+
+            <pre><code class="javascript">
+              var Func = function() {
+                console.trace("I'm a function.");
+                console.log('==========================');
+              };
+
+              setTimeout(Func, 2000);
+            </code></pre>
+
+          </section>
+          <section data-markdown>
+            ## Named functions
+
+            <pre><code class="javascript">
+              setTimeout(function named() {
+                console.trace("I'm named, somebody loves me.");
+                console.log('==========================');
+              }, 1000);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Anonymous functions
+
+            <pre><code class="javascript">
+              setTimeout(function() {
+                console.trace("I'm anonymous, see?");
+                console.log('==========================');
+              }, 1);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Use named functions.
+
+            * Makes it easier to find what is wrong in the stack trace
+            * Whats a stack trace?
+          </section>
+          <section data-markdown>
+            ## Stack Trace
+
+            * Node outputs a list of which functions were called when your code broke
+            * Makes it easier to find out where the error was.
+          </section>
+          <section data-markdown>
+            ## Stack Trace Example.
+
+            * First we'll try using console.trace
+            * Second we'll uncomment a real mistake and we'll see how it works.
+
+            ![stacktrace](assets/img/stacktrace.png)
+          </section>
         <section data-markdown>
           ### This
 
