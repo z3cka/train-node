@@ -71,6 +71,28 @@ app.get('/stories', function getStories(req, res) {
   res.json(stories);
 });
 
+// Keep a counter.
+var count = 0;
+/**
+   * Notifies the client of new stories.
+   */
+setInterval(function newStories() {
+  // Increment the counter.
+  count++;
+
+  // Create some story content to send to the client.
+    var newStories = [
+      {
+        title: 'New story ' + count,
+        description: 'New story text for ' + count,
+        link: 'http://fourkitchens.com'
+      }
+    ];
+
+    // Broadcast the new stories to all clients.
+    io.sockets.emit('newStories', newStories);
+}, config.pollInterval || 10000);
+
 /**
  * Handles a new message being posted from a client.
  *
