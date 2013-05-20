@@ -15,8 +15,9 @@ http.createServer(function hello(req, res) {
   // @see http://nodejs.org/docs/latest/api/http.html#http_class_http_serverresponse
   res.writeHead(200, {'Content-Type': 'text/plain'});
 
+  res.end('Hello Node!');
   // TODO (bonus) - inspect the request object with console.log to find
   // client headers that got sent.
-}).listen(); // TODO - add your port number here.
+}).listen(21002); // TODO - add your port number here.
 console.log('Server running.');
 
