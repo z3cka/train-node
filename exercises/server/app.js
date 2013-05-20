@@ -72,26 +72,47 @@ app.get('/stories', function getStories(req, res) {
 });
 
 // Keep a counter.
-var count = 0;
+// var count = 0;
 /**
    * Notifies the client of new stories.
    */
-setInterval(function newStories() {
-  // Increment the counter.
-  count++;
+// setInterval(function newStories() {
+//   // Increment the counter.
+//   count++;
 
-  // Create some story content to send to the client.
-    var newStories = [
-      {
-        title: 'New story ' + count,
-        description: 'New story text for ' + count,
-        link: 'http://fourkitchens.com'
-      }
-    ];
+//   // Create some story content to send to the client.
+//     var newStories = [
+//       {
+//         title: 'New story ' + count,
+//         description: 'New story text for ' + count,
+//         link: 'http://fourkitchens.com'
+//       }
+//     ];
 
-    // Broadcast the new stories to all clients.
-    io.sockets.emit('newStories', newStories);
-}, config.pollInterval || 10000);
+//     // Broadcast the new stories to all clients.
+//     io.sockets.emit('newStories', newStories);
+// }, config.pollInterval || 10000);
+
+/**
+   * Notifies the client of new stories.
+   */
+  setInterval(function newStories() {
+    nodes('http://anise.nodejs.4kclass.com/exercises/drupal/rest/node.json', function gotNodes(err, nodes) {
+      if (err) { return next(err); }
+
+      var newStories = [];
+
+      nodes.forEach(function eachNode(node) {
+        newStories.push({
+          title: node.title,
+          description: node.title + ' (nid: ' + node.nid + ')',
+          link: 'http://anise.nodejs.4kclass.com/exercises/drupal/node/' + node.nid
+        });
+      });
+
+      io.sockets.emit('newStories', newStories);
+    });
+  }, config.pollInterval || 10000);
 
 /**
  * Handles a new message being posted from a client.
@@ -107,6 +128,8 @@ app.post('/message', function postMessage(req, res) {
 
   // TODO - notify other sockets of the new message.
   // Hint: the new message is in the req.body hash.
+  var newMessages = [req.body];
+  io.sockets.emit('newMessages', newMessages);
 
   // TODO (bonus) - save the message locally so new clients can fetch
   // history when they connect.
@@ -124,7 +147,13 @@ app.post('/message', function postMessage(req, res) {
  *   The HTTP response object.
  */
 app.get('/messages', function getMessages(req, res) {
-  var messages = [];
+  var messages = [
+      {
+        name: 'Training bot',
+        message: 'Welcome to node.js training!',
+        time: new Date()
+      }
+    ];
 
   // TODO (bonus) - if you have saved new messages somewhere, serve those
   // instead of this empty list.
