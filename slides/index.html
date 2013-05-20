@@ -114,14 +114,12 @@
 
           * Intro to node.js
           * Console.log
-          * JS 101
-          * Async programing
-          * Using Require() *NPM? & Modules*
-          * Quick intro to Events
-          * Writing an http server
-          * Your first Server
-          * **Lunch**
+          * Hello World
           * Integrating with Drupal 1
+          * **Lunch**
+          * Async programing
+          * Using Require() *NPM & Modules*
+          * Quick intro to Events
           * Integrating with Drupal 2
           * Socket.io
         </section>
@@ -203,7 +201,7 @@
             ## What do you mean by slow?
           </section>
           <section data-markdown>
-            ## We actually mean bad at handling concurrency.
+            ## We actually mean Drupal and we mean it's bad at concurrency.
           </section>
           <section data-markdown>
             ### Why is PHP/Drupal bad at handling concurrency?
@@ -211,7 +209,7 @@
             * Big memory foot print.
               * If you need to load 100Meg of Code to deliver 4 lines of JSON. . .
             * Everything happens in order.
-              * You 100ms database call will hold up the execution of the enire process.
+              * Your 100ms database call will hold up the execution of the entire process.
               * Your next 100ms call will do the same, etc.
               * Only after all the database calls have completed can we return the 4 lines of JSON.
           </section>
@@ -406,44 +404,166 @@
           ![result](assets/img/consolelog.png)
         </section>
         <section data-markdown>
-          ## JavaScript 101
+          ## Hello World!
         </section>
         <section>
-          <small>JavaScript 101</small>
+          <small>Hello world server</small>
           <section data-markdown>
-            ### Hashes (AKA Objects)
+            ## Port Number
 
-            * A hash is an object, they can contain properties:
+            * A unique port has been assigned to each of you, it's in the
+              ```~/port-xxxxx``` file in your home directory. You'll need
+              this when we start a node server.
+            * The ```~/config.json``` file in your home directory can be used to
+              inject settings in your node code (more on that later).
+          </section>
+          <section data-markdown>
+            ## Your first Server.
 
-            <pre><code class="javacript">
-              var awesomeCompany = {
-                name: 'Four Kitchens',
-                location: 'Austin, TX'
-              };
+            ```~/train-node/hello/app.js```
 
-              console.log(awesomeCompany.name + ' is awesome!');
+            * Respond to the HTTP request with a hello world message
+          </section>
+          <section data-markdown>
+            <pre><code class="javascript">
+              var http = require('http');
+              http.createServer(function hello(request, response) {
+                res.writeHead(200, {'Content-Type': 'text/plain'});
+                res.end('Hello World\n');
+              }).listen(1337);
+              console.log('Server running at http://127.0.0.1:1337/');
+            </code></pre>
+
+            change *1337* to your port number.
+
+          </section>
+        </section>
+        <section data-markdown>
+          #JS101
+        </section>
+        <section data-markdown>
+          ## WAT
+
+          * We've secretly replaced the js101 section with a funny video.
+          * Lets see if the class notices.
+          * Don't worry we'll dive down into the basics after lunch.
+          * For now lets have some fun!
+        </section>
+        <section data-markdown>
+          ## WAT
+
+          [![wat](assets/img/wat.png)](assets/video/wat.mov)
+        </section>
+        <section>
+          <small>A quick intro to Express</small>
+          <section data-markdown>
+            ### Express
+
+            * A web application framework for node.js
+            * Provides:
+              * Static asset handling
+              * Dynamic router
+              * [Connect](http://www.senchalabs.org/connect/) middleware
+          </section>
+          <section data-markdown>
+            ### Getting started
+
+            * Use the ```express``` command to set up some scaffolding for a new application:
+            <pre><code class="no-highlight">
+              $ cd ~/train-node/exercies
+              $ express myserver
+              $ cd myserver
+              $ npm install
             </code></pre>
           </section>
           <section data-markdown>
-            ### Hashes (AKA Objects)
+            ### Copy your personal Config file.
 
-            * They can also contain functions:
+            * We're going to make a few changes to support the application we're going to build:
+              1. Copy the config.js file and client directory from your home directory to the example dirctory:
+                <pre><code class="no-highlight">
+                  $ cp ~/config.js ~/train-node/exercises/myserver/config.js
+                </code></pre>
+          </section>
+          <section data-markdown>
+            ## Edit app.js
+
+            Include the config we copied by adding it after the where path is required. Don't forget to remove the ";" after require('path').
+
+            <pre><code class="diff">
+-  , path = require('path');
++  , path = require('path')
++  , config = require('./config');
+            </code></pre>
+
+            Use the port number from the config file.
+
+            <pre><code class="diff">
+-  app.set('port', process.env.PORT || 3000);
++  app.set('port', config.port);
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ## Try it.
+            ![express works](assets/img/express.png)
+          </section>
+        </section>
+        <section data-markdown>
+          ## Integrating with Drupal I
+        </section>
+        <section>
+          <small>Integrating with Drupal I</small>
+          <section data-markdown>
+            ## What we'll build.
+
+            * We'll ping the node server with with node title
+            * We'll create a list of Drupal nodes in our app.
+
+          </section>
+          <section data-markdown>
+            ### Create the Node.js Endpoint.
 
             <pre><code class="javascript">
-              var awesomeCompany = {
-                name: 'Four Kitchens',
-                location: 'Austin, TX',
-                knowsNode: function() {
-                  return true;
-                }
-              };
+              app.post('/ping', function postPing(request, response){
+                console.log(request.body);      // your JSON
+                response.send(request.body);    // echo the result back
+              });
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Create a Drupal module to send the title to node.
 
-              if (awesomeCompany.knowsNode()) {
-                console.log(awesomeCompany.name + ' knows node!');
+            1. Stub drupal module is created already.
+            2. We'll put the code that talks to node in a node_view hook.
+            3. Hint: we'll use drupal\_json\_encode() and drupal\_http\_request()
+            4. Be sure to handle errors.
+          </section>
+          <section data-markdown>
+            ### Example Drupal Module code.
+            <pre><code class="php">
+              $data = array('title' => $node->title);
+              $data = drupal_json_encode($data);
+              $uri = variable_get('ping_nodejs_uri','http://localhost:3000/ping');
+
+              $options = array();
+              $options['headers'] = array('Content-Type' => 'application/json');
+              $options['method'] = 'POST';
+              $options['data'] = $data;
+              $response = drupal_http_request($uri, $options);
+
+              if ($response->code != 200) {
+                drupal_set_message("Got an error: " . $response->error, 'error');
+              }
+              else {
+                drupal_set_message('Successfully contacted node server. Response was: ' . $response->data);
               }
             </code></pre>
           </section>
-          
+        </section>
+        <section data-markdown>
+          ## Munch on Lunch
+
+          ![lunch](assets/img/alpaca-lunch.jpg)
         </section>
        <section data-markdown>
          ## Asynchronous programming
@@ -562,11 +682,6 @@
           * Eventually you'll write your own.
 
           [Events Explained.](http://howtonode.org/demystifying-events-in-node)
-        </section>
-        <section data-markdown>
-          ## WAT
-
-          [![wat](assets/img/wat.png)](assets/video/wat.mov)
         </section>
         <section data-markdown>
           ## Using ```require()```, NPM, and modules
@@ -698,152 +813,6 @@
               * Paths can be absolute, but this is highly discouraged, use the relative paths or package your own module.
 
             [the mystery explained](http://www.bennadel.com/blog/2169-Where-Does-Node-js-And-Require-Look-For-Modules-.htm)
-          </section>
-        </section>
-        <section>
-          <small>Hello world server</small>
-          <section data-markdown>
-            ## Port Number
-
-            * A unique port has been assigned to each of you, it's in the
-              ```~/port-xxxxx``` file in your home directory. You'll need
-              this when we start a node server.
-            * The ```~/config.json``` file in your home directory can be used to
-              inject settings in your node code (more on that later).
-          </section>
-          <section data-markdown>
-            ## Your first Server.
-
-            ```~/train-node/hello/app.js```
-
-            * Respond to the HTTP request with a hello world message
-          </section>
-          <section data-markdown>
-            <pre><code class="javascript">
-              var http = require('http');
-              http.createServer(function hello(request, response) {
-                res.writeHead(200, {'Content-Type': 'text/plain'});
-                res.end('Hello World\n');
-              }).listen(1337);
-              console.log('Server running at http://127.0.0.1:1337/');
-            </code></pre>
-
-            change *1337* to your port number.
-
-          </section>
-        </section>
-        <section data-markdown>
-          ## Munch on Lunch
-
-          ![lunch](assets/img/alpaca-lunch.jpg)
-        </section>
-        <section>
-          <small>A quick intro to Express</small>
-          <section data-markdown>
-            ### Express
-
-            * A web application framework for node.js
-            * Provides:
-              * Static asset handling
-              * Dynamic router
-              * [Connect](http://www.senchalabs.org/connect/) middleware
-          </section>
-          <section data-markdown>
-            ### Getting started
-
-            * Use the ```express``` command to set up some scaffolding for a new application:
-            <pre><code class="no-highlight">
-              $ cd ~/train-node/exercies
-              $ express myserver
-              $ cd myserver
-              $ npm install
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### Getting started (cont)
-
-            * We're going to make a few changes to support the application we're going to build:
-              1. Copy the config.js file and client directory from your home directory to the example dirctory:
-                <pre><code class="no-highlight">
-                  $ cp ~/config.json ~/train-node/exercises/myserver/config.js
-                </code></pre>
-
-              * Note the file was originally named with a .json extension when we should have used .js
-
-          </section>
-          <section data-markdown>
-            ## Edit app.js
-
-            Include the config we copied by adding it after the where path is required. Don't forget to remove the ";" after require('path').
-
-            <pre><code class="diff">
--  , path = require('path');
-+  , path = require('path')
-+  , config = require('./config');
-            </code></pre>
-
-            Use the port number from the config file.
-
-            <pre><code class="diff">
--  app.set('port', process.env.PORT || 3000);
-+  app.set('port', config.port);
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ## Try it.
-            ![express works](assets/img/express.png)
-          </section>
-        </section>
-        <section data-markdown>
-          ## Integrating with Drupal I
-        </section>
-        <section>
-          <small>Integrating with Drupal I</small>
-          <section data-markdown>
-            ## What we'll build.
-
-            * We'll ping the node server with with node title
-            * We'll create a list of Drupal nodes in our app.
-
-          </section>
-          <section data-markdown>
-            ### Create the Node.js Endpoint.
-
-            <pre><code class="javascript">
-              app.post('/ping', function postPing(request, response){
-                console.log(request.body);      // your JSON
-                response.send(request.body);    // echo the result back
-              });
-            </code></pre>
-          </section>
-          <section data-markdown>
-            ### Create a Drupal module to send the title to node.
-
-            1. Stub drupal module is created already.
-            2. We'll put the code that talks to node in a node_view hook.
-            3. Hint: we'll use drupal\_json\_encode() and drupal\_http\_request()
-            4. Be sure to handle errors.
-          </section>
-          <section data-markdown>
-            ### Example Drupal Module code.
-            <pre><code class="php">
-              $data = array('title' => $node->title);
-              $data = drupal_json_encode($data);
-              $uri = variable_get('ping_nodejs_uri','http://localhost:3000/ping');
-
-              $options = array();
-              $options['headers'] = array('Content-Type' => 'application/json');
-              $options['method'] = 'POST';
-              $options['data'] = $data;
-              $response = drupal_http_request($uri, $options);
-
-              if ($response->code != 200) {
-                drupal_set_message("Got an error: " . $response->error, 'error');
-              }
-              else {
-                drupal_set_message('Successfully contacted node server. Response was: ' . $response->data);
-              }
-            </code></pre>
           </section>
         </section>
         <section data-markdown>
@@ -1342,6 +1311,43 @@
               exports.Poll = Poll;
             </code></pre>
           </section>
+        </section>
+        <section>
+          <small>JavaScript 101</small>
+          <section data-markdown>
+            ### Hashes (AKA Objects)
+
+            * A hash is an object, they can contain properties:
+
+            <pre><code class="javacript">
+              var awesomeCompany = {
+                name: 'Four Kitchens',
+                location: 'Austin, TX'
+              };
+
+              console.log(awesomeCompany.name + ' is awesome!');
+            </code></pre>
+          </section>
+          <section data-markdown>
+            ### Hashes (AKA Objects)
+
+            * They can also contain functions:
+
+            <pre><code class="javascript">
+              var awesomeCompany = {
+                name: 'Four Kitchens',
+                location: 'Austin, TX',
+                knowsNode: function() {
+                  return true;
+                }
+              };
+
+              if (awesomeCompany.knowsNode()) {
+                console.log(awesomeCompany.name + ' knows node!');
+              }
+            </code></pre>
+          </section>
+          
         </section>
         <section data-markdown>
             ### Scope: Local Variable Scope
