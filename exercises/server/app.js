@@ -8,6 +8,7 @@ var path = require('path');
 
 var config = require('./config');
 var nodes = require('./routes/nodes');
+// var images = require('./routes/images');
 
 /**
  * Server and socket.io definition.
@@ -96,23 +97,23 @@ app.get('/stories', function getStories(req, res) {
 /**
    * Notifies the client of new stories.
    */
-  setInterval(function newStories() {
-    nodes('http://anise.nodejs.4kclass.com/exercises/drupal/rest/node.json', function gotNodes(err, nodes) {
-      if (err) { return next(err); }
+  // setInterval(function newStories() {
+  //   nodes('http://anise.nodejs.4kclass.com/exercises/drupal/rest/node.json', function gotNodes(err, nodes) {
+  //     if (err) { return next(err); }
 
-      var newStories = [];
+  //     var newStories = [];
 
-      nodes.forEach(function eachNode(node) {
-        newStories.push({
-          title: node.title,
-          description: node.title + ' (nid: ' + node.nid + ')',
-          link: 'http://anise.nodejs.4kclass.com/exercises/drupal/node/' + node.nid
-        });
-      });
+  //     nodes.forEach(function eachNode(node) {
+  //       newStories.push({
+  //         title: node.title,
+  //         description: node.title + ' (nid: ' + node.nid + ')',
+  //         link: 'http://anise.nodejs.4kclass.com/exercises/drupal/node/' + node.nid
+  //       });
+  //     });
 
-      io.sockets.emit('newStories', newStories);
-    });
-  }, config.pollInterval || 10000);
+  //     io.sockets.emit('newStories', newStories);
+  //   });
+  // }, config.pollInterval || 10000);
 
 /**
  * Handles a new message being posted from a client.
@@ -270,13 +271,25 @@ setInterval(function newStories() {
 setInterval(function newImages() {
   // TODO (bonus) - fetch images from flickr or other feeds and refresh the
   // client with the fetched content.
-  // Try this one: http://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=badcamp&nojsoncallback=1
+  // images('http://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=drupalcon&nojsoncallback=1');
 }, config.pollInterval || 10000);
 
 /**
  * Post path for Drupal Example.
  */
 app.post('/ping', function(request, response){
+// Create some story content to send to the client.
+  console.log(response);
+  var newStories = [
+    {
+      title: response.body.title,
+      description: 'there was a New story text for ',
+      link: 'http://fourkitchens.com'
+    }
+  ];
+  // Broadcast the new stories to all clients.
+  io.sockets.emit('newStories', newStories);
+
   console.log(request.body);      // your JSON
   response.send(request.body);    // echo the result back
 });
